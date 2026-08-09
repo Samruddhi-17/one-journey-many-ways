@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { COUNTRIES, TOTAL_STOPS } from '../../data/countries'
 import { codeFor } from '../../lib/countryCode'
+import { PLANE_PATH, PLANE_VIEWBOX } from '../../lib/planeGlyph'
 
 /*
  * BoardingPass — RETIRED. Not rendered anywhere. Read this note before wiring it back in.
@@ -169,16 +170,16 @@ export function BoardingPass() {
         {/*
          * THE STUB HEADER — the label, and the plane that marks it as a boarding pass at a glance.
          *
-         * The glyph is the same nine-coordinate path the flight map uses, for the same reason given
-         * there: an emoji renders in the operating system's own font at a size nobody here chose and
-         * cannot take the country's accent colour.
+         * The glyph is literally the same path the flight map flies, imported from one place rather
+         * than typed out again here. It was duplicated once, with a comment in each copy asserting
+         * they matched — which is the kind of claim only a shared import can keep.
          */}
         <div className="flex items-center justify-between border-b border-dashed border-ink-200 pb-3">
           <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-ink-500">
             Boarding pass
           </p>
-          <svg viewBox="-8 -6 16 12" className="size-4 text-[var(--accent-ink)]" aria-hidden="true">
-            <path d="M 7 0 L -5 -4.5 L -2.5 0 L -5 4.5 Z" fill="currentColor" />
+          <svg viewBox={PLANE_VIEWBOX} className="size-4 text-[var(--accent-ink)]" aria-hidden="true">
+            <path d={PLANE_PATH} fill="currentColor" />
           </svg>
         </div>
 

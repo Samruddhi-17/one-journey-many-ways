@@ -2,6 +2,7 @@ import { useId } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import worldMap from '../../data/worldMap.json'
 import { legsFor, LEG_SECONDS, FLIGHT_EASE } from '../../lib/flight'
+import { PLANE_PATH } from '../../lib/planeGlyph'
 
 /*
  * FlightMap — a real world map with a plane crossing it, along one leg or the whole itinerary.
@@ -42,8 +43,8 @@ import { legsFor, LEG_SECONDS, FLIGHT_EASE } from '../../lib/flight'
  *
  * WHY THIS IS AN `<svg>` AND NOT A CHART LIBRARY
  * Same reasoning as every other visual in the project: this is a handful of paths, five circles and
- * a triangle. Rendering it directly means it inherits the country's accent from CSS variables,
- * animates with the same motion primitives as everything else, and needs no text alternative
+ * one small aeroplane. Rendering it directly means it inherits the country's accent from CSS
+ * variables, animates with the same motion primitives as everything else, and needs no text alternative
  * because the surrounding markup already says where the visitor is going in words.
  * ============================================================================================
  */
@@ -300,16 +301,17 @@ export function FlightMap({
               }}
             >
               {/*
-               * The plane itself: a small triangle with a notched tail, drawn centred on the origin
-               * and pointing along +x.
+               * The plane itself. The shape lives in src/lib/planeGlyph.js, which also records the
+               * two things about its coordinates that this animation depends on: it points along
+               * +x, and it is centred on the origin. `offsetRotate: 'auto 0deg'` above measures the
+               * tangent from the +x axis, so a glyph drawn any other way is rotated wrongly at
+               * every point of every leg.
                *
-               * A path rather than an emoji (✈️) for the same reason the country flags were dropped
-               * from display type: an emoji renders in the operating system's own font, at a size
-               * and weight nobody here chose, and it cannot take the country's accent colour. This
-               * is nine coordinates and it is typeset by us.
+               * Shared with the boarding pass stub rather than typed out twice, so the two cannot
+               * drift apart.
                */}
               <path
-                d="M 7 0 L -5 -4.5 L -2.5 0 L -5 4.5 Z"
+                d={PLANE_PATH}
                 fill="var(--accent-ink)"
                 stroke="var(--color-surface-page)"
                 strokeWidth="0.75"
