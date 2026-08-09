@@ -11,7 +11,8 @@ import { toAvif } from '../../lib/images'
  * The chapter previously opened on one still hero photograph. A still photograph is a picture OF a
  * place; a slow drift between several is closer to being somewhere, because the thing that makes a
  * real view feel alive is that it keeps changing slightly while you look at it. The dataset gives
- * every country five gallery images (city, food, train, temple, night), which is enough to feel
+ * every country five gallery images — its city, its food, how people get around, a landmark and the
+ * place after dark — which is enough to feel
  * like a place rather than a slideshow of one moment.
  *
  * THE THREE MOTIONS, AND WHY EACH IS SEPARATE

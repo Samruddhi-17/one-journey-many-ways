@@ -363,7 +363,7 @@
             "src": "./images/india_food.jpeg"
           },
           {
-            "category": "Train",
+            "category": "Street Transport",
             "src": "./images/india_train.jpeg"
           },
           {
@@ -555,7 +555,7 @@
             "src": "./images/italy_train.jpeg"
           },
           {
-            "category": "Temple",
+            "category": "Ancient Ruins",
             "src": "./images/italy_temple.jpeg"
           },
           {
@@ -739,11 +739,11 @@
             "src": "./images/switzerland_food.jpeg"
           },
           {
-            "category": "Train",
+            "category": "Mountain Cable Car",
             "src": "./images/switzerland_train.jpeg"
           },
           {
-            "category": "Temple",
+            "category": "White Church",
             "src": "./images/switzerland_temple.jpeg"
           },
           {
@@ -927,11 +927,11 @@
             "src": "./images/us_food.jpeg"
           },
           {
-            "category": "Train",
+            "category": "New York Taxi",
             "src": "./images/us_train.jpeg"
           },
           {
-            "category": "Temple",
+            "category": "Hollywood Sign",
             "src": "./images/us_temple.jpeg"
           },
           {

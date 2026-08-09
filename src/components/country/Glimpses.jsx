@@ -9,7 +9,8 @@ import { inProse, inProseCapitalised } from '../../lib/countryName'
  * ============================================================================================
  * WHY THIS SECTION EXISTS AT ALL
  *
- * The five `country_gallery` photographs (city, food, train, temple, night) were already in
+ * The five `country_gallery` photographs (the city, its food, how people get around, a landmark,
+ * and the place after dark) were already in
  * `journey.json` and already on the page — feeding LivingBackdrop, where they are scaled past the
  * frame, cross-fading, under a scrim, and `aria-hidden`. So the site had five photographs per
  * country that no visitor could ever actually LOOK at, and no screen-reader user knew existed.
@@ -27,22 +28,38 @@ import { inProse, inProseCapitalised } from '../../lib/countryName'
  *
  * WHY THE CATEGORY IS THE ONLY LABEL, and this is the instruction the section was built around.
  *
- * The workbook keeps `category` in its own column, separate from the image — so "City", "Food",
- * "Train", "Temple", "Night" are the dataset's own words, and the alternative to using them is
- * INVENTING a caption per photograph per country. Twenty-five hand-written captions is twenty-five
- * chances to describe a country, which is exactly the authority this project does not claim: the
- * traveller reports what they noticed, and the dataset supplies facts. A caption saying "Tokyo's
- * neon-lit streets at dusk" is the site editorialising in a voice it has no source for.
+ * The workbook keeps `category` in its own column, separate from the image, so those words are the
+ * dataset's own, and the alternative to using them is INVENTING a caption per photograph per
+ * country. Twenty-five hand-written captions is twenty-five chances to describe a country, which is
+ * exactly the authority this project does not claim: the traveller reports what they noticed, and
+ * the dataset supplies facts. A caption saying "Tokyo's neon-lit streets at dusk" is the site
+ * editorialising in a voice it has no source for.
  *
- * One word under a photograph does something better anyway. It says what KIND of thing you are
+ * A short label under a photograph does something better anyway. It says what KIND of thing you are
  * looking at, which is the one piece of information the eye cannot supply for itself, and leaves
  * the photograph to say the rest.
  *
- * THE SAME FIVE CATEGORIES IN THE SAME ORDER FOR EVERY COUNTRY — deliberately, and it is Principle
- * 13 (consistent structure, distinct atmosphere) in its most literal form. Five countries answering
- * the identical five prompts is what makes the differences between them legible; it also means the
- * strip cannot become a place where one country gets nine photographs and another gets three, which
- * would read as one being better documented and therefore more important (§7.4).
+ * THE CATEGORIES ARE NO LONGER FIVE SHARED WORDS, AND THE SECTION HAD TO STOP ASSUMING THEY WERE.
+ * They began as "City / Food / Train / Temple / Night" for all five countries, and this comment used
+ * to lean on that: one word each, the same five prompts everywhere. The workbook then made them
+ * specific where the shared word was simply wrong — India's third frame is a street scene rather
+ * than a train, Italy's fourth is Roman ruins rather than a temple, Switzerland's are a cable car
+ * and a church, and the United States' are a taxi and the Hollywood sign.
+ *
+ * Nothing here hardcodes the old five, so the change needed no code — the categories have always
+ * been read from the data. The one thing worth checking was the caption: "MOUNTAIN CABLE CAR" is
+ * three words where "TRAIN" was one, in a five-column row of uppercase 12px text tracked at 0.14em.
+ * Measured, the longest label still sets on one line in a 170px column at 1024 — the narrowest this
+ * layout goes — and all five images stay top-aligned. So the strip needed no adjustment, which is
+ * recorded here so the next person does not go looking for the wrapping fix this paragraph used to
+ * claim was necessary.
+ *
+ * WHAT IS STILL FIXED IS THE SHAPE: five photographs per country, in the workbook's order, first and
+ * second always the city and its food and fifth always night. That is Principle 13 (consistent
+ * structure, distinct atmosphere) — the countries answer the same five prompts, and now they answer
+ * the middle ones in their own words. It still means the strip cannot become a place where one
+ * country gets nine photographs and another three, which would read as one being better documented
+ * and therefore more important (§7.4).
  *
  * WHY THIS IS NOT AN `<ol>` DESPITE BEING FIVE ITEMS IN A FIXED ORDER
  * The order is the workbook's, not a sequence the visitor should follow — there is no first or last
@@ -72,12 +89,23 @@ import { inProse, inProseCapitalised } from '../../lib/countryName'
  * knows is worse than alt text that is merely thin, because a screen-reader user cannot tell a
  * confident description from an accurate one.
  *
- * LOWERCASED because the category arrives title-cased for display ("Food") and mid-sentence it
- * should not be. `toLowerCase()` on the whole word rather than just the first letter, since none of
- * the five categories is a proper noun.
+ * THE CATEGORY IS USED VERBATIM, AND IT USED TO BE LOWERCASED. That was correct while every
+ * category was a common noun — "food in Japan" reads better than "Food in Japan" mid-sentence, and
+ * the comment here said as much: "none of the five categories is a proper noun".
+ *
+ * That stopped being true when the workbook's categories were made specific. Four of them are now
+ * proper nouns — "New York Taxi", "Hollywood Sign", plus "Mountain Cable Car" and "Ancient Ruins"
+ * as titles — and `toLowerCase()` turned them into "new york taxi in the United States", which is
+ * not a description of anything, just a mangled name.
+ *
+ * There is no way to tell a proper noun from a common one by looking at a string, so the fix is to
+ * stop trying: the author's capitalisation is the only reliable signal, so it is preserved. The cost
+ * is that "City in Japan" is title-cased where prose would not be. That is the cheaper error — a
+ * screen-reader user hears the same words either way, whereas "hollywood sign" is a name spelled
+ * wrong. A label-like alt phrase is allowed to read like a label.
  */
 function glimpseAlt(category, country) {
-  return `${category.toLowerCase()} in ${inProse(country)}`
+  return `${category} in ${inProse(country)}`
 }
 
 export function Glimpses({ country }) {
