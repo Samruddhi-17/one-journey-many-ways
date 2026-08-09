@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      ==========================================================================================
+      DOCUMENT METADATA — the static defaults.
+
+      READ THIS BEFORE CHANGING ANYTHING BELOW.
+
+      The site routes on the URL fragment (`/#/japan`), because GitHub Pages is a static file
+      host — see the note in src/App.jsx for why. Everything after the `#` is by design never
+      sent to the server. So when Slack, iMessage, WhatsApp, LinkedIn or X fetches a shared
+      link, the server hands back THIS FILE, unchanged, whatever route the link pointed at.
+      Those scrapers do not run our JavaScript.
+
+      Which means: the values in this file are not fallbacks. They are the only metadata any
+      link preview will ever show, for every page on the site. They have to stand alone, and
+      they have to describe the journey as a whole rather than any one country — which is the
+      honest thing for a shared link to promise in any case, since the five countries are an
+      itinerary and not a menu (PRODUCT_VISION.md §2.3).
+
+      src/hooks/useDocumentMeta.js overwrites the `content` of these same tags on every
+      navigation. That is for the browser — tab labels, history, bookmarks — not for sharing.
+      It only ever mutates tags that already exist here; it never appends one. If you add a tag
+      to that hook, add it here first, or a scraper gets nothing.
+
+      THE DESCRIPTION BELOW IS DUPLICATED from `SITE.description` in src/lib/meta.js, because
+      static HTML cannot call the spellOut() helper that builds it. That duplication is checked:
+      a mismatch logs a warning in the browser console in development.
+      ==========================================================================================
+    -->
+
+    <title>One Journey. Many Ways of Living.</title>
+    <meta
+      name="description"
+      content="Five countries, one traveller, and a set of expectations that did not survive the trip. A data-led travel story about how the world lives, thrives and connects."
+    />
+
+    <!--
+      OPEN GRAPH — the format Slack, iMessage, WhatsApp, LinkedIn, Discord and Facebook read.
+
+      NOTE THE ATTRIBUTE: `property`, not `name`. Open Graph is built on RDFa, where `property`
+      is the spec'd attribute. `name="og:title"` is silently ignored by every scraper, and the
+      failure is indistinguishable from a stale scraper cache.
+
+      `og:url` and `og:image` are deliberately ABSENT rather than wrong:
+
+        og:url wants the canonical absolute URL of the page, which requires knowing the deployed
+        origin. This repository has no configured deploy target yet (no `base` in
+        vite.config.js, no git remote), so any value here would be a guess. An absent og:url
+        makes scrapers use the URL they fetched, which is correct; a wrong one makes every
+        shared link point somewhere else.
+
+        og:image wants an absolute URL to a 1200x630 share card. There is no such asset — and
+        the only large images available are the country photographs, which would advertise one
+        country as the subject of the whole site. A card with no image is a clean text card; a
+        card showing Japan for a link to Italy is a mistake a visitor can see. Both belong on
+        the Version 2 backlog, together, once the deploy origin is fixed.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="One Journey. Many Ways of Living." />
+    <meta property="og:title" content="One Journey. Many Ways of Living." />
+    <meta
+      property="og:description"
+      content="Five countries, one traveller, and a set of expectations that did not survive the trip. A data-led travel story about how the world lives, thrives and connects."
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!--
+      X / TWITTER CARDS. X falls back to og:* for anything its own namespace omits, so these are
+      belt-and-braces. They are written out anyway so this block reads as "here is what each
+      platform is told" rather than requiring the reader to remember the inheritance rules.
+
+      `summary` rather than `summary_large_image`, because there is no image. Requesting the
+      large-image card without an image yields a broken-looking card rather than a text one.
+    -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="One Journey. Many Ways of Living." />
+    <meta
+      name="twitter:description"
+      content="Five countries, one traveller, and a set of expectations that did not survive the trip. A data-led travel story about how the world lives, thrives and connects."
+    />
+
+    <!--
+      The cream the page background actually is (`--color-surface-page` in src/styles/tokens.css).
+      Mobile browsers tint their own chrome with it, so the address bar matches the page instead
+      of framing it in white. A <meta> cannot hold a var(), so this is a literal that has to be
+      changed alongside the token.
+    -->
+    <meta name="theme-color" content="#fdf9f3" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

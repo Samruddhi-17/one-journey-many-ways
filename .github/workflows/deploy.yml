@@ -1,0 +1,72 @@
+# Builds the site and publishes it to GitHub Pages.
+#
+# WHY A WORKFLOW RATHER THAN COMMITTING `dist/`. The built output is derived from the workbook, the
+# images and the source; committing it would mean every change produced a second diff of generated
+# bundles, and the published site could silently drift from the source that supposedly produced it.
+# Building in CI means what is deployed is always what the committed source builds to. `dist/` stays
+# in .gitignore.
+#
+# WHAT IT NEEDS ON GITHUB, once: Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
+# Without that the workflow runs and the deploy step fails, because Pages defaults to serving a branch.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Lets you re-publish from the Actions tab without pushing a commit.
+  workflow_dispatch:
+
+# `contents: read` to check out, `pages: write` + `id-token: write` for the deploy action's OIDC
+# handshake. Nothing here needs write access to the repository itself.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. `cancel-in-progress: false` because a half-finished Pages deploy is worse
+# than a slightly stale one: cancelling mid-upload can leave the site serving a partial build.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 24 to match the version this was developed and verified on. `npm ci` needs the lockfile,
+          # which is committed; the cache keys off it.
+          node-version: 24
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it installs exactly the lockfile's tree and fails if
+      # package.json and the lockfile disagree, so CI cannot quietly resolve a different version
+      # than the one verified locally.
+      - run: npm ci
+
+      - run: npm run lint
+
+      # `npm run build` runs test:data -> data -> map -> vite build. The data step regenerates
+      # src/data/journey.json from the workbook and copies images into public/images/, and the
+      # validators throw on internally inconsistent data, so a bad workbook fails the build rather
+      # than shipping. Every step is offline; nothing here fetches anything.
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

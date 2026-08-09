@@ -1,0 +1,947 @@
+{
+  "generatedBy": "scripts/convertData.mjs",
+  "source": "travel_data_dictionary_10_countries.xlsx",
+  "countryCount": 5,
+  "countries": [
+    {
+      "slug": "japan",
+      "name": "Japan",
+      "arrivalOrder": 1,
+      "capital": "Tokyo",
+      "continent": "Asia",
+      "currency": "Japanese Yen (JPY, ¥)",
+      "timeZone": "UTC+9",
+      "coordinates": {
+        "latitude": 36.2048,
+        "longitude": 138.2529
+      },
+      "facts": {
+        "population": 123366734,
+        "lifeExpectancy": 85,
+        "happinessScore": 6.15,
+        "touristArrivalsMillions": 36.9,
+        "workHoursPerWeek": 36.7,
+        "commuteMinutesOneWay": 39
+      },
+      "welcome": {
+        "title": "Welcome to Japan",
+        "intro": "A blend of tradition, technology and remarkable discipline."
+      },
+      "didYouKnow": "It features over 5 million vending machines selling everything from hot canned coffee to fresh umbrellas.",
+      "travellerNote": "I expected futuristic technology, but what stayed with me most was the culture of respect and quietness in everyday life.",
+      "day": {
+        "ageGroup": "15–64",
+        "activities": [
+          {
+            "activity": "Paid Work / Study",
+            "hours": 6.3
+          },
+          {
+            "activity": "Sleep, Eating, Personal Care",
+            "hours": 10.4
+          },
+          {
+            "activity": "Leisure & Socializing",
+            "hours": 4
+          },
+          {
+            "activity": "Unpaid Housework / Childcare",
+            "hours": 2.2
+          },
+          {
+            "activity": "Commuting",
+            "hours": 1.1
+          }
+        ]
+      },
+      "food": [
+        {
+          "category": "Meat",
+          "perCapita": 49.8,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Vegetables",
+          "perCapita": 92,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Dairy",
+          "perCapita": 94.6,
+          "unit": "kg/capita/year"
+        }
+      ],
+      "transport": [
+        {
+          "mode": "Public Transit",
+          "percentage": 46
+        },
+        {
+          "mode": "Private Vehicle",
+          "percentage": 44.5
+        },
+        {
+          "mode": "Active Transport",
+          "percentage": 8
+        },
+        {
+          "mode": "Other/Taxi",
+          "percentage": 1.5
+        }
+      ],
+      "languages": [
+        {
+          "language": "Japanese",
+          "type": "Official / Dominant",
+          "display": "99%",
+          "approximate": false,
+          "share": 99
+        },
+        {
+          "language": "English",
+          "type": "Widely Taught",
+          "display": "15–30%",
+          "approximate": true,
+          "share": 22.5
+        },
+        {
+          "language": "Chinese",
+          "type": "Major Resident",
+          "display": "0.6–1%",
+          "approximate": true,
+          "share": 0.8
+        }
+      ],
+      "observations": [
+        {
+          "section": "Time Usage",
+          "title": "⏰ What I Noticed",
+          "quote": "Despite long working hours, I noticed people still made time for hobbies and personal routines. Life felt structured rather than rushed."
+        },
+        {
+          "section": "Food",
+          "title": "🍽️ My Food Experience",
+          "quote": "Rice, seafood and seasonal vegetables appeared in almost every meal, making the cuisine feel balanced and fresh."
+        },
+        {
+          "section": "Transport",
+          "title": "🚆 On the Move",
+          "quote": "I quickly realized that trains were the easiest way to travel. The network was punctual, clean and incredibly efficient."
+        },
+        {
+          "section": "Language",
+          "title": "🗣️ Communication",
+          "quote": "Japanese was everywhere, but simple English signs helped me navigate comfortably in major cities."
+        },
+        {
+          "section": "Culture",
+          "title": "🎭 Local Experience",
+          "quote": "Respect and discipline weren’t just traditions—they were part of everyday life, from greetings to public spaces."
+        }
+      ],
+      "experiences": [
+        {
+          "experience": "Hanami",
+          "title": "Cherry Blossom Viewing",
+          "description": "Every spring, families and friends gather beneath blooming cherry trees to celebrate nature and the arrival of a new season.",
+          "image": "./images/hanami_cherry_blossom_japan.jpeg"
+        },
+        {
+          "experience": "Tea Ceremony",
+          "title": "Tea Ceremony",
+          "description": "A centuries-old ritual centered on mindfulness, hospitality and respect, where every movement has meaning.",
+          "image": "./images/tea_ceremony_japan.jpeg"
+        },
+        {
+          "experience": "Shinkansen",
+          "title": "Bullet Train Experience",
+          "description": "Riding the Shinkansen showcases Japan’s precision, punctuality and world-renowned transportation system.",
+          "image": "./images/shinkansen_bullet_train_japan.jpeg"
+        }
+      ],
+      "images": {
+        "cover": "./images/japan_title_background.png",
+        "hero": null,
+        "flag": "./images/japan_flag.jpeg",
+        "fact": "./images/did_you_know_japan.jpeg",
+        "stamp": null,
+        "gallery": [
+          {
+            "category": "City",
+            "src": "./images/japan_city.jpeg"
+          },
+          {
+            "category": "Food",
+            "src": "./images/food_japan.jpeg"
+          },
+          {
+            "category": "Train",
+            "src": "./images/train.jpeg"
+          },
+          {
+            "category": "Temple",
+            "src": "./images/temple_japan.jpeg"
+          },
+          {
+            "category": "Night",
+            "src": "./images/night_japan.jpeg"
+          }
+        ],
+        "portrait": "./images/traveler_japan.png",
+        "notepaper": "./images/traveler_note_japan.png"
+      }
+    },
+    {
+      "slug": "india",
+      "name": "India",
+      "arrivalOrder": 2,
+      "capital": "New Delhi",
+      "continent": "Asia",
+      "currency": "Indian Rupee (INR, ₹)",
+      "timeZone": "UTC+5:30",
+      "coordinates": {
+        "latitude": 20.5937,
+        "longitude": 78.9629
+      },
+      "facts": {
+        "population": 1463865525,
+        "lifeExpectancy": 73,
+        "happinessScore": 4.39,
+        "touristArrivalsMillions": 11.2,
+        "workHoursPerWeek": 46.7,
+        "commuteMinutesOneWay": 48
+      },
+      "welcome": {
+        "title": "Welcome to India",
+        "intro": "A country where every state feels like a new adventure."
+      },
+      "didYouKnow": "It is the world’s largest producer of spices, generating over 70% of the global spice supply.",
+      "travellerNote": "Every state felt like a new country, each with its own language, traditions, and unforgettable flavors.",
+      "day": {
+        "ageGroup": "15–64",
+        "activities": [
+          {
+            "activity": "Paid Work / Study",
+            "hours": 7.1
+          },
+          {
+            "activity": "Sleep, Eating, Personal Care",
+            "hours": 10.1
+          },
+          {
+            "activity": "Leisure & Socializing",
+            "hours": 3.2
+          },
+          {
+            "activity": "Unpaid Housework / Childcare",
+            "hours": 2.4
+          },
+          {
+            "activity": "Commuting",
+            "hours": 1.2
+          }
+        ]
+      },
+      "food": [
+        {
+          "category": "Meat",
+          "perCapita": 4.5,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Vegetables",
+          "perCapita": 142.1,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Dairy",
+          "perCapita": 145.4,
+          "unit": "kg/capita/year"
+        }
+      ],
+      "transport": [
+        {
+          "mode": "Public Transit",
+          "percentage": 43.5
+        },
+        {
+          "mode": "Private Vehicle",
+          "percentage": 38
+        },
+        {
+          "mode": "Active Transport",
+          "percentage": 12
+        },
+        {
+          "mode": "Other/Taxi",
+          "percentage": 6.5
+        }
+      ],
+      "languages": [
+        {
+          "language": "Hindi",
+          "type": "Official (Union)",
+          "display": "43.6% (Native); ~55% incl. L2",
+          "approximate": true,
+          "share": 55
+        },
+        {
+          "language": "English",
+          "type": "Subsidiary Official",
+          "display": "12–18%",
+          "approximate": true,
+          "share": 15
+        },
+        {
+          "language": "Bengali",
+          "type": "Official (Regional)",
+          "display": "8%",
+          "approximate": false,
+          "share": 8
+        }
+      ],
+      "observations": [
+        {
+          "section": "Time Usage",
+          "title": "⏰ What I Noticed",
+          "quote": "Daily life revolved around work, family and community, with festivals and traditions bringing people together throughout the year."
+        },
+        {
+          "section": "Food",
+          "title": "🍽️ My Food Experience",
+          "quote": "Every region introduced completely different flavors, proving that Indian cuisine is far more diverse than I expected."
+        },
+        {
+          "section": "Transport",
+          "title": "🚆 On the Move",
+          "quote": "From metros to local trains and auto-rickshaws, every mode of transport had its own rhythm and purpose."
+        },
+        {
+          "section": "Language",
+          "title": "🗣️ Communication",
+          "quote": "Hearing multiple languages in a single day quickly became normal, reflecting the country’s incredible diversity."
+        },
+        {
+          "section": "Culture",
+          "title": "🎭 Local Experience",
+          "quote": "Every city felt like a new chapter, shaped by different customs, festivals and centuries of history."
+        }
+      ],
+      "experiences": [
+        {
+          "experience": "Festival of Colors",
+          "title": "Holi Festival",
+          "description": "Communities come together to celebrate the arrival of spring with colors, music and shared traditions.",
+          "image": "./images/india_holi_festival.jpeg"
+        },
+        {
+          "experience": "Local Markets",
+          "title": "Traditional Bazaar",
+          "description": "Bustling markets offer spices, handcrafted goods and street food while reflecting everyday local life.",
+          "image": "./images/india_traditional_bazaar.jpeg"
+        },
+        {
+          "experience": "Shared Meals",
+          "title": "Indian Thali Experience",
+          "description": "A traditional thali brings together a variety of regional dishes, showcasing India’s incredible culinary diversity.",
+          "image": "./images/india_thali.jpeg"
+        }
+      ],
+      "images": {
+        "cover": "./images/india_title_background.png",
+        "hero": null,
+        "flag": "./images/india_flag.jpeg",
+        "fact": "./images/india_did_you_know.jpeg",
+        "stamp": null,
+        "gallery": [
+          {
+            "category": "City",
+            "src": "./images/india_city.jpeg"
+          },
+          {
+            "category": "Food",
+            "src": "./images/india_food.jpeg"
+          },
+          {
+            "category": "Train",
+            "src": "./images/india_train.jpeg"
+          },
+          {
+            "category": "Temple",
+            "src": "./images/india_temple.jpeg"
+          },
+          {
+            "category": "Night",
+            "src": "./images/india_night.jpeg"
+          }
+        ],
+        "portrait": "./images/traveler_india.png",
+        "notepaper": "./images/india_traveler_note.png"
+      }
+    },
+    {
+      "slug": "italy",
+      "name": "Italy",
+      "arrivalOrder": 3,
+      "capital": "Rome",
+      "continent": "Europe",
+      "currency": "Euro (EUR, €)",
+      "timeZone": "UTC+1",
+      "coordinates": {
+        "latitude": 41.8719,
+        "longitude": 12.5674
+      },
+      "facts": {
+        "population": 58915656,
+        "lifeExpectancy": 84,
+        "happinessScore": 6.42,
+        "touristArrivalsMillions": 68.5,
+        "workHoursPerWeek": 34,
+        "commuteMinutesOneWay": 29
+      },
+      "welcome": {
+        "title": "Welcome to Italy",
+        "intro": "Walk through history while enjoying the world’s most loved cuisine."
+      },
+      "didYouKnow": "It contains three active volcanoes—Etna, Stromboli, and Vesuvius—all located in its southern region.",
+      "travellerNote": "History wasn’t confined to museums—it surrounded me on every street, square, and neighborhood café.",
+      "day": {
+        "ageGroup": "15–64",
+        "activities": [
+          {
+            "activity": "Paid Work / Study",
+            "hours": 4.8
+          },
+          {
+            "activity": "Sleep, Eating, Personal Care",
+            "hours": 11.2
+          },
+          {
+            "activity": "Leisure & Socializing",
+            "hours": 4.3
+          },
+          {
+            "activity": "Unpaid Housework / Childcare",
+            "hours": 2.7
+          },
+          {
+            "activity": "Commuting",
+            "hours": 1
+          }
+        ]
+      },
+      "food": [
+        {
+          "category": "Meat",
+          "perCapita": 77.4,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Vegetables",
+          "perCapita": 160.2,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Dairy",
+          "perCapita": 224,
+          "unit": "kg/capita/year"
+        }
+      ],
+      "transport": [
+        {
+          "mode": "Private Vehicle",
+          "percentage": 66.5
+        },
+        {
+          "mode": "Public Transit",
+          "percentage": 17
+        },
+        {
+          "mode": "Active Transport",
+          "percentage": 13.5
+        },
+        {
+          "mode": "Other/Taxi",
+          "percentage": 3
+        }
+      ],
+      "languages": [
+        {
+          "language": "Italian",
+          "type": "Official",
+          "display": "95%+",
+          "approximate": false,
+          "share": 95
+        },
+        {
+          "language": "English",
+          "type": "Widely Spoken",
+          "display": "30–35%",
+          "approximate": true,
+          "share": 32.5
+        },
+        {
+          "language": "Romanian",
+          "type": "Major Immigrant",
+          "display": "1.8–2%",
+          "approximate": true,
+          "share": 1.9
+        }
+      ],
+      "observations": [
+        {
+          "section": "Time Usage",
+          "title": "⏰ What I Noticed",
+          "quote": "Meals and conversations were never rushed. People seemed to genuinely value slowing down and enjoying the moment."
+        },
+        {
+          "section": "Food",
+          "title": "🍽️ My Food Experience",
+          "quote": "Fresh ingredients and regional recipes made every meal feel like a celebration of local tradition."
+        },
+        {
+          "section": "Transport",
+          "title": "🚆 On the Move",
+          "quote": "Walking through historic streets often felt more rewarding than taking public transport."
+        },
+        {
+          "section": "Language",
+          "title": "🗣️ Communication",
+          "quote": "Italian dominated everyday conversations, while English was common in tourist destinations."
+        },
+        {
+          "section": "Culture",
+          "title": "🎭 Local Experience",
+          "quote": "Ancient history blended naturally with modern life, making every street feel like an open-air museum."
+        }
+      ],
+      "experiences": [
+        {
+          "experience": "Piazza Culture",
+          "title": "Evening in the Piazza",
+          "description": "Public squares become gathering places where families and friends meet, relax and socialize.",
+          "image": "./images/italy_piazza_culture.jpeg"
+        },
+        {
+          "experience": "Pasta Making",
+          "title": "Handmade Pasta",
+          "description": "Preparing fresh pasta is a tradition passed down through generations and celebrated across the country.",
+          "image": "./images/italy_pasta_making.jpeg"
+        },
+        {
+          "experience": "Historic Streets",
+          "title": "Walking Through History",
+          "description": "Ancient streets, churches and monuments make history part of everyday life rather than just tourist attractions.",
+          "image": "./images/italy_historic_streets.jpeg"
+        }
+      ],
+      "images": {
+        "cover": "./images/italy_title_background.png",
+        "hero": null,
+        "flag": "./images/italy_flag.jpeg",
+        "fact": "./images/italy_did_you_know.png",
+        "stamp": null,
+        "gallery": [
+          {
+            "category": "City",
+            "src": "./images/italy_city.jpeg"
+          },
+          {
+            "category": "Food",
+            "src": "./images/italy_food.jpeg"
+          },
+          {
+            "category": "Train",
+            "src": "./images/italy_train.jpeg"
+          },
+          {
+            "category": "Temple",
+            "src": "./images/italy_temple.jpeg"
+          },
+          {
+            "category": "Night",
+            "src": "./images/italy_night.jpeg"
+          }
+        ],
+        "portrait": "./images/italy_traveler.png",
+        "notepaper": "./images/italy_traveler_note.png"
+      }
+    },
+    {
+      "slug": "switzerland",
+      "name": "Switzerland",
+      "arrivalOrder": 4,
+      "capital": "Bern",
+      "continent": "Europe",
+      "currency": "Swiss Franc (CHF, CHF)",
+      "timeZone": "UTC+1",
+      "coordinates": {
+        "latitude": 46.8182,
+        "longitude": 8.2275
+      },
+      "facts": {
+        "population": 9092436,
+        "lifeExpectancy": 84.2,
+        "happinessScore": 6.93,
+        "touristArrivalsMillions": 12.8,
+        "workHoursPerWeek": 34.6,
+        "commuteMinutesOneWay": 29
+      },
+      "welcome": {
+        "title": "Welcome to Switzerland",
+        "intro": "Where precision, nature and peaceful living come together."
+      },
+      "didYouKnow": "It is illegal to own just one guinea pig because they are considered social animals.",
+      "travellerNote": "I expected spectacular mountains, but I was equally impressed by the country’s precision and efficiency.",
+      "day": {
+        "ageGroup": "15–64",
+        "activities": [
+          {
+            "activity": "Paid Work / Study",
+            "hours": 5.1
+          },
+          {
+            "activity": "Sleep, Eating, Personal Care",
+            "hours": 10.3
+          },
+          {
+            "activity": "Leisure & Socializing",
+            "hours": 4.9
+          },
+          {
+            "activity": "Unpaid Housework / Childcare",
+            "hours": 2.8
+          },
+          {
+            "activity": "Commuting",
+            "hours": 0.9
+          }
+        ]
+      },
+      "food": [
+        {
+          "category": "Meat",
+          "perCapita": 67.4,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Vegetables",
+          "perCapita": 124,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Dairy",
+          "perCapita": 288.5,
+          "unit": "kg/capita/year"
+        }
+      ],
+      "transport": [
+        {
+          "mode": "Private Vehicle",
+          "percentage": 50.5
+        },
+        {
+          "mode": "Public Transit",
+          "percentage": 31
+        },
+        {
+          "mode": "Active Transport",
+          "percentage": 16.5
+        },
+        {
+          "mode": "Other/Taxi",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "language": "German",
+          "type": "Official",
+          "display": "62%",
+          "approximate": false,
+          "share": 62
+        },
+        {
+          "language": "French",
+          "type": "Official",
+          "display": "23%",
+          "approximate": false,
+          "share": 23
+        },
+        {
+          "language": "Italian",
+          "type": "Official",
+          "display": "8%",
+          "approximate": false,
+          "share": 8
+        }
+      ],
+      "observations": [
+        {
+          "section": "Time Usage",
+          "title": "⏰ What I Noticed",
+          "quote": "Life felt organized and efficient, leaving plenty of time to enjoy nature and outdoor activities."
+        },
+        {
+          "section": "Food",
+          "title": "🍽️ My Food Experience",
+          "quote": "Cheese, chocolate and locally sourced ingredients reflected the country’s strong regional traditions."
+        },
+        {
+          "section": "Transport",
+          "title": "🚆 On the Move",
+          "quote": "Trains connected even remote mountain towns with remarkable punctuality and comfort."
+        },
+        {
+          "section": "Language",
+          "title": "🗣️ Communication",
+          "quote": "Moving across regions meant hearing different official languages, yet everything still felt seamlessly connected."
+        },
+        {
+          "section": "Culture",
+          "title": "🎭 Local Experience",
+          "quote": "Precision wasn’t limited to watches—it was reflected in transportation, services and everyday life."
+        }
+      ],
+      "experiences": [
+        {
+          "experience": "Alpine Adventure",
+          "title": "Exploring the Alps",
+          "description": "Hiking and mountain activities are an important part of Swiss lifestyle and outdoor culture.",
+          "image": "./images/switzerland_swiss_alps.jpeg"
+        },
+        {
+          "experience": "Glacier Express",
+          "title": "Scenic Train Journey",
+          "description": "One of the world’s most scenic train rides demonstrates Switzerland’s engineering and breathtaking landscapes.",
+          "image": "./images/switzerland_scenic_train.jpeg"
+        },
+        {
+          "experience": "Chocolate Tradition",
+          "title": "Swiss Chocolate Making",
+          "description": "Local chocolatiers continue centuries-old traditions that have made Swiss chocolate famous worldwide.",
+          "image": "./images/switzerland_swiss_chocolate.jpeg"
+        }
+      ],
+      "images": {
+        "cover": "./images/switzerland_title_background.png",
+        "hero": null,
+        "flag": "./images/switzerland_flag.jpeg",
+        "fact": "./images/switzerland_did_you_know.jpeg",
+        "stamp": null,
+        "gallery": [
+          {
+            "category": "City",
+            "src": "./images/switzerland_city.jpeg"
+          },
+          {
+            "category": "Food",
+            "src": "./images/switzerland_food.jpeg"
+          },
+          {
+            "category": "Train",
+            "src": "./images/switzerland_train.jpeg"
+          },
+          {
+            "category": "Temple",
+            "src": "./images/switzerland_temple.jpeg"
+          },
+          {
+            "category": "Night",
+            "src": "./images/switzerland_night.jpeg"
+          }
+        ],
+        "portrait": "./images/switerland_traveler.png",
+        "notepaper": "./images/switzerland_traveler_note.png"
+      }
+    },
+    {
+      "slug": "united-states",
+      "name": "United States",
+      "arrivalOrder": 5,
+      "capital": "Washington, D.C.",
+      "continent": "North America",
+      "currency": "United States Dollar (USD, $)",
+      "timeZone": "UTC-5 to UTC-10",
+      "coordinates": {
+        "latitude": 39.8283,
+        "longitude": -98.5795
+      },
+      "facts": {
+        "population": 341784857,
+        "lifeExpectancy": 79.5,
+        "happinessScore": 6.72,
+        "touristArrivalsMillions": 68,
+        "workHoursPerWeek": 36.4,
+        "commuteMinutesOneWay": 27
+      },
+      "welcome": {
+        "title": "Welcome to the United States",
+        "intro": "Diverse landscapes, cultures and endless possibilities."
+      },
+      "didYouKnow": "It does not have an official legally mandated language at the federal level.",
+      "travellerNote": "Every state had its own identity, making one country feel like many different destinations in a single journey.",
+      "day": {
+        "ageGroup": "15–64",
+        "activities": [
+          {
+            "activity": "Paid Work / Study",
+            "hours": 5.3
+          },
+          {
+            "activity": "Sleep, Eating, Personal Care",
+            "hours": 10.3
+          },
+          {
+            "activity": "Leisure & Socializing",
+            "hours": 5.1
+          },
+          {
+            "activity": "Unpaid Housework / Childcare",
+            "hours": 2.4
+          },
+          {
+            "activity": "Commuting",
+            "hours": 0.9
+          }
+        ]
+      },
+      "food": [
+        {
+          "category": "Meat",
+          "perCapita": 124.8,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Vegetables",
+          "perCapita": 114.2,
+          "unit": "kg/capita/year"
+        },
+        {
+          "category": "Dairy",
+          "perCapita": 262,
+          "unit": "kg/capita/year"
+        }
+      ],
+      "transport": [
+        {
+          "mode": "Private Vehicle",
+          "percentage": 85.5
+        },
+        {
+          "mode": "Other/Taxi",
+          "percentage": 6
+        },
+        {
+          "mode": "Public Transit",
+          "percentage": 5
+        },
+        {
+          "mode": "Active Transport",
+          "percentage": 3.5
+        }
+      ],
+      "languages": [
+        {
+          "language": "English",
+          "type": "De Facto National",
+          "display": "78% (Home); ~95% Total Fluent",
+          "approximate": true,
+          "share": 95
+        },
+        {
+          "language": "Spanish",
+          "type": "Widely Spoken",
+          "display": "13–14%",
+          "approximate": true,
+          "share": 13.5
+        },
+        {
+          "language": "Chinese",
+          "type": "Significant Minority",
+          "display": "1%",
+          "approximate": false,
+          "share": 1
+        }
+      ],
+      "observations": [
+        {
+          "section": "Time Usage",
+          "title": "⏰ What I Noticed",
+          "quote": "I noticed that lifestyles varied dramatically from city to city, making every destination feel unique."
+        },
+        {
+          "section": "Food",
+          "title": "🍽️ My Food Experience",
+          "quote": "The food scene reflected cultures from around the world, offering something different in every region."
+        },
+        {
+          "section": "Transport",
+          "title": "🚆 On the Move",
+          "quote": "Cars dominated most areas, while major cities relied heavily on public transportation for daily commuting."
+        },
+        {
+          "section": "Language",
+          "title": "🗣️ Communication",
+          "quote": "English connected people nationwide, while Spanish and many other languages reflected the country’s multicultural identity."
+        },
+        {
+          "section": "Culture",
+          "title": "🎭 Local Experience",
+          "quote": "Every state had its own personality, traditions and landscapes, making one country feel like many different journeys."
+        }
+      ],
+      "experiences": [
+        {
+          "experience": "National Parks",
+          "title": "Exploring National Parks",
+          "description": "From Yellowstone to Yosemite, protected landscapes reflect America’s appreciation for nature.",
+          "image": "./images/us_national_park.jpeg"
+        },
+        {
+          "experience": "Road Trip",
+          "title": "Classic American Road Trip",
+          "description": "Long highways connect cities, towns and national landmarks, making road trips part of American culture.",
+          "image": "./images/us_road_trip.jpeg"
+        },
+        {
+          "experience": "Local Sports",
+          "title": "Baseball & Football Culture",
+          "description": "Sporting events bring communities together and are an important part of local traditions and entertainment.",
+          "image": "./images/us_local_sports.jpeg"
+        }
+      ],
+      "images": {
+        "cover": "./images/us_title_background_wide.png",
+        "hero": null,
+        "flag": "./images/us_flag_capitol.png",
+        "fact": null,
+        "stamp": null,
+        "gallery": [
+          {
+            "category": "City",
+            "src": "./images/us_city.jpeg"
+          },
+          {
+            "category": "Food",
+            "src": "./images/us_food.jpeg"
+          },
+          {
+            "category": "Train",
+            "src": "./images/us_train.jpeg"
+          },
+          {
+            "category": "Temple",
+            "src": "./images/us_temple.jpeg"
+          },
+          {
+            "category": "Night",
+            "src": "./images/us_night.jpeg"
+          }
+        ],
+        "portrait": "./images/us_traveler.png",
+        "notepaper": "./images/us_traveler_note.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary Office lock files (created when an .xlsx is open)
+~$*.xlsx
+
+# Images copied out of images/ by scripts/convertData.mjs.
+#
+# IGNORED because they are byte-identical copies of files already tracked in images/ —
+# committing them would double the repository's binary weight (3.3 MB today, more per country)
+# to store the same pixels twice. `npm run build` regenerates them, so a clean checkout still
+# builds. The originals in images/ remain tracked; only the copies are derived.
+#
+# NOTE the deliberate asymmetry with src/data/journey.json, which IS committed even though it
+# is also generated. A 25 KB text file produces a readable diff — when a number changes, the
+# review shows which number and by how much, which is worth having in history for a project
+# whose subject is data. A binary copy produces no useful diff at all.
+public/images/
+
+# Environment files — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Claude Code's per-machine settings. `settings.json` (shared, checked in) records permissions the
+# whole project should have; `settings.local.json` accumulates one-off approvals full of absolute
+# paths from whichever machine granted them, so it stays out of a public repository.
+.claude/settings.local.json
+
+# The superseded 12-country workbook. It is kept on disk as the backlog of countries that did not
+# make the five-stop itinerary, but it is NOT tracked: its image-URL column still points at an
+# internal corporate drive, alias and all, and this repository is public. The workbook the build
+# actually reads is travel_data_dictionary_10_countries.xlsx, whose URLs were replaced with local
+# filenames — see scripts/validators.mjs, which fails the build if an internal host ever returns.
+travel_data_dictionary.xlsx

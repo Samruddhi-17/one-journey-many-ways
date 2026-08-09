@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The site's own mark: the route arrow from the header, adapted for a browser tab.
+
+  WHY THIS SHAPE. It is the same path as the <svg> in SiteHeader.jsx — a paper plane
+  reading as a heading — which is the site's one piece of iconography. A favicon that
+  differs from the mark in the header is two logos for one site.
+
+  WHY IT IS FILLED HERE AND STROKED THERE. The header draws it as a 1.5-unit outline
+  at 20px. Scaled into a 16px tab that line falls near the 1px rendering floor, where
+  a hollow shape either disappears or turns to mush. So the tab gets the same
+  silhouette as a solid: the outline says "drawn", the fill says "recognisable at
+  16px", and only the second is achievable there. Adapting a mark to its size is not
+  inconsistency — rendering it identically at every size is.
+
+  WHY THE CREAM PLATE. A bare dark glyph disappears against a dark browser theme and
+  a bare light one disappears against a light theme. An opaque plate in the site's own
+  page colour (#fdf9f3) is legible on either, and it puts the signature cream in the
+  tab strip, which is the first pixel of this site a visitor ever sees. The
+  alternative, a `prefers-color-scheme` query inside this file, is supported unevenly
+  for favicons and would leave the unsupported browsers with the invisible case.
+
+  The two colours are hardcoded rather than referencing the design tokens on purpose:
+  this file is served as a standalone document, so it never sees the site's
+  stylesheet and `var()` would resolve to nothing. They are the page and ink-900
+  values from src/styles/tokens.css; if those change, this file must be edited by hand.
+
+  NOTE FOR ANYONE EDITING THESE COMMENTS: an SVG is XML, and an XML comment may not
+  contain a double hyphen. Writing a CSS custom property name here by its real
+  spelling makes the whole file unparseable, and a browser renders a broken favicon
+  as nothing at all. That happened once while writing this file.
+
+  rx="7" of 32 (~22%) matches the platform convention for app icons, so it reads as
+  an icon rather than as a clipped square.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7" fill="#fdf9f3" />
+  <!--
+    The 24-unit path from the header, scaled and translated so it sits centred on the
+    plate with an even margin.
+
+    THE NUMBERS ARE COMPUTED, NOT EYEBALLED, because eyeballing them was wrong twice.
+    The path's bounding box is x 2–21, y 4–23, so its box centre is (11.5, 13.5) — but
+    a triangle's visual weight is not at its box centre. Its area centroid is
+    (13.201, 12.045), up and to the right, because the mass is in the wide head rather
+    than in the tail. Centring on either alone looks off: on the box centre the head
+    hangs right, on the centroid the tail hangs left. This anchors on the midpoint of
+    the two, (12.35, 12.77), which is the usual optical-centring compromise, and the
+    translate is then just 16 − scale × anchor.
+
+    0.95 rather than a larger scale: at 1.15 (the first attempt) the arrow's tip
+    collided with the plate's rounded corner and the whole mark read as a blob at 16px.
+    A mark inside a rounded plate needs margin on all four sides, and the corner radius
+    eats into the diagonal, so the usable box is smaller than it looks.
+  -->
+  <path
+    d="M2 12l19-8-7 19-3-8-9-3z"
+    transform="translate(4.267 3.866) scale(0.95)"
+    fill="#1a1815"
+    stroke="#1a1815"
+    stroke-width="1"
+    stroke-linejoin="round"
+  />
+</svg>

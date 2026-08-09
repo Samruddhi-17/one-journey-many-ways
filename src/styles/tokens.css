@@ -1,0 +1,241 @@
+/*
+ * DESIGN TOKENS — the project's visual vocabulary, defined exactly once.
+ *
+ * Source of truth: docs/DESIGN_SYSTEM.md (which derives from docs/PRODUCT_VISION.md).
+ *
+ * WHY A TOKEN FILE AT ALL?
+ * A "token" is a named design decision. Instead of writing #2a78d6 in forty components,
+ * we name it once and refer to the name. When a value changes, it changes in one place.
+ * This is the same discipline as a lookup table in a data warehouse: don't repeat the
+ * literal, reference the key.
+ *
+ * WHY `@theme` AND NOT `:root`?
+ * Tailwind v4 reads `@theme` and generates utility classes from it. Declaring
+ * `--color-ink-700` here means `text-ink-700` and `bg-ink-700` exist as Tailwind classes.
+ * That is what makes design system compliance the *easy* path — a developer reaching for
+ * a colour finds only approved ones.
+ *
+ * EVERY COLOUR HERE WAS VALIDATED BY SCRIPT, NOT BY EYE.
+ * Measured contrast ratios are in the comments. See DESIGN_SYSTEM.md §4 for the
+ * validator output that produced them. Principle 16: accessible by construction.
+ */
+
+@theme {
+  /* ---------------------------------------------------------------------------
+   * SURFACES
+   * Warm paper cream, sampled from the project's own mockups — not invented.
+   * WHY cream and not white: cream is the print-magazine register the whole product
+   * aims at, and it makes photography glow rather than compete. Pure white makes
+   * photos look like cut-outs. (DESIGN_SYSTEM.md §4.1)
+   * ------------------------------------------------------------------------- */
+  --color-surface-page: #fdf9f3; /* the signature base */
+  --color-surface-card: #ffffff; /* cards, panels, chart plots */
+  --color-surface-sunken: #f6f1e8; /* inset wells, alternating bands */
+  --color-surface-ink: #1a1815; /* rare dark full-bleed sections */
+
+  /* ---------------------------------------------------------------------------
+   * INK SCALE (text + borders)
+   * Warm-tinted greys, not pure grey — pure grey on cream reads dirty.
+   * Ratios measured against --color-surface-page.
+   * ------------------------------------------------------------------------- */
+  --color-ink-900: #1a1815; /* 16.89:1 — display headings */
+  --color-ink-700: #3d3833; /* 11.05:1 — body copy (default) */
+  --color-ink-500: #6b635a; /*  5.63:1 — secondary text, captions, axes */
+  --color-ink-400: #8a8178; /*  3.65:1 — large/UI text ONLY, never body */
+  --color-ink-300: #a9a19a; /*  2.43:1 — decorative icons */
+  --color-ink-200: #d6d0c7; /*  1.46:1 — borders, dividers (deliberately quiet) */
+  --color-ink-100: #ebe6de; /*  1.18:1 — subtle fills, gridlines */
+
+  /* ---------------------------------------------------------------------------
+   * STATUS — reserved meanings. Never reused as a chart series.
+   * Always shipped with an icon and a text label, never colour alone.
+   * ------------------------------------------------------------------------- */
+  --color-status-good: #0f7a55; /* 5.09:1 */
+  --color-status-warning: #9a6700; /* 4.64:1 */
+  --color-status-critical: #9e2a2b; /* 7.10:1 */
+  --color-status-info: #1c5cab; /* 6.32:1 */
+
+  /* ---------------------------------------------------------------------------
+   * ORDINAL RAMP — see the `:root` block below for the live definition.
+   *
+   * This ramp USED to live here as five literal blues. It was moved because
+   * @theme values are compile-time constants, and a blue ramp is Japan's
+   * atmosphere, not the site's: rendering India's day in Japanese blue would
+   * make the one chart on the page contradict the country around it.
+   *
+   * It is now derived from `--accent-*` at runtime, so it follows the country
+   * automatically. The rules it must satisfy are recorded with it.
+   * ------------------------------------------------------------------------- */
+
+  /* ---------------------------------------------------------------------------
+   * TYPEFACES (DESIGN_SYSTEM.md §2.1)
+   * Two families because one cannot do both jobs: editorial prose wants a serif's
+   * warmth; 11px chart axis labels want a sans-serif's clarity.
+   * ------------------------------------------------------------------------- */
+  --font-display: 'Fraunces Variable', 'Fraunces', ui-serif, Georgia, serif;
+  --font-text: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------------------------------------------------------------------------
+   * SPACING — 4px base unit.
+   * The large section values (24/32 = 96/128px) are the most important spacing
+   * decision in the project: generous section padding is the mechanism that
+   * delivers "one idea per moment" (P4) by pushing the next section off screen.
+   * A dashboard uses 16-24px to maximise density. We want the opposite.
+   * ------------------------------------------------------------------------- */
+  --spacing-1: 0.25rem; /*   4px */
+  --spacing-2: 0.5rem; /*   8px */
+  --spacing-3: 0.75rem; /*  12px */
+  --spacing-4: 1rem; /*  16px */
+  --spacing-6: 1.5rem; /*  24px */
+  --spacing-8: 2rem; /*  32px */
+  --spacing-12: 3rem; /*  48px */
+  --spacing-16: 4rem; /*  64px */
+  --spacing-24: 6rem; /*  96px — section padding, mobile */
+  --spacing-32: 8rem; /* 128px — section padding, desktop */
+  --spacing-40: 10rem; /* 160px — around full-bleed breaks */
+
+  /* ---------------------------------------------------------------------------
+   * CONTAINER WIDTHS
+   * `prose` is 680px because body text beyond ~68 characters per line loses the
+   * reader's eye on the return sweep. Narrower than the image column, on purpose.
+   * ------------------------------------------------------------------------- */
+  --container-prose: 42.5rem; /*  680px — body copy, quotes */
+  --container-content: 67.5rem; /* 1080px — standard sections */
+  --container-wide: 85rem; /* 1360px — galleries */
+
+  /* ---------------------------------------------------------------------------
+   * BORDER RADIUS
+   * ------------------------------------------------------------------------- */
+  --radius-sm: 0.25rem; /*  4px — chart bar data-ends, chips */
+  --radius-md: 0.5rem; /*  8px — buttons, inputs, tags */
+  --radius-lg: 0.75rem; /* 12px — cards, callouts */
+  --radius-xl: 1.25rem; /* 20px — photo cards, feature panels */
+  --radius-2xl: 2rem; /* 32px — hero image containers */
+
+  /* ---------------------------------------------------------------------------
+   * ELEVATION
+   * Nearly absent by design — heavy card shadows are the strongest "corporate
+   * dashboard" tell there is. Print magazines have no shadows; separation comes
+   * from whitespace and hairlines. Default for cards is elev-0 (a border only).
+   * Shadows are warm-tinted (26,24,21 = our ink) because pure black on cream
+   * reads grey and dead.
+   * ------------------------------------------------------------------------- */
+  --shadow-elev-1: 0 1px 2px rgb(26 24 21 / 0.04), 0 2px 8px rgb(26 24 21 / 0.04);
+  --shadow-elev-2: 0 2px 4px rgb(26 24 21 / 0.05), 0 8px 24px rgb(26 24 21 / 0.06);
+  --shadow-elev-3: 0 8px 16px rgb(26 24 21 / 0.08), 0 24px 48px rgb(26 24 21 / 0.1);
+
+  /* ---------------------------------------------------------------------------
+   * MOTION — durations and easings (DESIGN_SYSTEM.md §7)
+   * These are BASE values. Each country scales them by its own pace multiplier
+   * (--atmosphere-pace), which is how "Italy feels slower than India" becomes a
+   * real, measurable thing rather than a vibe.
+   * ------------------------------------------------------------------------- */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 550ms;
+  --duration-slower: 800ms;
+  --duration-deliberate: 1200ms;
+
+  /* Never `ease-in` alone on an entry — content that accelerates as it arrives
+     feels like it is falling. Never `linear` except continuous loops. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* default */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* moves, not entries */
+  --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Italy */
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1); /* India only */
+}
+
+/*
+ * ATMOSPHERE DEFAULTS
+ *
+ * These four variables are what a country page overrides to change its entire feel.
+ * They live on :root (not @theme) because they are *reassigned at runtime* per
+ * country — @theme values are compile-time constants.
+ *
+ * The shell uses these neutral defaults; the Home page and any non-country route
+ * therefore look deliberately quiet, which is the point of "the shell is silent;
+ * the country speaks" (DESIGN_SYSTEM.md §1).
+ *
+ * ------------------------------------------------------------------------------------
+ * THESE VALUES MUST STAY IN STEP WITH `NEUTRAL_ATMOSPHERE` IN src/data/countries.js.
+ *
+ * The same four values are written twice: as the literals below, and as the neutral
+ * atmosphere object that useAtmosphere falls back to. The duplication is unavoidable —
+ * a stylesheet cannot import from a JavaScript module — so it is guarded instead: a
+ * development-only check in useAtmosphere.js compares them on load and warns if they
+ * drift. Change one, change the other.
+ *
+ * WHY THAT GUARD EXISTS, AND WHAT THESE DEFAULTS ARE *NOT* FOR. They are the shell's
+ * colour. They are not a safety net for a country route, and relying on them as one
+ * caused a real bug: useAtmosphere previously applied the country accent in a
+ * `useEffect`, which runs AFTER the browser paints, so the first frame of every country
+ * page used the values below — and because the ordinal ramp further down is derived
+ * from `--accent-ink`, an entire chart was painted in the shell's hue rather than the
+ * country's. Four of five countries arrived in the wrong colour. The hook now uses
+ * `useLayoutEffect`, which runs before paint; see the long note there. The consequence
+ * for this file is worth stating plainly: on a country route these lines should never be
+ * what the visitor sees, not even for one frame.
+ * ------------------------------------------------------------------------------------
+ */
+:root {
+  /*
+   * HEADER HEIGHT — one definition, three consumers.
+   *
+   * The fixed header is 64px tall. That number is needed in three places: the header's own
+   * height, the top padding on <main> that stops the header covering content, and any
+   * full-height section that must fit in the *remaining* viewport.
+   *
+   * WHY IT IS A TOKEN. It was previously a `pt-16` literal in SiteLayout, and that caused a
+   * real bug: the hero asked for `min-h-[100svh]` while sitting inside 64px of padding, so
+   * it was 100svh + 64px tall and its scroll indicator fell below the fold — on every
+   * screen, invisibly, because the page scrolls. A full-height element can only be correct
+   * if it can subtract the header, and it can only subtract it if the value has a name.
+   */
+  --header-height: 4rem; /* 64px */
+
+  --accent-mark: #2a78d6; /* chart fills — needs >=3:1 vs surface */
+  --accent-ink: #184f95; /* text, links, active nav — needs >=4.5:1 */
+  --accent-wash: #2a78d614; /* ~8% tint for callout backgrounds */
+  --atmosphere-pace: 1; /* duration multiplier */
+
+  /* ---------------------------------------------------------------------------
+   * THE ORDINAL RAMP — five steps of the active country's own accent.
+   *
+   * WHY ONE HUE AND NOT FIVE COLOURS. The five parts of a day are not five
+   * unrelated things; they are shares of one fixed quantity. A categorical
+   * palette says "these are different kinds"; a sequential ramp says "these are
+   * amounts of the same thing", which is what 24 hours actually are. It is also
+   * the only option that validates: a five-hue version was measured at
+   * normal-vision ΔE 13.7, below the 15 floor, meaning full-colour-vision
+   * readers could not reliably tell two of the slices apart.
+   *
+   * WHY DERIVED RATHER THAN LITERAL. These were five hardcoded blues, which is
+   * Japan's accent. Every other country would have got a chart that contradicted
+   * its own atmosphere. `color-mix` recomputes them from `--accent-ink`, so the
+   * ramp follows the country with no per-country code (Principle 13).
+   *
+   * WHY `in oklab`. Mixing in sRGB passes through muddy grey at the midpoint —
+   * the classic "why does my gradient look dirty" problem. OKLab is
+   * perceptually uniform, so equal mix percentages give equal-looking steps.
+   *
+   * THE MIX PERCENTAGES ARE MEASURED, NOT CHOSEN BY EYE. Steps must be far
+   * enough apart in lightness to be distinguishable; verified across all five
+   * accents, the smallest gap is India's at OKLab L 0.088, comfortably above the
+   * 0.06 floor. Japan 0.112 · India 0.088 · Italy 0.116 · Switzerland 0.096 ·
+   * United States 0.122.
+   *
+   * WHAT THIS RAMP MUST NEVER DO: run across countries. Applying it so that a
+   * darker step means "more" would make dark mean better, which §7.4 forbids.
+   * It orders the parts of ONE country's day, and nothing else.
+   *
+   * NOTE THE TWO LIGHTEST STEPS ARE BELOW 3:1 against the card (1.5 and 2.2).
+   * That is legal for a chart fill only because identity is never carried by
+   * colour alone here — every value is directly labelled in text. The moment a
+   * chart using this ramp drops its labels, it becomes inaccessible.
+   * ------------------------------------------------------------------------- */
+  --chart-ordinal-1: color-mix(in oklab, var(--accent-ink) 25%, var(--color-surface-card));
+  --chart-ordinal-2: color-mix(in oklab, var(--accent-ink) 45%, var(--color-surface-card));
+  --chart-ordinal-3: color-mix(in oklab, var(--accent-ink) 65%, var(--color-surface-card));
+  --chart-ordinal-4: color-mix(in oklab, var(--accent-ink) 85%, var(--color-surface-card));
+  --chart-ordinal-5: color-mix(in oklab, var(--accent-ink) 80%, var(--color-ink-900));
+}

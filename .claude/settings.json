@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4188/_probe.html)",
+      "Bash(rm -f dist/_probe.html)",
+      "Bash(pkill -f \"probe/collector.mjs\")",
+      "Bash(awk '/^### 3.4/,/^## 5/' docs/PRODUCT_VISION.md)",
+      "Bash(timeout 12 curl -sI https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(node shots.mjs)",
+      "Bash(node cx.mjs 390 844)",
+      "Bash(node cx.mjs 1440 900)",
+      "Bash(node cx.mjs 1024 800)",
+      "Bash(node cx.mjs 1920 1080)",
+      "Bash(node cx.mjs 1280 800)",
+      "Bash(node g2.mjs)"
+    ]
+  }
+}

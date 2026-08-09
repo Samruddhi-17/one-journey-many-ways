@@ -1,0 +1,213 @@
+/*
+ * GLOBAL STYLESHEET
+ *
+ * Load order matters and is deliberate:
+ *   1. Fonts     — self-hosted via npm, so no Google CDN request (DESIGN_SYSTEM.md §2.2)
+ *   2. Tailwind  — its reset, then its utility engine
+ *   3. Tokens    — our @theme block, which teaches Tailwind our vocabulary
+ *   4. Base      — our own element defaults
+ *   5. Utilities — a few semantic classes for patterns used everywhere
+ */
+
+/* Variable fonts. "Variable" means one file contains every weight from 100-900
+   as a continuous axis, instead of one file per weight. Two files, ~90KB total,
+   versus the eight files this design would otherwise need.
+
+   FRAUNCES USES ITS OPTICAL SIZE AXIS (`opsz.css`, not the default `wght` file).
+
+   A "variable axis" is any property the font can vary continuously. Weight is the
+   familiar one. Optical size is different and less known: it changes the letter
+   SHAPES for the size they will be printed at. Real metal type was cut separately
+   for each size — small sizes got sturdier strokes and looser spacing to stay
+   legible, display sizes got finer hairlines and tighter spacing to look elegant.
+   Scaling one outline to every size, which is what normal digital type does, loses
+   that. Fraunces restores it.
+
+   This matters here specifically because our headline runs to ~92px. At that size a
+   single-outline serif looks slightly clumsy — strokes too even, spacing too airy.
+   `font-optical-sizing: auto` below tells the browser to feed the font-size into the
+   opsz axis automatically, so the same headline gets display-cut letterforms while
+   14px captions get sturdier ones. No extra classes, no manual values.
+
+   THE COST, MEASURED: the opsz file is 65.7 KB versus 35.8 KB for weight-only —
+   +30 KB for the latin subset. Accepted, because the display serif at hero size IS
+   the first impression, and this is the cheapest available improvement to it. Inter
+   stays on the weight-only axis: it is body and UI text, where opsz would buy far
+   less for the same cost.
+
+   FRAUNCES' ITALIC IS A SEPARATE FILE, AND OMITTING IT WAS A BUG.
+
+   `opsz.css` declares only `font-style: normal` faces. So for most of this project the
+   site shipped no italic Fraunces at all — and `font-style: italic` in CSS does not
+   fail when a font has no italic face. The browser silently SYNTHESIZES one by
+   shearing the roman about 10 degrees to the right. It looks approximately right,
+   which is exactly why it survived: nothing warns, nothing 404s, and the page renders.
+
+   That mattered here more than it would elsewhere, because italic display Fraunces is
+   not decoration on this site — it sets the epithet under every country's name, the
+   traveller's quoted note in every chapter, and the last line the site says. The claim
+   at the time was that the emphasis "is a true cut, not a slanted roman, so it has
+   genuinely different letterforms rather than looking mechanically skewed," and until
+   this import existed that sentence described something the build did not contain.
+   Compared side by side at 60px the real cut has a
+   single-storey `a`, a cursive `g` and `y`, and calligraphic entry strokes; the
+   synthesized version has none of them, because a shear cannot invent a letterform.
+
+   The cost is +81 KB for the latin subset, which is the largest single font file here.
+   Accepted for the same reason as opsz, and on the same terms: it buys the display
+   serif's letterforms, at display size, on the screens that open the site and close
+   every chapter. Note that it is NOT a cost on every visit — see the note about
+   `unicode-range` below.
+
+   Inter deliberately gets no italic file. Its italics are small (a caption, a nav
+   subtitle), where the difference between a true cut and a shear is not perceptible at
+   14px, and its italic latin subset is 51 KB. Paying display-face prices for body text
+   is the trade opsz was already rejected for on Inter.
+
+   WHY THE NON-LATIN SUBSETS ARE NOT A PROBLEM, though `du` on dist/ makes them look
+   like one. These imports pull in ten woff2 files, ~372 KB, including Cyrillic, Greek
+   and Vietnamese for an English-language site. Every one of them is emitted with a
+   `unicode-range`, which is a promise the browser holds it to: a subset file is
+   downloaded only if the rendered page actually contains a character in its range.
+   This site's text is latin, so a visitor transfers the latin subsets and nothing else.
+   They are build weight on disk, not transfer weight over the wire — and deleting them
+   would be optimising a number nobody downloads. */
+@import '@fontsource-variable/fraunces/opsz.css';
+@import '@fontsource-variable/fraunces/opsz-italic.css';
+@import '@fontsource-variable/inter';
+
+@import 'tailwindcss';
+@import './styles/tokens.css';
+
+@layer base {
+  html {
+    /* Anchor links glide instead of jumping — important for a scroll-driven story.
+       The media query below disables this for visitors who ask for reduced motion. */
+    scroll-behavior: smooth;
+
+    /* Offsets in-page anchor targets so the fixed header never covers a heading
+       the visitor just jumped to. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-surface-page);
+    color: var(--color-ink-700);
+    font-family: var(--font-text);
+    font-size: 1rem;
+    line-height: 1.65;
+
+    /* Prevents sideways scroll from wide hero images and slide-in animations. */
+    overflow-x: hidden;
+
+    /* Smoother glyph rendering on macOS; harmless elsewhere. */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    /* Feeds the computed font-size into Fraunces' optical size axis automatically,
+       so every heading gets letterforms cut for the size it actually renders at.
+       `auto` is the spec default, but Safari has historically needed it stated
+       explicitly, so we do. See the font import note at the top of this file. */
+    font-optical-sizing: auto;
+  }
+
+  /* Headings default to the display serif. Note this styles FAMILY only, not size —
+     size comes from a utility class, because semantic level and visual size are
+     deliberately decoupled (DESIGN_SYSTEM.md §2.4). An h2 can be any size; what
+     makes it an h2 is its place in the document structure, which screen readers use
+     to navigate. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink-900);
+    line-height: 1.1;
+    text-wrap: balance; /* avoids a single orphaned word on the last line */
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* FOCUS RINGS ARE NEVER REMOVED.
+     Removing focus outlines makes a site unusable by keyboard. `:focus-visible`
+     shows the ring for keyboard users but not on mouse click, which is why we can
+     have both a clean pointer experience and an accessible keyboard one.
+     (DESIGN_SYSTEM.md §9.3, §15.3 — Principle 16.)
+
+     VERIFIED IN A BROWSER, and the method is worth recording because the first
+     attempt at verifying it produced a false alarm. Focusing an element and reading
+     `outline-color` IMMEDIATELY reports the browser's own `outline: auto` — ink at
+     3px — because the header links carry `transition-property: all` and the nav links
+     transition `outline-color`, so the first sample lands mid-transition. Waiting for
+     the transition to settle before sampling, every focusable element reports
+     `2px solid rgb(24,79,149)` at a 2px offset on Japan: the accent, as authored.
+
+     So: sample the computed style AFTER the transition, or the measurement describes
+     the animation rather than the rule. This rule works correctly inside `@layer base`
+     — an A/B build with it moved outside every layer was byte-identical in behaviour. */
+  :focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Selection in the active country's accent — a small, cheap atmosphere touch. */
+  ::selection {
+    background-color: var(--accent-wash);
+    color: var(--color-ink-900);
+  }
+}
+
+/*
+ * REDUCED MOTION — mandatory, not optional (DESIGN_SYSTEM.md §7.5).
+ *
+ * Every animation on this site is decorative. The site must be complete and good
+ * with all of it disabled — that is the test. Some visitors experience nausea or
+ * vertigo from motion; for them this is an accessibility requirement, not a taste.
+ *
+ * We do NOT set `animation: none`, which can break animations that only *end* in a
+ * usable state. Instead durations collapse to ~0 so every animation jumps straight
+ * to its final frame.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  /*
+   * Screen-reader-only: visually hidden, but still read aloud and still focusable.
+   *
+   * `display: none` would hide it from screen readers too, which defeats the point.
+   * This clips it to a 1px box instead. Used for the skip link and for the data
+   * tables that make our charts accessible (DESIGN_SYSTEM.md §15.5).
+   */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Applies the active country's pace multiplier to a transition.
+     Set `--local-duration` on the element; this scales it. */
+  .paced {
+    transition-duration: calc(var(--local-duration, 350ms) * var(--atmosphere-pace));
+  }
+}
