@@ -337,35 +337,50 @@ export function PassportPage() {
                      */}
                     <div className="md:flex md:items-start md:gap-8">
                       {/*
-                       * `aspect-[4/3]` AND A FIXED WIDTH, WHICH IS THE ONE REAL DECISION IN THIS LAYOUT.
+                       * `aspect-[3/4]` AND A FIXED WIDTH, WHICH IS THE ONE REAL DECISION IN THIS LAYOUT.
                        *
                        * The five sources range from 675×1200 (portrait, 0.56) to 1536×1024 (landscape,
                        * 1.5). Rendering each at its own ratio would give five differently-shaped rows,
-                       * and — worse — different amounts of vertical space per country, which reads as
+                       * and, worse, different amounts of vertical space per country, which reads as
                        * some stops mattering more than others. A single frame for all five is the same
                        * argument Glimpses makes for its strip.
                        *
-                       * 4/3 rather than portrait or square, because `object-cover` crops toward the
-                       * centre and every one of these photographs has its flag in the upper-middle. A
-                       * portrait frame on the Capitol image would cut the dome; this keeps the flag and
-                       * the landmark in all five. Checked against each file rather than assumed.
+                       * PORTRAIT, AND THIS USED TO BE 4/3 WITH A COMMENT CLAIMING 4/3 WAS VERIFIED.
+                       * It was not. Four of the five photographs are portrait or square (0.56, 0.56,
+                       * 0.75, 1.0) and `object-cover` in a 1.33 frame keeps only 42% of the height of
+                       * the two tallest. It cut the top off India's flag and both its edges, left
+                       * Switzerland's flag half outside the frame, and beheaded the pagoda behind
+                       * Japan's. A visitor reported it; it is visible at a glance in any of the five.
+                       *
+                       * 3/4 was chosen by rendering all five at 4/3, 1/1 and 3/4 and comparing the
+                       * results, not by reasoning about the numbers. It is the only one of the three
+                       * that keeps the whole flag AND the landmark below it in every photograph: the
+                       * Gateway of India entire, the Colosseum, the lake and chalet, the Capitol dome.
+                       * The one landscape source (the Capitol, 1.5) loses width at 3/4, which is why
+                       * this was worth checking: its flag and dome both sit centre-frame, so they
+                       * survive. Anything wider fails the four portrait sources; a portrait frame costs
+                       * the one landscape source nothing that matters.
+                       *
+                       * THE LESSON, since the previous comment asserted a verification that had not
+                       * happened: a crop cannot be checked by reading image dimensions. Where the
+                       * subject sits inside the frame is not derivable from its width and height.
                        *
                        * GUARDED ON `flag` BEING PRESENT, AND THE GUARD IS NOT DEFENSIVE PADDING. All
                        * five resolve today, but America's very nearly did not: the only US flag file
                        * supplied was watermarked and is excluded from publishing permanently, so
                        * `images.flag` was null for that country until a clean replacement arrived. A
                        * re-export of the workbook or a fresh exclusion puts it back. And a null here is
-                       * not merely an empty frame — `toAvif(null)` throws on `.replace`, so the whole
+                       * not merely an empty frame. `toAvif(null)` throws on `.replace`, so the whole
                        * page would fail to render rather than one photograph going missing.
                        *
                        * NOTHING RATHER THAN AN `ImageFrame` PLACEHOLDER. A labelled empty frame claims
                        * a photograph is coming; the reason this one would be absent is that no
                        * publishable photograph exists. The row still has its stamp, its name and its
-                       * remembered line, and the text column simply takes the full width — the same
+                       * remembered line, and the text column simply takes the full width, the same
                        * call FacetCard makes for America's fact.
                        */}
                       {country.images.flag ? (
-                        <div className="overflow-hidden rounded-xl aspect-[4/3] md:w-72 md:shrink-0">
+                        <div className="overflow-hidden rounded-xl aspect-[3/4] md:w-60 md:shrink-0">
                           <picture className="block h-full w-full">
                             <source srcSet={toAvif(country.images.flag)} type="image/avif" />
                             <img

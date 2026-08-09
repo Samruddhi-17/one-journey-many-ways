@@ -1,11 +1,11 @@
 /*
- * planeGlyph.js — the shape of the aeroplane, and nothing else.
+ * planeGlyph.js: the shape of the aeroplane, and nothing else.
  *
  * ============================================================================================
  * WHY THIS IS ITS OWN FILE RATHER THAN A CONSTANT IN flight.js
  *
  * Two places draw this plane: the flight map, and the boarding pass stub. It used to be typed out
- * in both, and the comment in each said "the same path the other one uses" — an assertion the code
+ * in both, and the comment in each said "the same path the other one uses", an assertion the code
  * had no way to keep true. One shared export makes it true by construction.
  *
  * The obvious home was flight.js, since both files already sit near it, but that import has a cost
@@ -14,7 +14,7 @@
  * coordinates of five cities in order to draw a 16px icon. This file imports nothing.
  *
  * It is also a different kind of geometry. flight.js knows where the stops are and what shape a leg
- * is — facts about the journey, derived from data. This is a drawing, and it is not derived from
+ * is: facts about the journey, derived from data. This is a drawing, and it is not derived from
  * anything.
  *
  * A path rather than an emoji (✈️), for the same reason the country flags were dropped from display
@@ -30,7 +30,7 @@
  * SOMEWHERE ELSE.
  *
  *   1. IT POINTS ALONG +x. The flight map positions the plane with CSS Motion Path and
- *      `offsetRotate: 'auto 0deg'`, which rotates the element to the tangent of the curve — and the
+ *      `offsetRotate: 'auto 0deg'`, which rotates the element to the tangent of the curve, and the
  *      tangent is measured from the +x axis. A glyph drawn nose-up is ninety degrees wrong at every
  *      point of every leg, which reads as a broken rotation rather than as a mis-drawn asset.
  *
@@ -38,7 +38,7 @@
  *      off-centre glyph flies beside its own trail instead of along it, and pivots about a point
  *      outside itself when the curve bends.
  *
- * The extent is x ∈ [-8.4, 8.4], y ∈ [-5.9, 5.9] — hence PLANE_VIEWBOX below. It was drawn to stay
+ * The extent is x ∈ [-8.4, 8.4], y ∈ [-5.9, 5.9], hence PLANE_VIEWBOX below. It was drawn to stay
  * legible at about 13px, which is the size it renders at on the map beside pins of radius 3 to 4;
  * a wider wingspan blurred into a single mass at that scale.
  */

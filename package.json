@@ -7,6 +7,7 @@
     "dev": "vite",
     "data": "node scripts/convertData.mjs",
     "map": "node scripts/generateMap.mjs",
+    "retouch": "node scripts/retouchPassports.mjs",
     "test:data": "node --test scripts/validators.test.mjs",
     "build": "npm run test:data && npm run data && npm run map && vite build",
     "lint": "oxlint",

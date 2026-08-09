@@ -1240,278 +1240,33 @@ function trimToFigure(image) {
 
 /*
  * ============================================================================================
- * REPAIRING THE TWO GARBLED PASSPORT COVERS.
+ * WHY THERE IS NO PASSPORT LETTERING STAGE HERE ANY MORE.
  *
- * THE DEFECT. These are AI-generated illustrations and two of them have misspelt lettering on the
- * passport the traveller is holding up:
+ * Two of the five portraits arrived with misspelt lettering on the passport cover the traveller is
+ * holding up: Italy read "PASSAPDRIO / REPURSTICA TIALLANA", the United States "UNITEO STATES OF
+ * AMERICA". This file used to erase those lines and set the correct words again, in Times New Roman
+ * rotated to the measured baseline angle, from a table of polygons and centres keyed by filename.
  *
- *     italy_traveler.png   "PASSAPDRIO / REPURSTICA TIALLANA"   should be PASSAPORTO / REPUBBLICA ITALIANA
- *     us_traveler.png      "UNITEO STATES OF AMERICA"           should be UNITED — one wrong letter
+ * THAT WHOLE STAGE IS GONE, and the reason is a decision about authorship rather than a technical
+ * one. Setting the correct type made the project the author of a claim about what a real passport
+ * cover says. The lettering is now REMOVED at source instead, by scripts/retouchPassports.mjs
+ * (npm run retouch): the misspelt words are painted out and the globe, shield, chip and cover are
+ * left as drawn. Nothing is written back. The covers read as unlettered artwork, which is honest
+ * about being an illustration.
  *
- * The other three are clean. This matters more than a typo normally would: the site's whole argument
- * is craft, and a visitor who can read a spelling mistake in the artwork stops evaluating the design.
- * It is the same class of defect as the watermarked stock photographs the pipeline already excludes.
+ * WHAT THIS COST WHEN BOTH EXISTED AT ONCE, recorded because it is the failure mode of splitting one
+ * job across two scripts. For one build the source retouch and this stage were both live. The retouch
+ * had already removed "UNITEO STATES OF AMERICA", so this stage's polygon erased blank navy and
+ * composited its replacement into empty space: the published American cover showed a single floating
+ * "D" under the shield. Nothing threw. The canvas assertion this stage carried was satisfied, because
+ * the coordinates were right; what had changed was the pixels underneath them.
  *
- * WHY IT IS FIXED HERE RATHER THAN DESIGNED AROUND. The previous attempt capped the figure's rendered
- * height at 160px so the lettering would stay below legibility — texture rather than words. That
- * worked, and it cost the thing the figure was added for: at 160px the traveller is a sticker in the
- * corner, which does not answer "I cannot see the traveller". The size ceiling was paying for a defect
- * in two files with a permanent constraint on all five.
- *
- * AND WHY THE EARLIER ATTEMPT CONCLUDED IT WAS IMPOSSIBLE. It recorded that "the garbled words sit
- * inside a continuous gold border and overlap the emblem, so every automated mask either left visible
- * smudges or ate into the emblem". That was wrong, and it was wrong because it was reasoned from
- * row-profiling statistics rather than from looking at the images. Enlarged, both covers show the text
- * on a flat navy field with clear separation from the globe and the shield, and every letter separates
- * as its own connected component. The lesson is the same one the EXCLUDED note above records: check
- * the pixels, do not infer them.
- *
- * HOW THE ERASE WORKS, and why the direction of interpolation is load-bearing. Masked pixels are
- * filled by interpolating between the nearest unmasked pixel on each side, which reconstructs the
- * navy field and its gradient exactly. The axis has to be chosen per case:
- *
- *   · Italy erases three whole lines of text, so the neighbours to the LEFT and RIGHT of each band are
- *     clean field — interpolate along rows.
- *   · The United States erases one letter from the middle of a word, so the neighbours to the left and
- *     right are the adjacent letters' ink. Interpolating along rows smears the E sideways across the
- *     gap (observed, not predicted). Above and below the letter is clean field — interpolate along
- *     columns.
- *
- * The replacement lettering is Times New Roman Bold, which is what the illustrations already imitate,
- * rotated to the angle measured from the surviving letters' baselines (Italy 13.7° down-to-up; the US
- * -17°), and filled with the colour sampled from the artwork's own glyphs (#F2ECA2 for the US, with a
- * dark edge matching its embossed look; #F2C734 flat for Italy). Sizes and positions are measured from
- * the letters being replaced.
- *
- * The numbers below are therefore all measurements of two specific files. They are stated as data
- * keyed by filename rather than as code, so a country without a defect needs no entry, and if the
- * artwork is ever regenerated the whole table is deleted rather than debugged.
- *
- * WHICH CANVAS THE NUMBERS ARE MEASURED ON — the thing that made the first attempt at this ship broken.
- *
- * Every coordinate here is an absolute pixel position on the TRIMMED, PUBLISHED file: 825x976 for Italy,
- * 1160x1008 for the US. NOT on the 1536x1024 source. Each entry states its `canvas` and
- * `repairPassport` asserts it, because a coordinate applied to the wrong canvas fails silently — the
- * polygons still land inside the image, the interpolation still runs, and the output is a clean-looking
- * PNG with the wrong pixels erased.
- *
- * That is precisely what shipped. The repair used to run FIRST, on the untrimmed source, on the
- * reasoning that trimming afterwards would shift the coordinates; the coordinates had been measured on
- * the trimmed file, so running first is what shifted them — by (311, 48) for Italy and (75, 16) for the
- * US. Italy's three text bands were erased 311px to the left of the passport, in the middle of the
- * traveller's jacket, and the replacement words were set there: three smeared green bands with
- * "PASSAPORTO / REPUBBLICA ITALIANA" in them, while the passport still read "PASSAPDRIO / REPURSTICA
- * TIALLANA". The visitor described the result as the passports having "right to left letters instead of
- * left to right", which is what erased-and-reset type in the wrong place reads as at display size.
- *
- * THE RULE THAT FOLLOWS: measure against the file a person can open. The published file is inspectable;
- * the source's offset is a function of a trim this script performs, so coordinates measured against it
- * are only correct as long as nobody re-derives them. If these ever need re-measuring, re-measure on
- * `public/images/` and update `canvas` in the same edit.
+ * SO THE RULE: one script owns the lettering. If the artwork is ever resupplied with correct spelling,
+ * delete the entry from TARGETS in retouchPassports.mjs. Do not reintroduce a redraw step here.
+ * The deleted implementation is in git if it is ever wanted: it interpolated across each masked
+ * polygon along a per-file axis and composited SVG text through sharp.
  * ============================================================================================
  */
-const PASSPORT_REPAIRS = {
-  'italy_traveler.png': {
-    /*
-     * The canvas every coordinate below was measured on: the TRIMMED, published file, not the
-     * 1536x1024 source. Asserted in `repairPassport` — see the note there for why a wrong canvas is
-     * silent, and the step-order note in the copy loop for what it looked like when it shipped.
-     */
-    canvas: [825, 976],
-    axis: 'rows',
-    /* Quadrilaterals covering each garbled line, following the text's rotation. */
-    erase: [
-      [[628, 462], [802, 496], [798, 544], [624, 510]],
-      [[603, 622], [742, 648], [738, 688], [599, 662]],
-      [[613, 646], [744, 670], [740, 710], [609, 686]],
-    ],
-    /* [text, fontSize, centreX, centreY]. Sizes chosen so the longest line clears the gold border. */
-    text: [
-      ['PASSAPORTO', 22, 700, 503],
-      ['REPUBBLICA', 19, 667, 653],
-      ['ITALIANA', 19, 672, 677],
-    ],
-    angle: 13.7,
-    fill: '#F2C734',
-    stroke: null,
-  },
-  'us_traveler.png': {
-    /* Measured on the trimmed, published canvas. See the note on Italy's `canvas` above. */
-    canvas: [1160, 1008],
-    axis: 'columns',
-    /*
-     * The quad starts at x=918 and not x=912, and the six pixels matter: the "E" of UNITE ends at
-     * x=917 and the "O" being replaced starts at x=919. Reaching back to 912 clipped the E's right
-     * arm and interpolated it away, so the line read "UNIT D" with a gap where the E's serif had been
-     * — a second defect introduced by the repair itself. Measured per row off the trimmed file.
-     */
-    erase: [[[918, 738], [941, 743], [941, 767], [918, 762]]],
-    /*
-     * `25`, not `30`. The replacement is sized to the glyph it replaces rather than to the eye: the
-     * erased O measures 19x18 px, and at 30 the D rendered 22x22 — visibly taller than every letter
-     * beside it, which reads as a correction rather than as the artwork. At 25 it renders 18x18 with
-     * its centre on the O's centre (929, 753 against the O's measured 928, 752.5).
-     */
-    text: [['D', 25, 929, 752]],
-    angle: -17,
-    fill: '#F2ECA2',
-    /* The US lettering is drawn with a dark embossed edge; without it the D reads as pasted on. */
-    stroke: '#786929',
-  },
-}
-
-/*
- * True for points inside the polygon, by the even-odd ray-casting rule. Small enough to state
- * directly rather than take a dependency for, and the pipeline has no image-editing library beyond
- * sharp (which cannot do this).
- */
-function insidePolygon(points, x, y) {
-  let inside = false
-  for (let i = 0, j = points.length - 1; i < points.length; j = i, i += 1) {
-    const [xi, yi] = points[i]
-    const [xj, yj] = points[j]
-    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside
-  }
-  return inside
-}
-
-/*
- * Fill every masked pixel by interpolating between the nearest unmasked pixels on either side, along
- * one axis. See the header note for why the axis is a per-file decision rather than a constant.
- */
-function interpolateAcross(data, width, height, channels, masked, axis) {
-  const alongRows = axis === 'rows'
-  const outer = alongRows ? height : width
-  const inner = alongRows ? width : height
-  const at = (o, i) => (alongRows ? o * width + i : i * width + o)
-
-  for (let o = 0; o < outer; o += 1) {
-    let i = 0
-    while (i < inner) {
-      if (!masked[at(o, i)]) {
-        i += 1
-        continue
-      }
-
-      // The extent of this run of masked pixels, and the clean pixel on each side of it.
-      let end = i
-      while (end + 1 < inner && masked[at(o, end + 1)]) end += 1
-      let before = i - 1
-      let after = end + 1
-      while (before >= 0 && masked[at(o, before)]) before -= 1
-      while (after < inner && masked[at(o, after)]) after += 1
-
-      // A run touching both edges has nothing to interpolate from; leave it.
-      if (before < 0 && after >= inner) {
-        i = end + 1
-        continue
-      }
-      const left = before < 0 ? at(o, after) : at(o, before)
-      const right = after >= inner ? left : at(o, after)
-
-      const steps = end - i + 2
-      for (let k = i; k <= end; k += 1) {
-        const t = (k - i + 1) / steps
-        const target = at(o, k) * channels
-        for (let channel = 0; channel < channels; channel += 1) {
-          const a = data[left * channels + channel]
-          const b = data[right * channels + channel]
-          data[target + channel] = Math.round(a * (1 - t) + b * t)
-        }
-      }
-      i = end + 1
-    }
-  }
-}
-
-/**
- * Erase the misspelt lettering from a portrait and set it again correctly. Returns a PNG buffer, or
- * null when the file has no recorded defect — which is every portrait but two.
- */
-async function repairPassport(name, input) {
-  const repair = PASSPORT_REPAIRS[name]
-  if (!repair) return null
-
-  const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
-  const { width, height, channels } = info
-
-  /*
-   * THE CANVAS THIS WAS MEASURED ON, ASSERTED — because getting it wrong is silent and this is exactly
-   * how the bug that shipped got in.
-   *
-   * Every coordinate in `repair` is an absolute pixel position, so it is meaningful only against one
-   * canvas size. Handed the untrimmed 1536x1024 source instead of the trimmed publish canvas, the erase
-   * polygons still fall inside the image, `insidePolygon` still matches pixels, `interpolateAcross`
-   * still runs, and a perfectly clean-looking PNG comes out with three bands of the traveller's jacket
-   * smeared away and the replacement type set over his sleeve. Nothing throws. Nothing is reported. The
-   * only way to notice is to open the file — which is what it took.
-   *
-   * So the size is stated in the table and checked here. This turns a wrong-coordinate-space call from
-   * a defect that ships into a build that stops and says which canvas it expected. It also documents the
-   * measurement basis where the numbers are, so re-measuring against a different canvas means updating
-   * the `canvas` field in the same edit rather than discovering the mismatch downstream.
-   */
-  const [expectedWidth, expectedHeight] = repair.canvas
-  if (width !== expectedWidth || height !== expectedHeight) {
-    throw new Error(
-      `repairPassport("${name}") was handed a ${width}x${height} image, but every coordinate in ` +
-        `PASSPORT_REPAIRS["${name}"] was measured on the ${expectedWidth}x${expectedHeight} ` +
-        `published canvas.\n` +
-        `  Applying them here would erase the wrong pixels and set the replacement lettering in the ` +
-        `wrong place — silently, since the polygons still land inside the image.\n` +
-        `  This is almost certainly a step-order problem: the repair must run AFTER keying and ` +
-        `trimming, on the trimmed canvas. See the note in the portraits branch of the copy loop.`,
-    )
-  }
-
-  const masked = new Uint8Array(width * height)
-  for (const polygon of repair.erase) {
-    /*
-     * Bounded to the polygon's own box rather than scanned over the whole image: this runs inside the
-     * build for every portrait, and testing 1.2 million pixels against three polygons to find the
-     * seventeen thousand that matter is work with no purpose.
-     */
-    const xs = polygon.map(([x]) => x)
-    const ys = polygon.map(([, y]) => y)
-    const x0 = Math.max(0, Math.min(...xs))
-    const x1 = Math.min(width - 1, Math.max(...xs))
-    const y0 = Math.max(0, Math.min(...ys))
-    const y1 = Math.min(height - 1, Math.max(...ys))
-
-    for (let y = y0; y <= y1; y += 1) {
-      for (let x = x0; x <= x1; x += 1) {
-        if (insidePolygon(polygon, x, y)) masked[y * width + x] = 1
-      }
-    }
-  }
-
-  interpolateAcross(data, width, height, channels, masked, repair.axis)
-  const erased = await sharp(data, { raw: { width, height, channels } }).png().toBuffer()
-
-  /*
-   * The new lettering as one SVG per line, rotated about its own centre. SVG rather than drawing
-   * glyphs by hand because sharp renders it through the system's text stack, so the result is a
-   * properly hinted, anti-aliased serif rather than something approximated with paths.
-   *
-   * `text-anchor: middle` with `dominant-baseline: central` puts the string's centre at the rotation
-   * origin, which is what makes the measured centre coordinates in the table above mean what they
-   * say — with a start anchor every position would have to be recomputed if a word's length changed.
-   */
-  const layers = repair.text.map(([string, size, cx, cy]) => {
-    const stroke = repair.stroke
-      ? `stroke="${repair.stroke}" stroke-width="1" paint-order="stroke"`
-      : ''
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-      <text x="${cx}" y="${cy}" transform="rotate(${-repair.angle} ${cx} ${cy})"
-        font-family="Times New Roman, Georgia, serif" font-size="${size}" font-weight="bold"
-        fill="${repair.fill}" ${stroke}
-        text-anchor="middle" dominant-baseline="central">${string}</text>
-    </svg>`
-    return { input: Buffer.from(svg), top: 0, left: 0 }
-  })
-
-  return sharp(erased).composite(layers).png().toBuffer()
-}
 
 /*
  * True when `target` exists and is at least as new as `source` — the standard "is this build
@@ -1967,37 +1722,6 @@ const PORTRAITS = new Set(
 )
 
 /*
- * EVERY KEY IN PASSPORT_REPAIRS MUST NAME A PORTRAIT THAT IS ACTUALLY PUBLISHED.
- *
- * The failure this guards against: someone renames a portrait in TRAVELLER_ASSETS, or the artwork is
- * resupplied under a different filename, and the repair table silently stops matching. Nothing breaks
- * — the build succeeds, the image is published, and the misspelt lettering comes back. It is the
- * quietest possible regression, which is why it is worth a hard failure.
- *
- * WHY THIS IS CHECKED AS SET MEMBERSHIP AND NOT AS A COUNT OF REPAIRS PERFORMED. The first version
- * compared `repairedPassports.length` against the table's size after the copy loop, and it was wrong
- * in a way worth recording: portraits whose outputs are already current skip the loop body entirely
- * (`isFresh`), so on any incremental run nothing is repaired and the count is zero. That version
- * passed on a clean build and threw on every subsequent one, because it conflated "this run did not
- * need to redo the repair" with "the repair no longer matches anything" — a freshness cache turns
- * "did it happen" into a question with no stable answer. "Does this filename exist" has one.
- *
- * Placed before the loop so it fails before doing several seconds of image work, and so the error is
- * about the table rather than about whichever file happened to be in hand when the count came out
- * short.
- */
-const strayRepairs = Object.keys(PASSPORT_REPAIRS).filter((name) => !PORTRAITS.has(name))
-if (strayRepairs.length > 0) {
-  throw new Error(
-    `PASSPORT_REPAIRS names ${strayRepairs.join(', ')}, which ${
-      strayRepairs.length === 1 ? 'is not a published portrait' : 'are not published portraits'
-    }. ` +
-      `The misspelt lettering in the source artwork would ship unrepaired. Published portraits are: ` +
-      `${[...PORTRAITS].join(', ')}. Check the keys against TRAVELLER_ASSETS.`,
-  )
-}
-
-/*
  * The five cover photographs, keyed by published filename, each carrying its measured crop box (or
  * null). Built from COVER_ASSETS for the same reason PORTRAITS is built from TRAVELLER_ASSETS: one
  * table, one answer to "which file is this country's cover, and how much of it is photograph".
@@ -2010,7 +1734,6 @@ const encoded = []
 const keyed = []
 const cropped = []
 const softCovers = []
-const repairedPassports = []
 const encodeTasks = []
 for (const file of copyList) {
   const name = normaliseFilename(file)
@@ -2034,60 +1757,38 @@ for (const file of copyList) {
     if (isFresh(target, source) && isFresh(avifTarget, source)) continue
 
     /*
-     * THE ORDER OF THE THREE STEPS MATTERS, AND IT IS THE OPPOSITE OF WHAT IT USED TO BE.
-     *
-     * IT USED TO REPAIR FIRST, on the original canvas, and the note here argued that trimming first
-     * "would shift the text bands by the width of the margin removed and the repair would land in the
-     * wrong place". That reasoning is sound and it was applied backwards: every coordinate in
-     * PASSPORT_REPAIRS was MEASURED on the trimmed, published file — the one that ends up in
-     * `public/images/` and is the only version anyone can open and measure — so applying them to the
-     * untrimmed source is what shifted them.
-     *
-     * MEASURED, which is how the direction was settled rather than argued:
-     *
-     *     italy_traveler.png   1536x1024 source, trimmed to 825x976 — cut 311 from the left, 48 from the top
-     *     us_traveler.png      1536x1024 source, trimmed to 1160x1008 — cut  75 from the left, 16 from the top
-     *
-     * So Italy's first text band, written as centre (700, 503), was being erased at (700, 503) on the
-     * source, which is (389, 455) once trimmed — 311px to the LEFT of the passport, in the middle of the
-     * traveller's jacket. That is exactly what shipped: three smeared bands of interpolated green across
-     * the sleeve and backpack with "PASSAPORTO / REPUBBLICA ITALIANA" set into them, while the passport
-     * itself still read "PASSAPDRIO / REPURSTICA TIALLANA". The visitor reported the passports as having
-     * "right to left letters instead of left to right", which is what a band of erased-and-reset type
-     * sitting in the wrong place reads as at display size. The United States was the same bug with a
-     * smaller offset: its "D" landed 75px left of the "O" it was meant to replace, so the cover read
-     * "D IITEO STATES OF AMERICA" — a letter added beside the defect instead of over it.
-     *
-     * THE ORDER NOW:
+     * TWO STEPS NOW, AND NEITHER OF THEM TOUCHES THE PASSPORT LETTERING.
      *
      * 1. Key the background, which only affects the three that arrived on a white field.
      * 2. Trim to the figure, the only step that changes the canvas size.
-     * 3. Repair the lettering LAST, on the trimmed canvas the coordinates were measured against.
      *
-     * WHY THIS ORDER IS ALSO THE ONE THAT CANNOT DRIFT. The published file is the artefact a person can
-     * open, zoom, and read coordinates off; the source is not, because its offset depends on a trim this
-     * script performs. Measuring against the thing you can see is the only version of this that survives
-     * someone re-measuring it later — which is how it was caught.
+     * There used to be a third step that erased the misspelt words on the passport cover and set them
+     * again correctly, and the hardest bug in this file came from it: its coordinates were measured on
+     * the TRIMMED canvas but it ran FIRST, on the untrimmed source, so Italy's text bands were erased
+     * 311px to the left of the passport, in the middle of the traveller's jacket, with the replacement
+     * words set there. Nothing threw. The lesson survives the stage that taught it: any edit expressed
+     * as absolute coordinates must state which canvas it was measured on, and the canvas a person can
+     * open is the only one that stays true.
+     *
+     * The lettering is now removed at source by scripts/retouchPassports.mjs, upstream of this pipeline
+     * entirely, so nothing here depends on canvas geometry. See "WHY THERE IS NO PASSPORT LETTERING
+     * STAGE HERE ANY MORE" above for why removal rather than correction.
      */
     const cut = await cutOutPortrait(source)
     if (cut) keyed.push(name)
 
     /*
-     * A portrait is NEVER copied untouched, even when it arrives already keyed and needs no lettering
-     * fix. The two supplied cut-outs are the ones with the largest empty margins — Italy's figure
-     * occupies 54% of its canvas width — so skipping them would leave exactly the two images that most
-     * need trimming untrimmed. See the note on `trimToFigure` for what the margins cost.
+     * A portrait is NEVER copied untouched. The two supplied cut-outs are the ones with the largest
+     * empty margins (Italy's figure occupies 54% of its canvas width), so skipping them would leave
+     * exactly the two images that most need trimming untrimmed. See the note on `trimToFigure` for
+     * what the margins cost.
      */
     const trimmed = cut ?? (await trimToFigure(sharp(source).ensureAlpha()).png().toBuffer())
 
-    const repaired = await repairPassport(name, trimmed)
-    if (repaired) repairedPassports.push(name)
-
-    const published = repaired ?? trimmed
-    writeFileSync(target, published)
+    writeFileSync(target, trimmed)
 
     encodeTasks.push(
-      sharp(published)
+      sharp(trimmed)
         .avif({ quality: AVIF_QUALITY, effort: AVIF_EFFORT })
         .toFile(avifTarget)
         .then(() => {
@@ -2201,23 +1902,6 @@ if (keyed.length > 0) {
   console.log(
     `  ${keyed.length} of ${PORTRAITS.size} portraits keyed (white background removed): ` +
       `${keyed.join(', ')}`,
-  )
-}
-
-/*
- * Reported for the same reason: this step edits artwork, which is the most surprising thing the
- * pipeline does, and a reader of the build output should not have to open the script to discover that
- * two images are not what was supplied.
- *
- * Printed only when a repair actually ran, so it describes this run rather than restating the table —
- * on an incremental build the portraits are fresh and nothing is re-lettered, which is correct and
- * should not print a line claiming work was done. The table itself is validated up front, next to
- * `PORTRAITS`, where the answer does not depend on what the cache skipped.
- */
-if (repairedPassports.length > 0) {
-  console.log(
-    `  ${repairedPassports.length} of ${Object.keys(PASSPORT_REPAIRS).length} passport covers ` +
-      `re-lettered (misspelt in the source artwork): ${repairedPassports.join(', ')}`,
   )
 }
 
