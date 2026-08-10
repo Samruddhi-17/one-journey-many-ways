@@ -201,13 +201,19 @@ export function AmbienceToggle({ variant = 'icon' }) {
         <span className="min-w-0 flex-1">
           <span className="block font-display text-lg text-ink-900">Ambient sound</span>
           {/*
-           * The description states what it is honestly: a tone, not a recording. See the header of
-           * src/lib/ambience.js for why there are no field recordings — and note that a visitor who
-           * expects the sound of Tokyo and gets a filtered drone has been misled by the label, which
-           * is the cheapest possible place to fix that.
+           * THE DESCRIPTION IS LOAD-BEARING, and it changed when the sound did.
+           *
+           * It used to say "A quiet tone for each country", which was accurate about a filtered
+           * drone. The engine now plays notes drawn from each country's own musical tradition — a
+           * koto tuning, a raga, alphorn harmonics — and that is a much easier thing to mistake for
+           * a recording or for a claim about what a place sounds like.
+           *
+           * "Synthesised" is therefore not modesty, it is the disclosure: see the header of
+           * src/lib/ambience.js for why there are no field recordings, and note that this label is
+           * the cheapest possible place to prevent a visitor thinking they are hearing Tokyo.
            */}
           <span className="block text-sm text-ink-500">
-            {on ? 'A quiet tone for each country' : 'Off'}
+            {on ? 'Synthesised notes, one instrument per country' : 'Off'}
           </span>
         </span>
       </button>
