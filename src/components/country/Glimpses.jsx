@@ -10,14 +10,18 @@ import { inProse, inProseCapitalised } from '../../lib/countryName'
  * WHY THIS SECTION EXISTS AT ALL
  *
  * The five `country_gallery` photographs (the city, its food, how people get around, a landmark,
- * and the place after dark) were already in
- * `journey.json` and already on the page — feeding LivingBackdrop, where they are scaled past the
- * frame, cross-fading, under a scrim, and `aria-hidden`. So the site had five photographs per
- * country that no visitor could ever actually LOOK at, and no screen-reader user knew existed.
+ * and the place after dark) were already in `journey.json` and already on the page, but only as
+ * fuel for the arrival's backdrop: scaled past the frame, cross-fading, under a scrim, and
+ * `aria-hidden`. So the site had five photographs per country that no visitor could ever actually
+ * LOOK at, and no screen-reader user knew existed.
  *
  * That was a defensible decision for a backdrop and a bad one for the photographs. The backdrop
- * needs images it can treat as texture; these are pictures of specific things. Both uses are now
- * served, from the same five files: blurred and drifting behind the arrival, and once, sharp, here.
+ * needs images it can treat as texture; these are pictures of specific things.
+ *
+ * THIS IS NOW THE ONLY PLACE THEY APPEAR. The arrival backdrop was cut back to the cover photograph
+ * alone, because these five are 736px wide and were being stretched roughly fourfold to fill that
+ * band — the softness a visitor reported as "very blur". Here each one is shown at a size close to
+ * its own, which was always the better of the two uses.
  *
  * WHY "GLIMPSES" AND NOT "GALLERY"
  * A gallery is a destination — you go to it, you page through it, it is the point. These are five

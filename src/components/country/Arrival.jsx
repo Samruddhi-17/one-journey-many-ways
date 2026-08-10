@@ -112,27 +112,29 @@ export function Arrival({ country }) {
        */}
       <div className="relative isolate flex min-h-[78svh] items-end overflow-hidden">
         {/*
-         * THE COVER PHOTOGRAPH FIRST, THEN THE GALLERY — drifting and cross-fading. Marked decorative
-         * inside the component; see the accessibility note in LivingBackdrop for why alt text would be
-         * wrong here rather than merely omitted.
+         * THE COVER PHOTOGRAPH, ALONE. Marked decorative inside the component; see the accessibility
+         * note in LivingBackdrop for why alt text would be wrong here rather than merely omitted.
          *
-         * WHY THE COVER IS PREPENDED RATHER THAN REPLACING THE GALLERY. The cover is the only landscape
-         * photograph a country has, so it is the only one that fills this band without being upscaled
-         * (the gallery is 736px and portrait — roughly a 2x stretch, which is what the visitor reported
-         * as blur). It goes FIRST because the first slide is the one that paints on arrival and the one
-         * loaded eagerly, so the sharpest image is the one the visitor actually sees when the chapter
-         * opens.
+         * THE GALLERY USED TO CROSS-FADE BEHIND THIS AND IT WAS REMOVED, WHICH REVERSES THE REASONING
+         * THAT USED TO SIT HERE. The old note argued the softness of the gallery slides was an
+         * acceptable price for the drift: they appear seven seconds in, under a scrim, moving, so
+         * sharpness reads less. The visitor reported the blur anyway, and named exactly this set:
+         * everything except the first image. An argument that a defect will not be noticed is refuted
+         * by the defect being noticed.
          *
-         * The gallery is kept behind it because the drift is meant to show the range of a place over
-         * time, and a single image cross-fading with itself is a still photograph with extra machinery —
-         * LivingBackdrop skips its timer entirely at one slide. The later slides are softer than the
-         * first, which is a real cost, and it is accepted: they appear seven seconds in, under a scrim,
-         * moving, where sharpness reads far less than it does on the still frame that greets you.
+         * THE ARITHMETIC BEHIND IT, because "very blur" turned out to be measurable. Density is
+         * naturalWidth / (CSS width * devicePixelRatio) — below 1 means the browser is magnifying.
+         * The cover measures about 0.6 across this band. The gallery photographs are 736px wide and
+         * portrait, so across the same 1498px band they measure 0.25: a 4x stretch. Nothing recovers
+         * detail lost to an upscale, and there is no larger version of these files to reach for, so
+         * the only honest lever is to stop showing them at a size they cannot fill.
+         *
+         * WHAT THIS COSTS, stated plainly rather than glossed: there is no cross-fade behind the
+         * heading any more. LivingBackdrop creates no timer at one slide, so what remains is the
+         * single sharp cover with its slow drift. The gallery is not lost — it has its own section
+         * further down the chapter, where each photograph is shown at a size it was made for.
          */}
-        <LivingBackdrop
-          images={[{ src: country.images.cover }, ...country.images.gallery]}
-          overlay="hero"
-        />
+        <LivingBackdrop images={[{ src: country.images.cover }]} overlay="hero" />
 
         <Section as="div" spacing="none" width="content" className="w-full pb-16 pt-32 md:pb-24">
           {/*
@@ -386,19 +388,17 @@ export function Arrival({ country }) {
           </Notepaper>
         </Reveal>
 
-        <Reveal delay={0.22}>
-          {/*
-           * The handover to the explorer below.
-           *
-           * WHY ANYTHING AT ALL AFTER THE QUOTE: without it the next section starts cold and the
-           * quotation reads as a pull-quote — an ornament. One line turns it into a premise by naming
-           * what happens next, and because that line is an invitation rather than a summary, it does
-           * not settle whether the note was right. The chapter tests the note; it does not resolve it.
-           */}
-          <p className="mt-14 font-display text-2xl italic leading-[1.45] text-[var(--accent-ink)] md:text-3xl">
-            {greeting.onward}
-          </p>
-        </Reveal>
+        {/*
+         * THE HANDOVER LINE THAT USED TO SIT HERE IS GONE. It read "Ask me anything about this place",
+         * set large in accent italic, and a reader took it for a chat box: at that size, in the
+         * traveller's voice, directly above a row of questions, it reads as an input rather than as
+         * narration. The site has no free-text input and the six topics below are fixed.
+         *
+         * The argument for having a line at all was that without one the next section starts cold and
+         * the traveller's note reads as a pull-quote. That argument was right about the risk and wrong
+         * about the fix: FacetExplorer opens with its own eyebrow, heading and lead, so the handover was
+         * a third introduction to a section that already had two. See the note in voice.js for the rule.
+         */}
       </Section>
     </>
   )

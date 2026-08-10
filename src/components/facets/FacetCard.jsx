@@ -127,7 +127,7 @@ const FACT_ALT = {
   japan:
     'A brightly lit vending machine on a Japanese station platform, stocked with rows of canned coffee, tea and bottled drinks.',
   india:
-    'Open sacks of spices crowded together at an Indian market — turmeric, cardamom, dried chillies, cinnamon bark and peppercorns.',
+    'Open sacks of spices crowded together at an Indian market: turmeric, cardamom, dried chillies, cinnamon bark and peppercorns.',
   italy:
     'Mount Vesuvius rising behind the excavated streets and stone amphitheatre of Pompeii.',
   switzerland:

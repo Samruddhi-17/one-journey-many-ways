@@ -173,7 +173,7 @@ export const REFLECTIONS = {
      * a punctual train network mean when read together rather than scored separately.
      */
     carried: 'Precision, it turns out, is a kind of politeness.',
-    body: 'A day here is organised carefully enough that people can count on it — trains that arrive when they say they will, hours that hold their shape. What the figures cannot show is how that reliability feels from the inside: not rigid, but restful.',
+    body: 'A day here is organised carefully enough that people can count on it. Trains arrive when they say they will, and the hours hold their shape. What the figures cannot show is how that reliability feels from the inside: not rigid, but restful.',
     open: 'Whether structure like this is something a place builds or something it inherits is not a question a dataset can answer.',
   },
   india: {
@@ -185,7 +185,7 @@ export const REFLECTIONS = {
      * reflection that overstates the chart three screens above it is the easiest kind of dishonesty
      * to miss, because prose is not checked the way an axis is.
      */
-    body: 'The measured day looks busy, and the shared parts of it — meals, markets, festivals, the crowded transport that carries more journeys here than any other kind — are where the hours actually go. Company is not an interruption of the routine; it is the routine.',
+    body: 'The measured day looks busy, and the shared parts of it are where the hours actually go: meals, markets, festivals, and the crowded transport that carries more journeys here than any other kind. Company is not an interruption of the routine; it is the routine.',
     open: 'How much of that comes from choice and how much from proximity is not visible in any of these numbers.',
   },
   italy: {

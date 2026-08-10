@@ -169,7 +169,7 @@ export function RouteProgressNav() {
                       <span className="font-medium uppercase tracking-[0.14em] tabular-nums">
                         {String(country.arrivalOrder).padStart(2, "0")}
                         <span className="sr-only">
-                          {` — stop ${country.arrivalOrder}, not yet visited`}
+                          {`, stop ${country.arrivalOrder}, not yet visited`}
                         </span>
                       </span>
                     )}

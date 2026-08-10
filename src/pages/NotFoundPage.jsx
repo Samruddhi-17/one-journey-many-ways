@@ -31,7 +31,7 @@ export function NotFoundPage() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-[46ch] text-lg leading-relaxed text-ink-700">
-          The page you were looking for doesn&rsquo;t exist — but the journey does.
+          The page you were looking for doesn&rsquo;t exist, but the journey does.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">

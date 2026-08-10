@@ -78,10 +78,10 @@ import { spellOut } from "../lib/spellOut";
 export const OPENING = {
   hail: "Come with me.",
   pitch:
-    "I have just come back from five countries, and I did not go for the monuments. I went to find out what an ordinary day looks like somewhere else — what time people get up, what is on the table, how they get to work, what they say to a stranger.",
+    "I have just come back from five countries, and I did not go for the monuments. I went to find out what an ordinary day looks like somewhere else: what time people get up, what is on the table, how they get to work, what they say to a stranger.",
   turn: "None of it is the kind of thing that ends up on a postcard. All of it is the reason the trip stayed with me.",
   invitation:
-    "You choose what we look at. Nothing here is ranked, and no country is the answer — they are five different ways of arranging the same twenty-four hours.",
+    "You choose what we look at. Nothing here is ranked. These are five different ways of arranging the same twenty-four hours.",
   action: "Start where I started",
 
   /*
@@ -94,9 +94,16 @@ export const OPENING = {
    * about a second of reading — and `pitch` survives immediately below, where a visitor who wants the
    * argument gets it in full.
    *
-   * THE LAST LINE IS THE ONE DOING THE WORK. "Not the postcards" is the site's whole editorial position
-   * stated as a negation, which is the shortest honest way to set an expectation the data can meet: the
-   * workbook holds time-use, transport, meals and language, and no monuments at all.
+   * THE THIRD LINE USED TO READ "Not the postcards", AND IT WAS CUT FOR BEING A SLOGAN. It was written
+   * as the site's editorial position stated as a negation, on the reasoning that a negation is the
+   * shortest way to set an expectation. What it actually does is tell the visitor what the site is too
+   * good for before showing them anything, and a reader reported it as one of the lines that does not
+   * make sense on its own. "Ordinary days, recorded" says what the pages contain, which the workbook can
+   * back: time-use, transport, meals and language, and no monuments at all.
+   *
+   * THE GENERAL RULE THIS SETS, since the same instinct produced several lines that had to go: copy may
+   * say what a thing IS. Copy that defines itself by what it refuses is arguing with a reader who has
+   * not spoken yet.
    *
    * WHY IT IS AN ARRAY. The three lines break on their own, so a single string with `<br>` would put
    * markup in the content layer, and a `whitespace-pre-line` string makes the line breaks invisible to
@@ -105,7 +112,7 @@ export const OPENING = {
   coverLines: [
     "Five countries. Twenty-eight days.",
     "Real stories. Everyday lives.",
-    "Not the postcards.",
+    "Ordinary days, recorded.",
   ],
 
   /*
@@ -194,11 +201,17 @@ export function arrivalGreeting(country) {
   return {
     landed: `We have landed in ${country.capital}.`,
     /*
-     * The clock line is the smallest possible "you are somewhere else" signal, and it is a fact
-     * rather than a flourish — the time zone is in the dataset. It also quietly sets up the day
-     * facet, which is the only facet every country's data can support in full.
+     * The clock line is the smallest possible "you are somewhere else" signal, and it is a fact rather
+     * than a flourish: the time zone is in the dataset.
+     *
+     * IT USED TO CARRY A SECOND SENTENCE, "Everything from here on is measured against that, not against
+     * your own morning", and a reader reported it as not making sense. They were right, and the reason is
+     * worth keeping. It was written to set up the day facet, but read literally it is false: nothing on
+     * the page is measured against the local clock, and the visitor's own morning was never a unit. It
+     * was a sentence that sounded like it was explaining something while explaining nothing. The fact
+     * stands on its own.
      */
-    clock: `Local time runs on ${country.timeZone}. Everything from here on is measured against that, not against your own morning.`,
+    clock: `Local time runs on ${country.timeZone}.`,
     brochure: country.welcome.intro,
     /*
      * The pivot from brochure to observation. This is the sentence that makes the traveller's note
@@ -207,7 +220,23 @@ export function arrivalGreeting(country) {
      */
     pivot:
       "That is what I was told before I came. Here is what I actually wrote down:",
-    onward: "Ask me anything about this place.",
+    /*
+     * THERE USED TO BE AN `onward` LINE HERE READING "Ask me anything about this place", AND IT WAS A
+     * PROMISE THE SITE CANNOT KEEP.
+     *
+     * It was written as a handover into the facets below, on the reasoning that phrasing them as
+     * questions put to the traveller makes the visitor an asker rather than a reader. The problem is
+     * what "anything" advertises. A reader reported that the line reads as a chat box: they expected to
+     * be able to type a question about the country and get an answer. What is actually below is six
+     * fixed topics drawn from the workbook, and there is no free-text input anywhere on the site.
+     *
+     * That is a false affordance rather than a wording preference, which is why the line is deleted
+     * instead of reworded. The facet explorer's own heading already names what it offers, so nothing
+     * fills the gap: the section below introduces itself.
+     *
+     * THE RULE: copy may not describe an interaction the interface does not support. "Ask me anything"
+     * is the exact shape of the failure, because the medium makes it sound like a feature.
+     */
   };
 }
 
@@ -222,7 +251,7 @@ export function arrivalGreeting(country) {
 export const EXPLORER = {
   eyebrow: "Ask the traveller",
   heading: "What do you want to know?",
-  lead: "Six things I paid attention to everywhere I went. Open them in any order — there is no correct route through a place.",
+  lead: "Six things I paid attention to everywhere I went. Open them in any order.",
   /*
    * Progress copy. Deliberately never a fraction or a percentage: "four of six" is a completion
    * meter and turns curiosity into a chore. See `progressLine` below for the wording.
@@ -243,7 +272,7 @@ export function progressLine(opened, total) {
   if (opened === 0) return "Nothing opened yet.";
   if (opened >= total) return EXPLORER.allSeen;
   if (opened === 1)
-    return "One question asked. Keep going — they are all short.";
+    return "One question asked. They are all short.";
   return `${opened} questions asked, and a few still unopened.`;
 }
 
@@ -470,7 +499,7 @@ export const PASSPORT = {
    * says outright what the page is not, so the number cannot be read as the start of a scorecard.
    */
   lead: (stops) =>
-    `${stops} stops, in the order we made them. Not a scoreboard — there is nothing here to add up. Only where we were, and one thing worth remembering from each.`,
+    `${stops} stops, in the order we made them. Where we were, and one thing worth remembering from each.`,
 
   /*
    * ============================================================================================
@@ -502,12 +531,12 @@ export const PASSPORT = {
    * the journey is help rather than a conversion.
    */
   emptyLead:
-    "Nothing in it yet. This is where the trip gets written down as it happens — one stamp and one remembered thing per country, in the order you go.",
+    "Nothing in it yet. This is where the trip gets written down as it happens: one stamp and one remembered thing per country, in the order you go.",
   emptyAction: "Start where the traveller started",
 
   /* SOME VISITED. Names what is here and what is not, without counting either. */
   partialLead:
-    "What is in the record so far, in the order you went. The stamps that are still outlines are the countries you have not opened yet — they stay blank until you do.",
+    "What is in the record so far, in the order you went. The stamps that are still outlines are countries you have not opened yet.",
 
   /*
    * THE REALISATION. The single most important sentence on the site, and the reason §4.4 exists.

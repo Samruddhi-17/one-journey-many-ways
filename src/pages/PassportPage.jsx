@@ -337,33 +337,40 @@ export function PassportPage() {
                      */}
                     <div className="md:flex md:items-start md:gap-8">
                       {/*
-                       * `aspect-[3/4]` AND A FIXED WIDTH, WHICH IS THE ONE REAL DECISION IN THIS LAYOUT.
+                       * NO FIXED FRAME, AND NO CROP AT ALL. THIS IS THE ONE REAL DECISION IN THIS LAYOUT
+                       * AND IT TOOK THREE ATTEMPTS, SO ALL THREE ARE RECORDED.
                        *
-                       * The five sources range from 675×1200 (portrait, 0.56) to 1536×1024 (landscape,
-                       * 1.5). Rendering each at its own ratio would give five differently-shaped rows,
-                       * and, worse, different amounts of vertical space per country, which reads as
-                       * some stops mattering more than others. A single frame for all five is the same
-                       * argument Glimpses makes for its strip.
+                       * The five photographs cannot share a frame. They run from 675×1200 (Japan,
+                       * portrait, 0.56) to 1536×1024 (the Capitol, landscape, 1.5), which is not a spread
+                       * a single aspect ratio can absorb: whatever ratio is chosen, `object-cover` must
+                       * discard the difference between it and every source that disagrees.
                        *
-                       * PORTRAIT, AND THIS USED TO BE 4/3 WITH A COMMENT CLAIMING 4/3 WAS VERIFIED.
-                       * It was not. Four of the five photographs are portrait or square (0.56, 0.56,
-                       * 0.75, 1.0) and `object-cover` in a 1.33 frame keeps only 42% of the height of
-                       * the two tallest. It cut the top off India's flag and both its edges, left
-                       * Switzerland's flag half outside the frame, and beheaded the pagoda behind
-                       * Japan's. A visitor reported it; it is visible at a glance in any of the five.
+                       *   FIRST, `aspect-[4/3]`, behind a comment asserting it had been verified. It had
+                       *      not. In a 1.33 frame the two tallest sources keep 42% of their height: the
+                       *      top of India's flag was gone, Switzerland's was half outside the frame, and
+                       *      the pagoda behind Japan's was beheaded.
+                       *   SECOND, `aspect-[3/4]`, chosen by actually rendering all five at 4/3, 1/1 and
+                       *      3/4 and looking at them. It fixed three and it could not fix the other two,
+                       *      because the fault was never the ratio. A portrait frame crops a landscape
+                       *      source horizontally, so the Capitol lost its left and right; India, at 0.56
+                       *      against a 0.75 frame, still lost its top and bottom. A visitor reported both
+                       *      as still cut, which is exactly right.
+                       *   NOW, `object-contain` with no aspect box. The photograph sets its own height
+                       *      inside a fixed width and every pixel of it is shown. Nothing is cropped
+                       *      because nothing is being forced into a shape it does not have.
                        *
-                       * 3/4 was chosen by rendering all five at 4/3, 1/1 and 3/4 and comparing the
-                       * results, not by reasoning about the numbers. It is the only one of the three
-                       * that keeps the whole flag AND the landmark below it in every photograph: the
-                       * Gateway of India entire, the Colosseum, the lake and chalet, the Capitol dome.
-                       * The one landscape source (the Capitol, 1.5) loses width at 3/4, which is why
-                       * this was worth checking: its flag and dome both sit centre-frame, so they
-                       * survive. Anything wider fails the four portrait sources; a portrait frame costs
-                       * the one landscape source nothing that matters.
+                       * WHAT THIS COSTS, because the uniform frame was not arbitrary. The rows are now
+                       * different heights, and the reason that was avoided is that unequal vertical space
+                       * can read as some stops mattering more than others. That risk is real and it is
+                       * the lesser one: a row being 60px shorter is a rhythm imperfection, while a
+                       * beheaded landmark is a broken photograph. The fixed WIDTH is what keeps the rows
+                       * a set rather than five loose images, and it is why the width stayed while the
+                       * height went.
                        *
-                       * THE LESSON, since the previous comment asserted a verification that had not
-                       * happened: a crop cannot be checked by reading image dimensions. Where the
-                       * subject sits inside the frame is not derivable from its width and height.
+                       * THE LESSON, since the first comment asserted a verification that had not happened
+                       * and the second fixed the wrong variable: a crop cannot be checked by reading image
+                       * dimensions, and when sources disagree about shape, the question is not which
+                       * shape to impose but whether to impose one.
                        *
                        * GUARDED ON `flag` BEING PRESENT, AND THE GUARD IS NOT DEFENSIVE PADDING. All
                        * five resolve today, but America's very nearly did not: the only US flag file
@@ -380,8 +387,8 @@ export function PassportPage() {
                        * call FacetCard makes for America's fact.
                        */}
                       {country.images.flag ? (
-                        <div className="overflow-hidden rounded-xl aspect-[3/4] md:w-60 md:shrink-0">
-                          <picture className="block h-full w-full">
+                        <div className="overflow-hidden rounded-xl md:w-60 md:shrink-0">
+                          <picture className="block w-full">
                             <source srcSet={toAvif(country.images.flag)} type="image/avif" />
                             <img
                               src={country.images.flag}
@@ -389,12 +396,20 @@ export function PassportPage() {
                               /*
                                * `lazy` on all five including the first. The first stop sits below a
                                * title block that is itself below a fixed header, so on no viewport is
-                               * this photograph in the initial paint — there is no
+                               * this photograph in the initial paint. There is no
                                * first-contentful-paint case to protect here, unlike the country covers.
                                */
                               loading="lazy"
                               decoding="async"
-                              className="h-full w-full object-cover"
+                              /*
+                               * `h-auto`, NOT `h-full`, AND THE PAIR WITH `object-contain` IS THE WHOLE
+                               * FIX. `h-full` resolves against a parent that no longer sets a height, so
+                               * on its own it collapses; `object-contain` inside a fixed box would letterbox
+                               * instead of cropping, which trades a cut photograph for a padded one. Height
+                               * driven by the image means the box is always exactly the photograph's shape,
+                               * so `contain` has nothing left to letterbox and nothing to crop.
+                               */
+                              className="block h-auto w-full object-contain"
                             />
                           </picture>
                         </div>

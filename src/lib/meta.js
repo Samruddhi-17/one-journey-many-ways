@@ -208,7 +208,7 @@ export function getRouteMeta(pathname) {
        * to show it. The URL keeps the metaphor because a URL is part of the experience; the
        * tab label answers "which tab is this?".
        */
-      description: `The whole itinerary in order — ${spellOut(TOTAL_STOPS)} countries, ${COUNTRIES.map((c) => c.name).join(', ')} — and where the journey has reached so far.`,
+      description: `The whole itinerary in order: ${spellOut(TOTAL_STOPS)} countries, ${COUNTRIES.map((c) => c.name).join(', ')}, and where the journey has reached so far.`,
     }
   }
 

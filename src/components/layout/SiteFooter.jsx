@@ -69,9 +69,9 @@ export function SiteFooter() {
                   src/lib/spellOut.js. This sentence appears on every page of the site, so it
                   is the worst possible place for a count that can quietly go stale. */}
               A journey through {spellOut(TOTAL_STOPS)} countries, exploring how
-              people live, thrive and connect. Figures describe national
-              averages drawn from a single dataset and are best read as
-              impressions rather than precise measurements — averages flatten
+              people live, thrive and connect. Figures are national averages,
+              compiled from several published sources, and are best read as
+              impressions rather than precise measurements. An average flattens
               the variation that makes each place interesting.
             </p>
           </div>

@@ -98,13 +98,18 @@ export const FACETS = [
      * about the same chart is where a shared component starts branching.
      */
     framing:
-      'Every day is the same length everywhere. What changes is where it goes — and that division is where a country stops being an idea and becomes a routine you could live inside.',
+      'Every day is the same length everywhere. What changes is where the hours go.',
     /*
      * `caveat` is Principle 17 attached to the specific evidence it qualifies, rather than
      * collected in a page footer nobody reaches. Only the facets that need one have one.
+     *
+     * IT USED TO SAY "from a single dataset", WHICH WAS FALSE ABOUT THIS PROJECT'S OWN PROVENANCE. The
+     * figures were compiled from several published sources before they reached the workbook, so calling
+     * them one dataset understated the sourcing and misdescribed where they came from. Corrected here and
+     * in the site footer, which carried the same wrong claim.
      */
     caveat:
-      'A national average for one age band, from a single dataset. It describes no actual person’s Tuesday — useful for shape and proportion, unreliable for anything more precise.',
+      'A national average for one age band, compiled from published sources. Useful for shape and proportion, unreliable for anything more precise.',
   },
   {
     id: 'transport',
@@ -131,7 +136,7 @@ export const FACETS = [
      * the most common way a bar chart misleads without containing a false number.
      */
     framing:
-      'These are kilograms per person per year, and unlike the hours in a day they do not add up to anything. So every bar on every country page is drawn against the same ruler — the largest single figure anywhere on the journey — which is what makes the lengths worth comparing at all.',
+      'These are kilograms per person per year, and unlike the hours in a day they do not add up to anything. Every bar on every country page is drawn against the same ruler, the largest single figure anywhere on the journey, which is what makes the lengths worth comparing.',
     caveat:
       'Availability per person, not what anyone eats. More of something is not better than less of it, and nothing here is a diet.',
   },

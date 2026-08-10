@@ -1609,12 +1609,65 @@ function build() {
 }
 
 /*
- * Straight quotes to typographic ones. Apostrophes only — the dataset has no double quotes,
- * and guessing open-versus-close for those without parsing the sentence goes wrong on
- * possessives. `Japan's` and `weren't` are both mid-word, so a single rule covers the data.
+ * Straight quotes to typographic ones, and em dashes out.
+ *
+ * APOSTROPHES ONLY for the quote rule: the dataset has no double quotes, and guessing
+ * open-versus-close for those without parsing the sentence goes wrong on possessives. `Japan's` and
+ * `weren't` are both mid-word, so a single rule covers the data.
+ *
+ * WHY EM DASHES ARE REMOVED RATHER THAN LEFT AS WRITTEN. Four sentences in the workbook use an em dash
+ * as their main joint ("Respect and discipline weren't just traditions—they were part of everyday
+ * life"). Nothing is wrong with the punctuation, but the mark has become a tell: it reads as
+ * machine-written to a lot of readers now, and this site's whole argument is that a person made it. So
+ * it is normalised everywhere, in the site's own copy by hand and in the workbook's copy here.
+ *
+ * TWO SHAPES, AND A SINGLE RULE GETS ONE OF THEM WRONG. This was written as a blanket dash-to-colon
+ * replacement, which is right for three of the four and produces nonsense on the fourth:
+ *
+ *   ONE DASH is a joint: a claim, then the elaboration that earns it. "Respect and discipline weren't
+ *      just traditions—they were part of everyday life." A colon keeps that relationship exactly; a
+ *      comma would turn it into a splice.
+ *   TWO DASHES are a parenthesis: "three active volcanoes—Etna, Stromboli, and Vesuvius—all located in
+ *      its southern region." Replacing both with colons gives "volcanoes: Etna, Stromboli, and
+ *      Vesuvius: all located", which is two colons in one sentence and reads as broken. Commas do not
+ *      work either, because the interruption is itself a comma list. Brackets are the one substitution
+ *      that survives a list inside the aside.
+ *
+ * So the count decides, which is checkable rather than clever: an even number of dashes in one string is
+ * treated as parenthetical, an odd number as a joint. With four sentences in the corpus this is not a
+ * general-purpose typographic engine and does not pretend to be one; if the workbook ever gains a
+ * sentence with three dashes, this will get it wrong, and the tell will be a stray bracket in the
+ * published text.
+ *
+ * THIS EDITS THE PUBLISHED TEXT, WHICH THE PIPELINE OTHERWISE REFUSES TO DO. See the editorial-override
+ * machinery for the standard this has to meet. It clears it on the narrow ground that it changes
+ * punctuation and not a single word: no claim, figure, or observation is altered, so the traveller's
+ * sentence still says exactly what they wrote. Anything that changed wording would have to go through
+ * the override table instead, where it is listed in the build output for review.
  */
 function typographic(text) {
-  return text.replace(/'/g, '’').trim()
+  const quoted = text.replace(/'/g, '’').trim()
+
+  const dashes = (quoted.match(/—/g) ?? []).length
+  if (dashes === 0) return quoted
+
+  if (dashes % 2 === 0) {
+    /*
+     * Parenthetical: each pair becomes brackets, so a comma list inside the aside still reads.
+     *
+     * THE COMMA AFTER THE CLOSING BRACKET IS NOT OPTIONAL, and dropping it was the first version's bug.
+     * A closing em dash does two jobs at once: it ends the aside AND supplies the pause the sentence
+     * needs to resume. A bracket only does the first, so `volcanoes (Etna, Stromboli, and Vesuvius) all
+     * located in its southern region` runs the aside straight into the predicate. It is only added when
+     * what follows is a word, since a bracket already sitting before a full stop needs nothing.
+     */
+    return quoted
+      .replace(/\s*—\s*(.+?)\s*—\s*/g, (_, aside) => ` (${aside}), `)
+      .replace(/,\s*([.,;:!?])/g, '$1')
+      .replace(/\s+/g, ' ')
+      .trim()
+  }
+  return quoted.replace(/\s*—\s*/g, ': ')
 }
 
 // ---------------------------------------------------------------------------------------
