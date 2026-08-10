@@ -126,9 +126,12 @@ export function AmbienceToggle({ variant = 'icon' }) {
    * country was current when the module was first imported. Skipping the call while silent would
    * make the very first press play the wrong place.
    *
-   * `textureFor` returns undefined off a country route, which the engine plays as silence — the
-   * home page and the passport stay quiet even with the toggle on. "The shell is silent; the
-   * country speaks", now audibly.
+   * `textureFor` HAS AN ANSWER FOR EVERY ROUTE, which it did not used to. It returned undefined off
+   * a country route and the engine played that as silence, on the argument that the shell should be
+   * silent and only a country should speak. That was reported as a fault and it was one: a visitor
+   * who presses this button on the front page and hears nothing has learned that the button does
+   * nothing. The shell now has its own texture, faster and brighter than any country's, so the page
+   * where the sound is most likely to be switched on is the page that demonstrates it.
    *
    * A plain `useEffect` and not `useLayoutEffect`: unlike the accent colour, nothing here is
    * visible in the first painted frame, so there is nothing to get in ahead of. A fade that starts
@@ -211,9 +214,14 @@ export function AmbienceToggle({ variant = 'icon' }) {
            * "Synthesised" is therefore not modesty, it is the disclosure: see the header of
            * src/lib/ambience.js for why there are no field recordings, and note that this label is
            * the cheapest possible place to prevent a visitor thinking they are hearing Tokyo.
+           *
+           * IT SAYS "AIR" NOW BECAUSE THE SOUND IS MOSTLY AIR. Each country's continuous layer — the
+           * wind through leaves, the alpine air, the warmth off the water — carries more of the
+           * minute than the instrument on top of it does, and a label that mentioned only notes
+           * would be describing the smaller half.
            */}
           <span className="block text-sm text-ink-500">
-            {on ? 'Synthesised notes, one instrument per country' : 'Off'}
+            {on ? 'Synthesised air and notes, different for each place' : 'Off'}
           </span>
         </span>
       </button>
