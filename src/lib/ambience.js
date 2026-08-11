@@ -41,12 +41,9 @@
  *      their landscape actually has, and their instrument sits inside it.
  *
  *      WHERE A TRADITION ALREADY SUPPLIES A CONTINUOUS SOUND, THAT IS USED INSTEAD OF WIND, because
- *      it is the better answer to the same problem. Italy gets mandolin tremolo, which exists for
- *      exactly this reason: a mandolin cannot hold a note, so a player makes one by picking as fast
- *      as they can. Switzerland gets the herd — cow bells on grazing cattle ring constantly and
- *      irregularly, and that, not the alphorn, is what an alpine pasture sounds like. The United
- *      States gets bottleneck slide, the one American guitar technique that sustains and glides
- *      instead of striking.
+ *      it is the better answer to the same problem. Switzerland gets the herd — cow bells on grazing
+ *      cattle ring constantly and irregularly, and that, not the alphorn, is what an alpine pasture
+ *      sounds like. Italy gets a held reed organ (round three tried mandolin tremolo here; see below).
  *
  *   3. THE SHELL IS NO LONGER SILENT, which reverses a rule this file used to state at length. The
  *      report was "there is no music on the main page, we should have something like excitement
@@ -55,16 +52,53 @@
  *      concludes it is broken, and switches it off before ever reaching a country. The one page that
  *      most needs to justify the button was the one page that said nothing.
  *
- *      So there is a shell texture, and its brief is anticipation rather than place: the fastest
- *      tempo here by a factor of four, a bright register, a walk biased upward so figures rise, and
- *      a soft pulse underneath. IT IS THE ONLY TEXTURE WITH A PULSE FAST ENOUGH TO BE CALLED A
- *      TEMPO, and that is deliberate — a beat is how excitement is made, and the shell is the one
- *      place where a beat carries no risk, because the shell claims no country. Putting a groove
- *      under Japan would be a caricature of Japan. Putting one under "you are about to travel" is a
- *      caricature of nothing.
+ * ============================================================================================
+ * ROUND THREE WAS THEN REPORTED THREE-SIXTHS WRONG, AND THE THREE PARTITION CLEANLY. THIS IS ROUND
+ * FOUR, AND IT IS THE MOST USEFUL THING ANY OF THE FOUR ROUNDS HAS ESTABLISHED.
+ *
+ * The report was: "i dont like the main page music, even italy, even US". Japan, India and
+ * Switzerland went unmentioned. Those two sets are not a matter of taste — they are a fact about
+ * additive synthesis, and I built the rejected half on mechanisms this engine cannot produce.
+ *
+ *   ACCEPTED: a plucked drone (tanpura), gusting noise (wind through leaves), struck resonant bodies
+ *   (cow bells, an overtone-series horn). Every one of those IS a sum of decaying sinusoids. That is
+ *   not an approximation of what those sounds are; it is a description of them.
+ *
+ *   REJECTED: a metronomic pulse, a plectrum tremolo, a fretted glide. Every one of those is defined
+ *   by material that has no pitch at all — pick noise on a plectrum stroke, string nonlinearity under
+ *   a fast wrist, finger friction and fret buzz under a moving bottleneck. Remove the noise and what
+ *   is left of a tremolo is amplitude flutter, and what is left of a slide is a swooping whistle.
+ *   Those are precisely the two words you would use to describe a cheap synthesiser.
+ *
+ * THE RULE THIS YIELDS, AND IT SHOULD GOVERN ANY FUTURE ADDITION HERE:
+ *
+ *   ONLY IMITATE SOUNDS WHOSE IDENTITY SURVIVES BEING MADE OF SINE WAVES. A sound whose character
+ *   lives in its noise, its attack transient, or its nonlinearity will read as a cheap imitation no
+ *   matter how accurate the pitches are, because the part being imitated is the part that is missing.
+ *   Struck, blown, bowed and gusting sounds pass. Plucked-with-a-plectrum, scraped, buzzed and
+ *   bowed-hard sounds do not.
+ *
+ * SO ROUND FOUR REBUILDS THE THREE REJECTED TEXTURES ON THE RECIPE THE THREE ACCEPTED ONES SHARE —
+ * a sustained layer, plus sparse struck or blown notes with a long decay — and deletes the three
+ * gestures that were reaching for what the engine does not have. Japan, India and Switzerland are
+ * untouched apart from a remeasured `level`, for the same reason India was untouched in round three.
+ *
+ *   · ITALY loses its tremolo and its arpeggio, and gains a soft held reed organ under sparse distant
+ *     bells. Bells and a held pipe tone are both what this engine already does best, and both are
+ *     more honestly Italian than a mandolin trope: a hill town's continuous sound is a church organ
+ *     and its bells, not a serenade.
+ *   · THE UNITED STATES loses its slide and its long-decay dyad, and keeps only the open low string,
+ *     now blown-long rather than struck, under the widest wind here. Its identity moves from a
+ *     technique to a space, which is the more defensible claim for a country too varied for one
+ *     instrument anyway.
+ *   · THE SHELL LOSES ITS BEAT. Excitement was asked for and a 500 ms pulse was the wrong answer — a
+ *     bare pulse of sine waves is the sound of a machine, and it is the only thing on the site with a
+ *     grid. What is kept is everything that made it excited WITHOUT percussion: the fastest tempo
+ *     here, the brightest register, rising figures, and the shortest room. Tempo and direction are
+ *     what anticipation is made of; a click track was never carrying it.
  *
  * ============================================================================================
- * THE RISK IN DRAWING ON REAL TRADITIONS, WHICH ROUNDS TWO AND THREE BOTH TAKE ON.
+ * THE RISK IN DRAWING ON REAL TRADITIONS, WHICH EVERY ROUND SINCE THE SECOND HAS TAKEN ON.
  *
  * Asked how far each country's sound should reference that country's own music, the visitor chose to
  * draw on the tradition rather than to use five neutral instruments. So the choices below are
@@ -79,17 +113,21 @@
  *   1. THE MATERIAL IS REAL, NOT SUGGESTIVE. Japan's scale is hirajōshi, an actual koto tuning, not
  *      "some pentatonic". India's is Yaman, a named raga, and the tanpura's cycle is the
  *      conventional Pa–Sa–Sa–Sa. Switzerland's horn plays only the natural overtone series, because
- *      that is the only thing an alphorn physically can play. Italy's tremolo and America's slide
- *      are named techniques, not moods. Where a real tradition supplies a specific answer, that
- *      answer is used instead of a generic one.
- *   2. NOTHING IS PERFORMED. There are no melodies and no phrases — notes are chosen one at a time
- *      and the result is closer to wind chimes than to a tune. A composed melody would be an
- *      impersonation. A scale is a palette. The one exception is the shell's pulse, which belongs to
- *      no country for exactly that reason.
+ *      that is the only thing an alphorn physically can play. Italy's organ has strong odd harmonics
+ *      and weak even ones because that is what a stopped reed pipe does. Where a real tradition
+ *      supplies a specific answer, that answer is used instead of a generic one.
+ *
+ *      ROUND FOUR ADDS A SECOND HALF TO THIS CONSTRAINT: the material must also be renderable. A real
+ *      technique this engine cannot produce is not a truer choice than a generic one, it is a worse
+ *      one, because the listener hears the failure rather than the reference. Italy's tremolo and
+ *      America's slide were both genuine techniques and both had to go.
+ *   2. NOTHING IS PERFORMED. There are no melodies, no phrases and now no pulse anywhere outside
+ *      India's tanpura — notes are chosen one at a time and the result is closer to wind chimes than
+ *      to a tune. A composed melody would be an impersonation. A scale is a palette.
  *   3. THE LABEL DOES NOT LIE. The toggle says these are synthesised, not a recording of anywhere,
  *      which is the cheapest possible place to prevent the misunderstanding.
  *
- * WHY THERE ARE STILL NO AUDIO FILES, which was the original decision and survives all three rounds.
+ * WHY THERE ARE STILL NO AUDIO FILES, which was the original decision and survives every round.
  * Openly-licensed audio is far thinner than openly-licensed photography: the best CC0 candidate for
  * Japan was a New Zealand cicada and the best for the United States was a recording titled "Highway
  * from bridge, centre". Labelling those as those countries is exactly the failure Principle 15
@@ -133,7 +171,7 @@
  *                rather than the tonic above it, so figures rise and then start again from low
  *                down. Rising motion is anticipation; only the shell uses it.
  *
- * TIMBRE (`voice`, plus `horn` / `slideVoice` where a country has two)
+ * TIMBRE (`voice`, plus `horn` where a country has two)
  *   partials     The instrument, and the only field that really decides what it sounds like. Each
  *                entry is { r: frequency ratio, g: gain, d: decay multiplier }.
  *                `r` INTEGER RATIOS ARE A STRING OR A PIPE; NON-INTEGER RATIOS ARE A BELL. That is
@@ -145,16 +183,22 @@
  *                the instant it starts. A blown or bowed instrument holds before it decays, and
  *                that single number is most of the difference between India's flute and Japan's
  *                koto, more than the partials are.
+ *
+ *                A LONG `hold` IS ALSO HOW A DRONE BECOMES A CHORD RATHER THAN A PULSE. Italy's organ
+ *                holds for 5.5 s against gaps of about 4.2 s, so each note is still sounding when the
+ *                next arrives and they overlap into something continuous. India's tanpura reaches the
+ *                same place from the opposite direction, by plucking faster than the gaps register.
  *   detuneCents  Adds a second copy of the low partials, slightly out of tune. Instruments with
- *                doubled courses (a mandolin, a tanpura) beat against themselves, and that beating
- *                is a large part of their character. 0 for single-strung instruments.
+ *                doubled courses beat against themselves, and that beating is a large part of their
+ *                character. 0 for single-strung instruments, and worth removing wherever the note is
+ *                too short for a slow beat to be heard as anything but roughness.
  *   spread       How far notes are panned left and right, 0 to 1. Width, cheaply.
- *   glideS       Only on a voice played with a starting pitch. Seconds to travel from where the note
- *                begins to where it lands — a bottleneck sliding up the neck.
  *
  * BEHAVIOUR
- *   gesture      What a single event is: 'single', 'arpeggio', 'dyad', 'cluster', 'tremolo',
- *                'slide' or 'sparkle'. See `playEvent`.
+ *   gesture      What a single event is: 'single', 'dyad', 'cluster' or 'sparkle'. See `playEvent`.
+ *                THREE MORE EXISTED AND WERE DELETED — 'tremolo', 'slide' and 'arpeggio' — because
+ *                each depended on material sine synthesis does not have. See the round-four note at
+ *                the top of the file before adding a fourth.
  *   gapMs        [min, max] milliseconds between events. This is the tempo. IT IS NOW MUCH SHORTER
  *                THAN IT WAS, on the four countries reported as "very slow", and the shortening is
  *                only half the fix — see `wind` and `drone`.
@@ -179,13 +223,19 @@
  *                between one gust falling away and the next starting. SMALL `calmS` VALUES MAKE
  *                GUSTS OVERLAP, which is what a windy day is.
  *
- *   drone        Optional. A cycle of plucks independent of the melody, and general enough now to be
+ *   drone        Optional. A second queue of notes independent of the melody, general enough to be
  *                three different things:
- *                  · `stepMs` — a fixed period. India's tanpura, and the shell's pulse.
- *                  · `gapMs` — an irregular period. Switzerland's herd, where a fixed gap between
- *                    two cow bells would be a metronome and a herd is not one.
+ *                  · `stepMs` — a fixed period. India's tanpura, and the only fixed period left here.
+ *                  · `gapMs` — an irregular period. Switzerland's herd, where a fixed gap between two
+ *                    cow bells would be a metronome and a herd is not one; and Italy's organ, where
+ *                    the notes are longer than the gaps so they overlap into a held chord.
  *                  · `pick: 'random'` — choose from `ratios` at random instead of cycling, again for
  *                    the herd: those are different animals, not one animal playing a figure.
+ *
+ *                THE SHELL HAS NO DRONE, and it is the only texture that needs none: its events are
+ *                closer together than its own decay, so the notes overlap each other. Every country's
+ *                notes are seconds apart, which is why removing their second layer would return them
+ *                straight to the ringtone complaint.
  *
  * BACKGROUND
  *   bed          The quiet static noise floor that used to be the whole background, with a very slow
@@ -225,23 +275,47 @@
  *                1053 and got QUIETER, because a tremolo pluck is a fifth the gain of a struck note.
  *                Counting events is not measuring loudness either.
  *
- *                So the trims below are each texture's previous value scaled by the ratio of its
- *                measured RMS to a common 0.0060 target, applied twice and then verified over the MEAN
- *                OF TWO independent 40-second windows per route. As committed the six read 0.00608,
- *                0.00613, 0.00622, 0.00629, 0.00561 and 0.00577 — a spread of 1.12x, worst peak 0.042.
+ *                AND AGAIN FOR ROUND FOUR, for the same structural reason: three of the six textures
+ *                were replaced outright, and the replacements changed density in both directions.
+ *                Italy's held organ is continuous energy where its tremolo was many tiny plucks, so it
+ *                came out 1.5x too loud; the American slide became one sparse swelled dyad every four
+ *                seconds and came out too quiet. Both were invalidated by construction rather than by
+ *                drift, which is why no trim here is ever carried across a rewrite.
  *
- *                THE SECOND WINDOW IS NOT BELT AND BRACES; IT IS THE ONLY HONEST READING, AND IT IS
- *                ALSO WHERE THE TRIMMING HAS TO STOP. Switzerland measured 0.00676 in one window and
- *                0.00439 in the next off an identical build: its herd fires at a random interval and
- *                its alphorn on a 32% chance, so one window can land on a quiet stretch. I trimmed it
- *                UP on that reading, which was chasing the sample rather than the texture. Round two
- *                made the same mistake in another form, when a 14-second sample of Japan happened to
- *                fall on a run of rests and looked like a broken scheduler.
+ *                THE FIGURES AS COMMITTED, verified after the trims were applied: 0.00602, 0.00592,
+ *                0.00600, 0.00614, 0.00515 and 0.00595 — a spread of 1.19x, worst peak 0.035 against a
+ *                ceiling of 0.1. Every one is the mean of two independent 40-second windows.
  *
- *                Hence the stopping rule: a residual spread SMALLER THAN A SINGLE TEXTURE'S OWN
- *                RUN-TO-RUN VARIANCE is not a defect and must not be trimmed. Switzerland alone still
- *                moves 1.16x between windows, so the 1.12x spread above is inside the noise floor of
- *                the instrument measuring it. Anything further would be fitting to one performance.
+ *                A TRIM NEVER SURVIVES A CHANGE TO WHAT IS BEING PLAYED, only to how loudly. The
+ *                American dyad's upper note moved from a scale degree to a fixed fifth after the trims
+ *                were first computed, which changed the spectrum, so its earlier windows were discarded
+ *                rather than pooled with the later ones.
+ *
+ *                MEASURING TWICE IS NOT BELT AND BRACES; IT IS THE ONLY HONEST READING, AND IT IS ALSO
+ *                WHERE THE TRIMMING HAS TO STOP. Switzerland read 0.00676 then 0.00439 off one
+ *                identical build: its herd fires at a random interval and its alphorn on a 32% chance,
+ *                so a single window can land on a quiet stretch. I trimmed it up on that reading, which
+ *                was fitting the sample rather than the texture, and then overshot it a second time the
+ *                same way. Round two made the same mistake in another form, when a 14-second sample of
+ *                Japan fell on a run of rests and looked like a broken scheduler.
+ *
+ *                WHAT FINALLY WORKED IS POOLING EVERY WINDOW A TEXTURE HAS EVER BEEN MEASURED IN,
+ *                ACROSS DIFFERENT LEVEL SETTINGS, and solving for RMS-PER-UNIT-LEVEL. Loudness is
+ *                linear in the trim, so dividing each reading by the level it was taken at makes
+ *                windows from different builds comparable instead of throwing them away — six readings
+ *                per texture rather than two, from data already collected.
+ *
+ *                THE ESTIMATOR ALSO REPORTS ITS OWN RELIABILITY, which is the part worth keeping: the
+ *                per-unit figures agree to within 1.04x for India, whose tanpura is regular, 1.05x for
+ *                the shell, and 1.34x for Switzerland, whose herd interval and 32% horn are not. A
+ *                texture's variance is a property of its own design.
+ *
+ *                Hence the stopping rule: A RESIDUAL SPREAD SMALLER THAN A SINGLE TEXTURE'S OWN
+ *                RUN-TO-RUN VARIANCE IS NOT A DEFECT AND MUST NOT BE TRIMMED. The pooled solve asks for
+ *                Switzerland at 0.553 against the 0.53 committed here — a 4% difference sitting inside
+ *                its own 1.34x variance, so it is left alone. Five of the six are confirmed to within
+ *                1%. Anything further would be fitting to one performance, and two rounds of doing
+ *                exactly that is what this estimator exists to prevent.
  *
  *                That India's trim is a third of Japan's says nothing whatever about the two
  *                countries — only about how many notes per minute each texture asks for.
@@ -326,7 +400,7 @@ const TEXTURES = {
     pad: { level: 0.04 },
     reverbS: 2.9,
     wet: 0.4,
-    level: 0.77,
+    level: 0.76,
   },
 
   /*
@@ -346,8 +420,11 @@ const TEXTURES = {
    * file was re-measured against a common target after the other five changed density.
    * ============================================================================================
    *
-   * THE TANPURA IS WHY THIS COUNTRY SOUNDS DIFFERENT FROM THE OTHERS AT A SECOND'S NOTICE, and it is
-   * the one place here with a fixed pulse besides the shell. A tanpura is not a drone in the
+   * THE TANPURA IS WHY THIS COUNTRY SOUNDS DIFFERENT FROM THE OTHERS AT A SECOND'S NOTICE, and after
+   * round four it is the ONLY fixed period left on the site — the shell's beat was removed as a
+   * caricature of excitement, and this survives because it is not a beat but an instrument that
+   * happens to be regular, and because it was the one thing reported as working. A tanpura is not a
+   * drone in the
    * held-note sense: it is plucked, continuously, in a cycle, and the conventional cycle is
    * Pa–Sa–Sa–Sa — the fifth below the tonic, then the tonic three times. That is the `ratios` list,
    * and 0.75 is Pa (a fifth below Sa is three-quarters of its frequency).
@@ -418,82 +495,128 @@ const TEXTURES = {
   },
 
   /*
-   * ITALY — mandolin tremolo, in warm coastal air.
+   * ITALY — a reed organ held under distant bells, in a stone room.
    *
-   * TREMOLO IS THE ANSWER TO THE RINGTONE COMPLAINT AND IT IS ALSO THE MOST ITALIAN THING A MANDOLIN
-   * DOES, which is the rare case where the honest choice and the useful one are the same choice. A
-   * mandolin physically cannot sustain: the strings are short, doubled and struck with a plectrum, so
-   * the note is over in a couple of seconds whatever the player wants. The tradition's response is
-   * tremolo — pick the same note as fast as the wrist allows, and a listener hears a held note
-   * instead of thirteen separate ones. That is exactly the trick this file needed: a continuous
-   * sound built out of the only material the instrument has.
+   * ============================================================================================
+   * ROUND THREE PUT A MANDOLIN TREMOLO HERE AND IT WAS REJECTED. WHY IT DESERVED TO BE.
    *
-   * SO AN EVENT HERE IS NOW ABOUT 0.8 SECONDS LONG INSTEAD OF INSTANTANEOUS. Between the length of a
-   * tremolo and gaps of 1.3–2.6 s, something is sounding most of the time, which is the whole
-   * difference from round two.
+   * The argument for it was good and the sound was not. A mandolin cannot sustain, tremolo is the
+   * tradition's own answer to that, so a continuous sound built from the instrument's only material
+   * seemed like the rare case where the honest choice and the useful one agreed.
    *
-   * THE SWELL IS A HALF SINE ACROSS THE STROKE, quiet at both ends. A tremolo at constant force
-   * sounds like a machine; a real one is a shape, because a player is arriving at a note and leaving
-   * it. One `Math.sin` is most of what makes it musical.
+   * WHAT THAT ARGUMENT MISSED IS THAT A PLECTRUM STROKE IS MOSTLY NOISE. The reason thirteen plucks a
+   * second fuse into one held note on a real mandolin is the pick attack: a broadband click, thirteen
+   * times a second, plus the doubled course beating and the string behaving nonlinearly under a fast
+   * wrist. This engine has sine waves. Take the click away and what is left of a tremolo is a sine
+   * tone being wobbled in amplitude, which is not a mandolin — it is a synthesiser with an LFO on it,
+   * and that is exactly what it sounded like. `detuneCents: 9` made it worse rather than better,
+   * because beating without a transient is just wobble on wobble.
    *
-   * `detuneCents: 9` IS THE INSTRUMENT. A mandolin is strung in courses of two, tuned as closely as
-   * a player can manage and never exactly, so every note beats gently against itself. Removing that
-   * one number leaves a generic bright pluck; adding it is immediately a mandolin. It matters more
-   * under tremolo than it did under single notes, because thirteen plucks give the beating time to
-   * be heard.
+   * THE REPLACEMENT USES ONLY WHAT THIS ENGINE PRODUCES HONESTLY, and the country loses nothing by it.
+   * A hill town's actual continuous sound is not a serenade — it is a church organ heard through a
+   * door, and bells across the valley marking the hour. Both are things additive synthesis genuinely
+   * IS rather than imitates: a reed pipe is a held tone with strong odd harmonics, and a bell is a
+   * struck body with inharmonic partials.
+   * ============================================================================================
    *
-   * ARPEGGIOS SURVIVE AS THE MINORITY EVENT, one in three, so the texture still opens out
-   * occasionally instead of being one gesture on repeat.
+   * THE ORGAN IS THE CONTINUOUS LAYER, AND IT IS A HELD CHORD RATHER THAN A CYCLE OF PLUCKS. This is
+   * the one place `hold` is long enough to make the drone queue produce sustain instead of rhythm:
+   * 5.5 seconds of hold against a 4.2-second gap means each note is still sounding when the next
+   * arrives, so consecutive drone notes overlap into a continuous chord that changes rather than a
+   * pulse. India's tanpura solves the same problem the opposite way, by plucking fast enough that the
+   * gaps do not register. Both are continuous; only one of them has a beat.
+   *
+   * ITS RATIOS ARE A CYCLE THROUGH THE TONIC TRIAD, [1, 1.5, 2, 1.5], so the held chord shifts colour
+   * every few seconds without ever leaving the harmony. Not random — the point of a drone is that it
+   * does not go anywhere, and a random pick would make it a second melody.
+   *
+   * ODD HARMONICS STRONG AND EVEN ONES WEAK IS WHAT MAKES IT A PIPE. A reed pipe stopped at one end
+   * resonates most readily at odd multiples of its fundamental, which is why a clarinet and an organ's
+   * reed stops sound hollow rather than bright. The gains below run 1, 0.12, 0.5, 0.08, 0.3 — the
+   * third and fifth harmonics far above the second and fourth. That single asymmetry does more to
+   * identify the instrument than any envelope here, and it is free.
+   *
+   * THE BELLS ARE FAR AWAY AND THAT IS WHY THEY WORK. Inharmonic partials (2.04, 2.68, 3.42 — none of
+   * them integer multiples of anything) so they clang rather than fuse into a pitch, a very long
+   * decay, a high register, wide panning and a low gain. A struck resonant body is the accepted
+   * category from Switzerland; the difference is that Switzerland's are ON the animal in front of you
+   * and Italy's are half a mile off across a valley, which is entirely a matter of level and reverb.
    *
    * THE FOURTH IS MISSING FROM THE SCALE ON PURPOSE. [0, 2, 4, 7, 9, 11] is G major without its
    * fourth degree, which in a major key is the note that most easily sounds like a mistake when it
    * lands on its own with nothing resolving it. Six notes are plenty for a palette, and leaving out
    * the one that needs a harmonic context this engine cannot provide is cheaper than handling it.
    *
-   * THE WIND IS LOW, GENTLE AND SLOW, unlike Japan's: warm air off water rather than a canopy, so
-   * the band sits at 420 Hz with very little movement and long lazy gusts. It is a floor here, not
-   * the lead — Italy's continuity comes from the instrument.
+   * THE WIND IS ALMOST GONE, down from a peak of 0.3 to 0.16. Round three needed it as a floor
+   * because the tremolo left gaps; the organ is a better floor than air, and layering both was
+   * crowding. What is left is a slow warm movement rather than weather.
+   *
+   * THE LONGEST REVERB OF THE COUNTRIES AFTER SWITZERLAND, at 4.4 seconds, and the highest wet level
+   * on the site. A stone church is mostly its own echo, and this texture is entirely held tones and
+   * struck metal — the two things a long room flatters most.
    */
   italy: {
     rootHz: 98, // G2
     scale: [0, 2, 4, 7, 9, 11], // G major, fourth omitted
-    voiceOctave: 1,
-    degrees: [0, 13],
+    voiceOctave: 2,
+    degrees: [0, 12],
+    /*
+     * A distant bell. Inharmonic and slow, so it rings rather than strikes; `attack: 0.008` is soft
+     * for a bell because distance and air absorb the very front of a transient before it arrives.
+     */
     voice: {
       partials: [
         { r: 1, g: 1, d: 1 },
-        { r: 2, g: 0.55, d: 0.66 },
-        { r: 3, g: 0.34, d: 0.5 },
-        { r: 4, g: 0.2, d: 0.38 },
-        { r: 5, g: 0.13, d: 0.3 },
-        { r: 6, g: 0.08, d: 0.24 },
-        { r: 7.03, g: 0.05, d: 0.18 },
+        { r: 2.04, g: 0.3, d: 0.6 },
+        { r: 2.68, g: 0.18, d: 0.44 },
+        { r: 3.42, g: 0.1, d: 0.3 },
+        { r: 4.61, g: 0.05, d: 0.2 },
       ],
-      attack: 0.003,
+      attack: 0.008,
       hold: 0,
-      decay: 1.6,
-      detuneCents: 9,
-      spread: 0.4,
+      decay: 5.4,
+      detuneCents: 0,
+      spread: 0.55,
     },
-    gesture: 'tremolo',
-    arpeggioChance: 0.32,
-    gapMs: [1300, 2600],
-    restChance: 0.1,
+    gesture: 'single',
+    gapMs: [2600, 5200],
+    restChance: 0.2,
+    drone: {
+      ratios: [1, 1.5, 2, 1.5], // tonic – fifth – octave – fifth
+      gapMs: [3600, 4800],
+      level: 0.14,
+      voice: {
+        partials: [
+          { r: 1, g: 1, d: 1 },
+          { r: 2, g: 0.12, d: 0.9 },
+          { r: 3, g: 0.5, d: 0.85 },
+          { r: 4, g: 0.08, d: 0.8 },
+          { r: 5, g: 0.3, d: 0.7 },
+          { r: 6, g: 0.05, d: 0.6 },
+          { r: 7, g: 0.14, d: 0.5 },
+        ],
+        attack: 0.9,
+        hold: 5.5,
+        decay: 2.6,
+        detuneCents: 0,
+        spread: 0.18,
+      },
+    },
+    bed: { hz: 560, q: 1, level: 0.035, swayHz: 0.045, swayDepth: 90 },
+    pad: { level: 0.03 },
     wind: {
       hz: 420,
       q: 0.5,
       swayHz: 0.05,
       swayDepth: 120,
-      level: 0.3,
-      floor: 0.4,
-      gustS: [2.6, 5.5],
-      calmS: [1.5, 4.5],
+      level: 0.16,
+      floor: 0.5,
+      gustS: [3.5, 7],
+      calmS: [2, 5],
     },
-    bed: { hz: 560, q: 1, level: 0.035, swayHz: 0.045, swayDepth: 90 },
-    pad: { level: 0.045 },
-    reverbS: 2.3,
-    wet: 0.4,
-    level: 0.69,
+    reverbS: 4.4,
+    wet: 0.52,
+    level: 0.41,
   },
 
   /*
@@ -609,40 +732,67 @@ const TEXTURES = {
     pad: { level: 0.025 },
     reverbS: 5.2,
     wet: 0.5,
-    level: 0.54,
+    level: 0.53,
   },
 
   /*
-   * UNITED STATES — bottleneck slide over open country.
+   * UNITED STATES — open country, with a low string ringing in it.
    *
-   * THE SLIDE IS THE CONTINUOUS VOICE, AND IT IS THE ONE AMERICAN GUITAR TECHNIQUE THAT SUSTAINS.
-   * Round two gave this country bare fifths on a steel string: struck, decaying, and silent in
-   * between — the most ringtone-shaped thing in the file. A bottleneck is the tradition's own answer
-   * to that. A glass or metal tube laid across the strings does two things a fretted note cannot: it
-   * rings far longer, because nothing damps the string, and it MOVES — the pitch travels into the
-   * note rather than starting there. `glideS: 0.42` is that travel, and a note that is still arriving
-   * half a second in cannot be heard as an alert.
+   * ============================================================================================
+   * ROUND THREE PUT A BOTTLENECK SLIDE HERE AND IT WAS REJECTED ALONGSIDE ITALY'S TREMOLO. THEY
+   * FAILED FOR THE SAME REASON, WHICH IS WHY THE TWO REPLACEMENTS SHARE A SHAPE.
    *
-   * IT IS ALSO NOT A STYLISATION. Slide is documented across blues, gospel, country and Hawaiian
-   * steel, which is about as broad a claim on American vernacular as one technique can have, and it
-   * is a technique rather than a tune — so it stays inside the "nothing is performed" constraint.
+   * The claim was defensible: slide is documented across blues, gospel, country and Hawaiian steel,
+   * it is a technique rather than a tune, and it is the one American guitar idiom that sustains and
+   * moves instead of striking. All true, and none of it survives synthesis.
    *
-   * SLIDES AND DYADS ALTERNATE, roughly half and half. `gesture: 'dyad'` PLAYS ROOT AND FIFTH
-   * TOGETHER, which is what an open-tuned guitar mostly is: bare fifths with no third, so nothing
-   * declares itself major or minor. It is also the widest interval that still sounds like one event,
-   * which suits a country whose atmosphere note is distance. Keeping both means the texture has a
-   * struck sound and a sung one.
+   * A BOTTLENECK IS A NOISE INSTRUMENT. What identifies the sound is glass or steel dragging across
+   * wound strings — friction, fret rattle, the pick attack underneath, and the string's own
+   * nonlinearity as the tube loads it. The PITCH MOVEMENT is the least of it, and pitch movement is
+   * the only part this engine can render. So what came out was a pure sine ensemble swooping between
+   * two notes, which is not slide guitar. It is a theremin, or a sound effect, and once heard as a
+   * swoop it cannot be heard as anything else.
+   *
+   * THE REVEALING DETAIL IS THAT `glideS` WAS THE ONLY MECHANISM ON THE SITE NOTHING ELSE USED. That
+   * should have been the warning: the accepted textures all work by summing decaying sinusoids, and
+   * this one needed a bespoke capability added to the engine to exist at all. A feature that only one
+   * texture needs is usually a texture reaching outside what the engine honestly does.
+   *
+   * SO THE COUNTRY'S IDENTITY MOVES FROM A TECHNIQUE TO A SPACE, which is the more defensible claim
+   * anyway. This is the one country too varied for any single instrument to represent, and it was
+   * always the one whose atmosphere note is distance rather than a tradition. The wind was already
+   * the widest and lowest here; now it leads, and one long-ringing open string sits inside it.
+   * ============================================================================================
+   *
+   * THE WIND IS THE LEAD, AS IN JAPAN, AND IT IS THE OPPOSITE KIND OF WIND. Japan's is high, bright
+   * and busy — small leaves, close by, gusting every couple of seconds. This one is low (320 Hz at a Q
+   * of 0.35, which is a tilt rather than a filter), takes up to 8 seconds to build, and never fully
+   * drops (`floor: 0.5`). That is weather crossing a lot of empty ground, and the contrast between the
+   * two is the clearest demonstration that the wind layer is a real instrument here and not a preset:
+   * same three nodes, entirely different place.
+   *
+   * THE STRING IS NOW BLOWN-LONG RATHER THAN STRUCK. `attack: 0.09` and `hold: 1.2` on a 5.8-second
+   * decay is not how a guitar behaves — it is closer to a bowed or swelled note, and that is
+   * deliberate. A hard transient is what makes a sparse note sound like an alert, and this is the
+   * sparsest texture on the site (gaps of 3.2 to 6 seconds, the longest here). Softening the front of
+   * each note is what lets it be that sparse without becoming a ringtone: the note arrives out of the
+   * wind rather than on top of it. The wind, not the notes, is doing the continuity work.
+   *
+   * THE DYAD IS THE ONLY GESTURE LEFT, AND IT IS THE ONE THAT WAS NEVER THE PROBLEM. Root and fifth
+   * together is what an open-tuned guitar mostly is: bare fifths with no third, so nothing declares
+   * itself major or minor. The fifth is a FIXED SEVEN SEMITONES rather than three scale degrees — see
+   * the gesture itself for why the scale-degree version was measurably wrong, and produced a tritone
+   * a third of the time. Only the lower note of the pair comes from the scale.
    *
    * THE SCALE CARRIES ONE NOTE THE OTHERS DO NOT: the flat seventh (the 10). [0, 2, 4, 7, 9, 10] is
    * a major pentatonic with that added, which is the interval the whole American vernacular runs on
    * — blues, gospel, country and rock all lean on it. One semitone is doing more identifying work
-   * here than any partial in the list, and it is also the note a slide most wants to bend into.
+   * here than any partial in the list, and it survives the rewrite because a scale is a palette
+   * rather than a technique: it makes no claim the engine cannot honour.
    *
-   * THE WIND IS THE WIDEST AND LOWEST BAND OF THE FOUR, with the longest gusts of any country: 320
-   * Hz at a Q of 0.35 is not a filter so much as a tilt, and 3 to 7 seconds to build is weather
-   * moving across a lot of empty ground. Somewhere between plains air and the distant road, and
-   * deliberately not either specifically — this is the one country whose landscape is too varied for
-   * a single honest environmental claim, so the wind here is broad on purpose.
+   * `detuneCents: 4` STAYS, though Italy's went. A twelve-string or a doubled course beating slowly is
+   * audible on a note held for six seconds, where under a tremolo's amplitude flutter it was just more
+   * flutter. The same number is honest in one context and mush in the other.
    */
   'united-states': {
     rootHz: 110, // A2
@@ -658,50 +808,30 @@ const TEXTURES = {
         { r: 5.03, g: 0.1, d: 0.34 },
         { r: 6.05, g: 0.06, d: 0.26 },
       ],
-      attack: 0.004,
-      hold: 0,
-      decay: 3.8,
+      attack: 0.09,
+      hold: 1.2,
+      decay: 5.8,
       detuneCents: 4,
       spread: 0.45,
     },
-    /*
-     * The same steel string under a bottleneck. Fewer high partials, because glass on a string is a
-     * softer contact than a plectrum; a long hold, because nothing is fretting it; and `glideS`,
-     * which no other voice on the site has.
-     */
-    slideVoice: {
-      partials: [
-        { r: 1, g: 1, d: 1 },
-        { r: 2, g: 0.34, d: 0.82 },
-        { r: 3, g: 0.15, d: 0.68 },
-        { r: 4, g: 0.07, d: 0.5 },
-      ],
-      attack: 0.05,
-      hold: 1.5,
-      decay: 3.2,
-      detuneCents: 3,
-      spread: 0.3,
-      glideS: 0.42,
-    },
-    gesture: 'slide',
-    dyadChance: 0.45,
-    gapMs: [1500, 3100],
-    restChance: 0.12,
+    gesture: 'dyad',
+    gapMs: [3200, 6000],
+    restChance: 0.18,
     wind: {
       hz: 320,
       q: 0.35,
       swayHz: 0.04,
-      swayDepth: 110,
-      level: 0.36,
-      floor: 0.42,
-      gustS: [3, 7],
-      calmS: [1.2, 4],
+      swayDepth: 140,
+      level: 0.44,
+      floor: 0.5,
+      gustS: [3.5, 8],
+      calmS: [1, 3.5],
     },
-    bed: { hz: 700, q: 0.45, level: 0.04, swayHz: 0.09, swayDepth: 200 },
+    bed: { hz: 700, q: 0.45, level: 0.045, swayHz: 0.09, swayDepth: 200 },
     pad: { level: 0.04 },
     reverbS: 3.6,
     wet: 0.44,
-    level: 0.47,
+    level: 0.45,
   },
 }
 
@@ -717,27 +847,47 @@ const TEXTURES = {
  * the front page, hears nothing at all, and has no reason to imagine the button works elsewhere.
  * The rule was costing the feature its only introduction.
  *
- * WHAT "EXCITEMENT" IS, MECHANICALLY, since it is not a knob. Four things, and none of them is
- * volume — this is the quietest kind of loud:
+ * ============================================================================================
+ * ROUND THREE'S SHELL HAD A 500 MS PULSE AND IT WAS REJECTED. THE PULSE WAS THE WRONG ANSWER TO THE
+ * RIGHT REQUEST, AND IT IS WORTH BEING PRECISE ABOUT WHY, BECAUSE THE REQUEST HAS NOT CHANGED.
+ *
+ * "Excitement" was asked for and a beat is the obvious way to supply it — so obvious that I did not
+ * examine it. But a beat made of sine waves is not a drum. A drum is almost entirely transient and
+ * noise: skin, air, and a body resonating for a fraction of a second. A three-partial sine pluck
+ * repeating on an exact grid has none of that, and what it has instead is regularity, which the ear
+ * locks onto immediately and then cannot ignore. It was the only thing on the site with a grid, and a
+ * grid with no transient is a metronome. It also worked directly against the rest of the file, whose
+ * whole method is that nothing shares a period.
+ *
+ * WHAT IS KEPT IS EVERYTHING THAT MADE IT EXCITED WITHOUT PERCUSSION. Tempo and direction were always
+ * carrying that, not the click:
  *
  *   1. TEMPO. `gapMs: [520, 1050]`, which is between three and five times faster than any country,
- *      and `restChance: 0.08`, the lowest here. Things happening close together is most of it.
- *   2. A PULSE. The drone queue at a fixed 500 ms, which is a walking tempo, and the only beat on
- *      the site. Its `ratios` move — tonic, tonic, fifth, tonic — so the bass goes somewhere instead
- *      of tapping. THIS IS THE ONE THING HERE THAT WOULD BE A CARICATURE ANYWHERE ELSE: a groove
- *      under a named country is an impersonation of that country's music. Under "you are about to
- *      travel" it impersonates nothing, which is exactly why the shell is where it belongs.
- *   3. RISING MOTION. `climb: true` biases the walk upward and sends it home to the BOTTOM of its
+ *      and `restChance: 0.07`, the lowest here. Things happening close together is most of it, and
+ *      this is now the ONLY texture whose events are closer together than its own decay — so runs
+ *      overlap each other continuously without any second queue being involved.
+ *   2. RISING MOTION. `climb: true` biases the walk upward and sends it home to the BOTTOM of its
  *      range, so the texture keeps setting off from low down and reaching. Ascending figures are
  *      anticipation; descending ones are arrival, and arrival is what the country pages are for.
- *   4. A SHORT ROOM. 1.9 seconds against Switzerland's 5.2. A long tail is contemplative because it
+ *   3. A SHORT ROOM. 2.2 seconds against Switzerland's 5.2. A long tail is contemplative because it
  *      blurs events into each other; a short one leaves each one distinct and lets the next one
  *      matter. Reverb length is a tempo control as much as a space control.
+ *   4. A BRIGHT SHIMMER INSTEAD OF A BASS PULSE. The bed is the highest and fastest-moving on the
+ *      site — 1100 Hz sweeping 320 Hz at 0.19 Hz — which is air with light in it rather than a floor.
+ *      It replaces the pulse as the continuous layer, and it does the same job (something is always
+ *      sounding) without imposing a period on anything.
+ *
+ * THE CONTINUITY NOW COMES FROM THE NOTES THEMSELVES, which no other texture here can say. Every
+ * other one needed a second layer because its notes are seconds apart; at 520–1050 ms against a
+ * 2.4-second decay, three or four runs are always ringing at once. That is why removing the drone
+ * queue costs this texture nothing, and why doing the same to any country would break it.
  *
  * THE TIMBRE IS DELIBERATELY NOT ANY COUNTRY'S. Bright, struck, fast-decaying, mostly integer
  * partials with two barely sharp at the top — a celesta or a glockenspiel, an instrument with no
- * national claim on it. The bare major pentatonic with a major seventh added is the same decision:
- * the most neutral bright scale available, chosen because it belongs to nowhere in particular.
+ * national claim on it. It is also in the accepted category: a struck bar is a sum of decaying
+ * sinusoids, which is precisely what this engine produces. The bare major pentatonic with a major
+ * seventh added is the same decision: the most neutral bright scale available, chosen because it
+ * belongs to nowhere in particular.
  * ============================================================================================
  */
 const SHELL = {
@@ -757,35 +907,20 @@ const SHELL = {
     ],
     attack: 0.002,
     hold: 0,
-    decay: 1.9,
+    // Longer than round three's 1.9, which is the compensation for losing the pulse: the notes now
+    // have to overlap each other to be the continuous layer, and decay is what makes them overlap.
+    decay: 2.4,
     detuneCents: 0,
     spread: 0.5,
   },
   gesture: 'sparkle',
   gapMs: [520, 1050],
-  restChance: 0.08,
-  drone: {
-    ratios: [1, 1, 1.5, 1, 1, 1.5, 2, 1.5],
-    stepMs: 500,
-    level: 0.16,
-    voice: {
-      partials: [
-        { r: 1, g: 1, d: 1 },
-        { r: 2, g: 0.3, d: 0.5 },
-        { r: 3, g: 0.1, d: 0.3 },
-      ],
-      attack: 0.004,
-      hold: 0,
-      decay: 0.42,
-      detuneCents: 0,
-      spread: 0.1,
-    },
-  },
-  bed: { hz: 900, q: 0.7, level: 0.03, swayHz: 0.16, swayDepth: 260 },
+  restChance: 0.07,
+  bed: { hz: 1100, q: 0.7, level: 0.042, swayHz: 0.19, swayDepth: 320 },
   pad: { level: 0.02 },
-  reverbS: 1.9,
-  wet: 0.3,
-  level: 0.99,
+  reverbS: 2.2,
+  wet: 0.34,
+  level: 0.96,
 }
 
 /**
@@ -846,9 +981,9 @@ const FADE_SWAP = 0.55
  * frame; 1.2 s against 0.25 s is a generous margin at no cost, because a note scheduled early is
  * simply a note with an accurate start time.
  *
- * THE MARGIN MATTERS MORE NOW THAN IT DID. The shell's pulse is every 500 ms and the herd can be
- * every 340 ms, so a lookahead shorter than the wake interval would drop notes rather than merely
- * placing them late.
+ * THE MARGIN MATTERS MORE NOW THAN IT DID. The Swiss herd can strike every 340 ms and the shell's
+ * runs arrive every 520 ms, so a lookahead shorter than the wake interval would drop notes rather
+ * than merely placing them late.
  */
 const CLOCK_MS = 250
 const SCHEDULE_AHEAD_S = 1.2
@@ -890,10 +1025,10 @@ let wanted = null
  * reason to suspect it belongs to the country they left.
  *
  * IT IS MORE DANGEROUS AGAIN NOW. Under the drone version the textures were nearly interchangeable;
- * under this one they are wind, a herd, a tremolo and a slide, so a mis-tuned graph is not a subtle
- * wrongness — and the shell's pulse playing under a country page would be unmistakable. The more
- * distinct the textures get, the worse the consequence of this bug and the more the two variables
- * earn their keep.
+ * under this one they are high leaf wind, a plucked tanpura, a held organ, a herd of bells and low
+ * open-country air, so a mis-tuned graph is not a subtle wrongness — the shell's tempo under a country
+ * page is roughly four times too fast to be mistaken for anything else. The more distinct the textures
+ * get, the worse the consequence of this bug and the more the two variables earn their keep.
  *
  * THE GENERAL LESSON. `wanted` was being used as both an intention and a record of what had been
  * done about it. Those diverge precisely when an intention is deferred — which is the whole reason
@@ -1258,13 +1393,19 @@ function build(context) {
  * it exactly at the end of the ramp risks truncating on a non-zero sample, which is a click; a 60 ms
  * tail costs nothing and guarantees the cut happens in silence.
  *
- * `fromHz` IS THE SLIDE, and it is a ramp on frequency rather than on gain. Every partial glides by
- * the same RATIO, not the same number of hertz, which is the only way a moving note keeps its
- * timbre: a bottleneck travelling up the neck multiplies the whole spectrum. Exponential, because
- * pitch is perceived logarithmically and a linear frequency ramp audibly accelerates at the end.
+ * NO NOTE HERE CHANGES PITCH WHILE IT SOUNDS, and that is now a rule rather than an omission. Round
+ * three added a `fromHz` parameter and a per-voice `glideS` for the American bottleneck slide — an
+ * exponential ramp on every partial's frequency, by ratio rather than by hertz so the timbre held
+ * together. It worked exactly as designed and was rejected, because a moving sine ensemble is a
+ * theremin and not a slide guitar: the friction and rattle that identify a bottleneck are the parts
+ * this engine cannot produce, so all that arrived was the swoop.
+ *
+ * IT WAS ALSO THE ONLY MECHANISM IN THE ENGINE THAT SERVED A SINGLE TEXTURE, which in hindsight was
+ * the warning. Everything else here is shared by every voice. Both the parameter and the field are
+ * deleted rather than left unused, so the next texture cannot reach for them by accident.
  * ============================================================================================
  */
-function playNote(g, voice, freqHz, atS, gainMul, fromHz) {
+function playNote(g, voice, freqHz, atS, gainMul) {
   const { partials, attack, hold, decay, detuneCents, spread } = voice
 
   const panner = g.context.createStereoPanner()
@@ -1291,13 +1432,7 @@ function playNote(g, voice, freqHz, atS, gainMul, fromHz) {
 
       const osc = g.context.createOscillator()
       osc.type = 'sine'
-      const target = freqHz * p.r * 2 ** (cents / 1200)
-      if (fromHz) {
-        osc.frequency.setValueAtTime(fromHz * p.r * 2 ** (cents / 1200), atS)
-        osc.frequency.exponentialRampToValueAtTime(target, atS + (voice.glideS ?? 0.3))
-      } else {
-        osc.frequency.value = target
-      }
+      osc.frequency.value = freqHz * p.r * 2 ** (cents / 1200)
 
       const env = g.context.createGain()
       const peak = p.g * (cents ? 0.6 : 1)
@@ -1382,17 +1517,21 @@ function walk(texture) {
 /*
  * WHERE A MULTI-NOTE FIGURE CAN START, given that it needs `rise` degrees of room above it.
  *
- * THIS EXISTS BECAUSE THE OBVIOUS SPELLING IS WRONG IN A WAY THAT IS HARD TO HEAR. An arpeggio, a
- * rising run and a slide all need headroom, and all three originally clamped each note into range
- * individually — which near the top of the range turns a three-note figure into the same note three
- * times, and near the bottom turns a slide into a glide from a pitch to itself. Measured: only 45 of
- * 88 shell runs actually ended higher than they began, and 12 of 30 slide oscillators travelled by a
- * ratio of exactly 1.000. Both read as "the gesture is quietly not happening" rather than as a bug.
+ * THIS EXISTS BECAUSE THE OBVIOUS SPELLING IS WRONG IN A WAY THAT IS HARD TO HEAR. Three gestures
+ * needed headroom and all three originally clamped each note into range individually — which near the
+ * top of the range turns a three-note figure into the same note three times, and near the bottom
+ * turned a slide into a glide from a pitch to itself. Measured: only 45 of 88 shell runs actually
+ * ended higher than they began, and 12 of 30 slide oscillators travelled by a ratio of exactly 1.000.
+ * Both read as "the gesture is quietly not happening" rather than as a bug.
  *
  * MOVING THE WHOLE FIGURE PRESERVES ITS SHAPE; CLIPPING IT DESTROYS IT. That is the same reasoning
  * as the walk's reflection at the edges, and the two together mean no gesture ever degenerates.
  *
- * The lower guard is not currently reachable — every range here is at least eleven degrees and the
+ * ONLY THE SHELL'S RUN STILL CALLS THIS, since the arpeggio and the slide were deleted in round four.
+ * It stays a named function rather than being inlined because the mistake it prevents is one anybody
+ * adding a multi-note gesture will make, and the two measurements above are the argument.
+ *
+ * The lower guard is not currently reachable — every range here is at least twelve degrees and the
  * largest figure spans four — but a narrower range would otherwise return a negative index, and
  * `degreeHz` floor-divides on the assumption that indices are non-negative.
  */
@@ -1410,105 +1549,6 @@ function playEvent(g, texture, atS) {
   if (Math.random() < texture.restChance) return
 
   const { voice, gesture } = texture
-
-  /*
-   * A rising arpeggio: three notes 170 ms apart. Ascending and never descending — a rising arpeggio
-   * opens and a falling one closes, and this is background, so it should not keep sounding like an
-   * ending. Later notes are quieter, which is what a player's hand actually does across a stroke.
-   *
-   * Hoisted out of the branch below because Italy reaches it two ways: as its minority event, and
-   * never as its default.
-   *
-   * IT SHIFTS DOWN TO FIT INSTEAD OF CLAMPING, for the reason the shell's run documents below: three
-   * notes clamped into the top of the range are one note played three times, which is the opposite of
-   * an arpeggio. This was the original spelling here and it was wrong in the same way in all three
-   * gestures, which is why the correction is stated once and applied everywhere.
-   */
-  const arpeggio = () => {
-    const start = clampFigure(texture, walk(texture), 4)
-    for (let i = 0; i < 3; i += 1) {
-      playNote(g, voice, degreeHz(texture, start + i * 2), atS + i * 0.17, 0.2 - i * 0.03)
-    }
-    degree = start + 4
-  }
-
-  if (gesture === 'arpeggio') {
-    arpeggio()
-    return
-  }
-
-  if (gesture === 'tremolo') {
-    /*
-     * ITALY. Seven to thirteen plucks on one note, about 65 ms apart, swelling in and out.
-     *
-     * THE COUNT AND THE SPACING ARE BOTH RANDOM, per stroke, because a fixed number of plucks at a
-     * fixed spacing is a buzz at a calculable frequency and a wrist is not a clock. The variation is
-     * small enough to be inaudible as variation and large enough to stop the stroke ringing like a
-     * machine.
-     *
-     * THE SWELL IS `sin(π · i / count)`: silent at both ends, loudest in the middle. This is the
-     * single line that makes it sound like a held note rather than a burst — a tremolo that starts
-     * at full force is a mandolin being dropped.
-     *
-     * MOVING TO A NEIGHBOURING NOTE HALFWAY THROUGH, two strokes in five. A tremolo held on one
-     * pitch for a full second is static; changing note under the swell is what a player does, and it
-     * is the only place in this file where a pitch changes inside an event.
-     */
-    if (Math.random() < texture.arpeggioChance) {
-      arpeggio()
-      return
-    }
-    let index = walk(texture)
-    const count = 7 + Math.floor(Math.random() * 7)
-    const step = between(0.058, 0.076)
-    const turn = Math.floor(count / 2)
-    for (let i = 0; i < count; i += 1) {
-      if (i === turn && Math.random() < 0.4) index = walk(texture)
-      const shape = Math.sin((Math.PI * (i + 0.5)) / count)
-      playNote(g, voice, degreeHz(texture, index), atS + i * step, 0.05 + shape * 0.07)
-    }
-    return
-  }
-
-  if (gesture === 'slide') {
-    /*
-     * UNITED STATES. Either a bottleneck note that arrives from two degrees below, or the older
-     * struck dyad.
-     *
-     * THE SLIDE COMES FROM BELOW AND NEVER FROM ABOVE. Both are physically possible, but a slide up
-     * into a note is the gesture the tradition is built on — it is the sound of reaching a pitch,
-     * and a downward slide reads as letting go. Two degrees is far enough to hear as movement and
-     * near enough not to sound like a mistake being corrected.
-     *
-     * THE DYAD PLAYS ROOT AND FIFTH TOGETHER, which is what an open-tuned guitar mostly is: bare
-     * fifths with no third, so nothing declares itself major or minor. The fifth is found by scale
-     * degree rather than by multiplying by 1.5, and that matters — taking a just fifth would put a
-     * note outside the scale, and in a scale carrying a flat seventh the difference is audible.
-     * Three degrees up in a six-note scale is the fifth in every position this scale is used at.
-     */
-    const index = walk(texture)
-    if (Math.random() < texture.dyadChance) {
-      playNote(g, voice, degreeHz(texture, index), atS, 0.19)
-      playNote(g, voice, degreeHz(texture, index + 3), atS + 0.035, 0.14)
-      return
-    }
-    /*
-     * THE DESTINATION MOVES UP RATHER THAN THE ORIGIN MOVING DOWN, and that is a fix rather than a
-     * preference. A slide needs two degrees of room beneath it; at the bottom of the range the
-     * obvious spelling (`max(low, index - 2)`) clamps the origin onto the destination, and a glide
-     * from a note to itself is not a slide. Measured: 12 of 30 gliding oscillators were travelling by
-     * a ratio of exactly 1.000, so two slides in five near the bottom of the range were silently
-     * ordinary struck notes with a needlessly long envelope.
-     *
-     * Raising the target keeps the gesture intact and costs only that the very lowest two degrees are
-     * never a slide's destination — which is inaudible, where a dead glide is the whole point of the
-     * country going missing.
-     */
-    const to = clampFigure(texture, index, 2) + 2
-    playNote(g, texture.slideVoice, degreeHz(texture, to), atS, 0.2, degreeHz(texture, to - 2))
-    degree = to
-    return
-  }
 
   if (gesture === 'sparkle') {
     /*
@@ -1534,9 +1574,38 @@ function playEvent(g, texture, atS) {
   }
 
   if (gesture === 'dyad') {
-    const index = walk(texture)
-    playNote(g, voice, degreeHz(texture, index), atS, 0.19)
-    playNote(g, voice, degreeHz(texture, index + 3), atS + 0.035, 0.14)
+    /*
+     * THE UNITED STATES. Root and fifth together, which is what an open-tuned guitar mostly is: bare
+     * fifths with no third, so nothing declares itself major or minor.
+     *
+     * THE FIFTH IS A FIXED INTERVAL, NOT A SCALE STEP, AND GETTING THAT WRONG WAS A REAL BUG. This
+     * used to read `index + 3` and claim in a comment that "three degrees up is the fifth in every
+     * position this one is used at". It is not, and the arithmetic is not close: in [0, 2, 4, 7, 9, 10]
+     * three degrees up is 7 semitones from degrees 0 and 1, but a FOURTH (5) from degrees 3 and 4 and a
+     * TRITONE (6) from degrees 2 and 5. Only five of the thirteen positions in range were fifths.
+     *
+     * A tritone is the exact opposite of what the gesture is for. The whole point of a bare fifth is
+     * that it commits to nothing; a tritone is the most committed interval in Western music, and the
+     * one thing it cannot sound like is open country.
+     *
+     * SO THE UPPER NOTE IS SEVEN SEMITONES UP, FULL STOP, and that is not a compromise — it is what
+     * the instrument being alluded to physically does. A hand barred across two strings tuned a fifth
+     * apart moves in PARALLEL: the interval is a property of the tuning, not of the key, which is why
+     * open-tuned playing gives you the same fifth wherever you put your hand. Requiring both notes to
+     * be scale members was the error, because the companion note of a drone fifth was never a melody
+     * note in the first place.
+     *
+     * (The old comment's stated reason for avoiding a 1.5 ratio does not survive either: an
+     * equal-tempered fifth and a just one differ by 2 cents, which is inaudible. The reason to write
+     * it as 2^(7/12) is simply that every other pitch here is derived in semitones.)
+     *
+     * THE 35 MS OFFSET IS NOT A FLOURISH. Two notes started at the identical sample sum into one
+     * spectrum and read as a single chord voice; a few tens of milliseconds apart, the ear hears two
+     * strings, because that is the only spread a hand across two courses actually produces.
+     */
+    const rootFreqHz = degreeHz(texture, walk(texture))
+    playNote(g, voice, rootFreqHz, atS, 0.19)
+    playNote(g, voice, rootFreqHz * 2 ** (7 / 12), atS + 0.035, 0.14)
     return
   }
 
