@@ -8,7 +8,13 @@ import { JournalOpening } from "../components/journey/JournalOpening";
 import { JOURNEY } from "../data/journey";
 import { OPENING, JOURNAL } from "../data/voice";
 import { TOTAL_DAYS, TOTAL_STOPS } from "../data/countries";
-import { spellOutCapitalised } from "../lib/spellOut";
+/*
+ * `spellOut` and no longer `spellOutCapitalised`. The capitalised form existed for the counts caption
+ * under the cover button, which opened its own sentence ("Five stops · Twenty-eight days") and has been
+ * removed. The counts now fall mid-sentence inside the traveller's first cover line, where a capital
+ * would be wrong.
+ */
+import { spellOut } from "../lib/spellOut";
 /*
  * The cover artwork, imported rather than referenced by path. The long note on `COVER_IMAGE` below
  * explains why this one image cannot live in public/images/ like every other photograph on the site.
@@ -564,16 +570,33 @@ export function HomePage() {
             </motion.h1>
 
             {/*
-             * THE THREE COVER LINES, where a 47-word paragraph used to be.
+             * THE COVER'S OPENING PARAGRAPH — the traveller saying where they have been and what they
+             * brought back.
              *
-             * See `OPENING.coverLines` for why the pitch moved below the fold and these took its place.
-             * A `<p>` per line rather than one `<p>` with breaks: they are three separate statements, and
-             * a screen reader pauses between paragraphs, which is the rhythm the three lines are written
-             * for.
+             * IT WAS THREE SEPARATE `<p>`s IN A `space-y-1` STACK, AND THAT FORM IS GONE. The design
+             * reference's hero is three short lines, and the argument for matching it was rhythm: three
+             * statements, a pause between each, read in a second. The form only works while each line
+             * fits on one visual line, and this column is a fixed 576px at every desktop width — about
+             * 53 characters. The copy the reader asked for runs to 63 and 68 in two of its three
+             * sentences, so two of the three wrapped: six visual lines with a 4px gap appearing at three
+             * arbitrary points inside them, and an earlier draft orphaned "in all." onto a line of its
+             * own. Measured at 1440, 1280 and 1024; the column does not change. See the long note on
+             * `OPENING.coverIntro` for why the content won that trade.
+             *
+             * ONE `<p>` AND `max-w-[46ch]`. The character measure rather than a pixel width because what
+             * is being constrained is line LENGTH for reading, which is a property of the type and not of
+             * the viewport — 46ch is inside the 576px the column offers, so the paragraph now wraps where
+             * the measure says rather than where the column runs out.
+             *
+             * IT IS CALLED WITH THE ITINERARY'S OWN COUNTS, spelled out, because the first sentence states
+             * the size of the trip and that pair of numbers is derived rather than typed — the caption
+             * beneath the button used to carry them and has been removed as an echo. `spellOut` and not
+             * `spellOutCapitalised`: they fall mid-sentence after "back from", where a capital would be
+             * wrong.
              *
              * `mt-9` clears the hand-drawn underline, which hangs below the headline's last baseline.
              */}
-            <motion.div
+            <motion.p
               initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
               animate={prefersReducedMotion ? false : { opacity: 1, y: 0 }}
               transition={{
@@ -581,12 +604,10 @@ export function HomePage() {
                 ease: [0.16, 1, 0.3, 1],
                 delay: 0.22,
               }}
-              className="mt-9 space-y-1 text-lg leading-[1.5] text-ink-700 md:text-xl"
+              className="mt-9 max-w-[46ch] text-lg leading-[1.6] text-ink-700 md:text-xl"
             >
-              {OPENING.coverLines.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
-            </motion.div>
+              {OPENING.coverIntro(spellOut(TOTAL_STOPS), spellOut(TOTAL_DAYS))}
+            </motion.p>
 
             <motion.div
               initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
@@ -666,7 +687,7 @@ export function HomePage() {
              *
              * THE COUNTS STAY, AND THEY ARE NOW THE ONLY PLACE THEY APPEAR. They used to be said twice
              * within one screen: here, and in the cover's first line ("Five countries. Twenty-eight days.").
-             * That line has been rewritten into the traveller's own sentence — see `OPENING.coverLines` —
+             * That line has been rewritten into the traveller's own sentence — see `OPENING.coverIntro` —
              * which leaves these two figures said once, quietly, in the position a caption occupies. They
              * earn that place by answering the only question a visitor has before clicking: how much is
              * this. Both are derived from the itinerary, never typed, so the sentence cannot go stale.
@@ -682,17 +703,29 @@ export function HomePage() {
              * we look at. Nothing here is ranked." — in the traveller's voice, in a full sentence, next to
              * the reason it matters. That is the promise; this was the badge. Deleting the badge loses no
              * information and removes the only place on the cover where the site spoke about itself.
+             *
+             * ==========================================================================================
+             * AND THEN THE WHOLE LINE WENT, IN THE NEXT ROUND, WHICH REVERSES THE TRADE ABOVE.
+             *
+             * The counts were kept here because the cover's own first line had given them up. That line has
+             * since been rewritten again — a reader asked for the traveller actually telling them about the
+             * trip — and the sentence they asked for necessarily contains its size: "I have just come back
+             * from five countries, twenty-eight days in all." So the two figures were being said twice in
+             * one screen once more, and this time THIS is the echo: a caption in the site's own register
+             * repeating what the traveller just said in theirs.
+             *
+             * NOTHING IS LOST, INCLUDING THE DERIVATION. `TOTAL_STOPS` and `TOTAL_DAYS` are the point of
+             * this element, not the words around them — a hand-typed "five countries" in voice.js would go
+             * stale the day the itinerary changes. So `OPENING.coverIntro` became a function taking both
+             * counts, and the constants are passed to it from this file, twenty lines above. The numbers are
+             * still derived; they are now derived in the sentence a person says instead of the caption
+             * underneath it.
+             *
+             * The element's other purpose is gone too. Its long contrast note above records buying 4.5:1 for
+             * 14px `ink-700` type over the corner of the artwork — that measurement retires with the element,
+             * and any future caption in this position needs measuring again rather than inheriting it.
+             * ==========================================================================================
              */}
-            <motion.p
-              initial={prefersReducedMotion ? false : { opacity: 0 }}
-              animate={prefersReducedMotion ? false : { opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              className="mt-10 text-sm text-ink-700"
-            >
-              {spellOutCapitalised(TOTAL_STOPS)} stops{" "}
-              <span aria-hidden="true">·</span>{" "}
-              {spellOutCapitalised(TOTAL_DAYS)} days
-            </motion.p>
           </div>
         </Section>
 
@@ -783,6 +816,36 @@ export function HomePage() {
 
         <Reveal delay={0.12}>
           {/*
+           * ==========================================================================================
+           * `OPENING.pitch` IS RENDERED AGAIN, AND ITS ABSENCE WAS A REAL BUG RATHER THAN AN EDIT.
+           *
+           * The note on `OPENING.coverIntro` in voice.js states that the 47-word pitch "survives
+           * immediately below, where a visitor who wants the argument gets it in full". It did not. When
+           * the cover's paragraph was replaced by three short lines, the paragraph was deleted from the
+           * markup and the string was left in voice.js with a comment describing a placement that no
+           * longer existed — so the site's whole thesis was written, maintained, commented, and rendered
+           * nowhere. Found by grepping for the identifier while rewriting the cover: zero callers.
+           *
+           * IT BELONGS HERE, WHICH IS WHERE THAT COMMENT ALWAYS SAID IT WAS. This section is the one
+           * place on the page the visitor is asked to accept a premise, `turn` above states it in one
+           * italic sentence, and `pitch` is the same argument in full — what the traveller went to find
+           * out, listed as the four things the facets actually answer. Between an italic claim and the
+           * no-ranking promise is exactly the position it was written for.
+           *
+           * WHY IT DOES NOT DUPLICATE THE COVER ANY MORE, which is what made it deletable in the first
+           * place. The cover used to open with these 47 words; then it opened with three lines whose
+           * three nouns were the same three nouns, which is why the second version of the cover lines was
+           * cut. The cover now says where the traveller went and what for, in two sentences with no list
+           * in them, so the list is new information at this point in the page rather than a reprise.
+           * ==========================================================================================
+           */}
+          <p className="mt-10 text-lg leading-[1.7] text-ink-700 md:text-xl">
+            {OPENING.pitch}
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.24}>
+          {/*
            * THE NO-RANKING PROMISE, made in the traveller's own voice before the visitor sees a
            * single figure.
            *
@@ -790,8 +853,13 @@ export function HomePage() {
            * everything afterwards should be read: a visitor who expects a league table will read
            * every chart as one, and no caption three screens later undoes that. Said up front, in a
            * sentence rather than a disclaimer, it is a promise instead of a defence.
+           *
+           * ITS DELAY STEPPED 0.12 → 0.24 because `pitch` was inserted above it and the stagger counts
+           * positions in the cascade, not elements. Same renumbering the explorer's reveals needed when
+           * the eyebrow came out; a hand-written delay is a fact about a sequence rather than about the
+           * element holding it.
            */}
-          <p className="mt-10 text-lg leading-[1.7] text-ink-700 md:text-xl">
+          <p className="mt-8 text-lg leading-[1.7] text-ink-700 md:text-xl">
             {OPENING.invitation}
           </p>
         </Reveal>
@@ -873,10 +941,28 @@ export function HomePage() {
                * first stop's capital in prose two hundred pixels below. It reads better without: the
                * defence is that the order is a flight path rather than a verdict, and which airport it
                * started from is not part of that argument.
+               *
+               * ======================================================================================
+               * "BUT THE DAYS DO ADD UP IF YOU TAKE THEM AS THEY CAME" IS GONE, and a reader asking what
+               * it meant is the whole case against it. It was trying to say that reading the five stops
+               * in order gives you the trip as the traveller had it, with each country arriving after the
+               * last one had set your expectations. What it actually says is that days ADD UP — a phrase
+               * about arithmetic, on a page where "adding up" is what the food facet's note has to tell
+               * readers NOT to do with its three bars. Same two words, opposite instruction, one site.
+               *
+               * It also contradicted the sentence in front of it inside a single "but": the order means
+               * nothing, but the order gives you something. Both halves were true of different things —
+               * the SEQUENCE is not a ranking, and the ACCUMULATION is real — and jamming them together
+               * with "but" made the paragraph argue with itself in twelve words.
+               *
+               * WHAT REPLACES IT SAYS THE ACCUMULATION PLAINLY: each country changes what you expect of
+               * the next, which is the actual reason the order is worth following and is the site's own
+               * expectation-versus-discovery thesis stated once, here, where the visitor is choosing.
+               * ======================================================================================
                */}
               The order is the order I flew in, which is a flight path and
-              nothing more than that. You can start anywhere, but the days do
-              add up if you take them as they came.
+              nothing more than that. Start wherever you like, though each place
+              did change what I expected of the next one.
             </p>
           </Reveal>
 

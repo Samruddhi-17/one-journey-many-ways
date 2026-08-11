@@ -94,8 +94,42 @@ export const OPENING = {
    * its last rather than introducing a new idea.
    */
   hail: "Come with us.",
+  /*
+   * THE ARGUMENT IN FULL, rendered in the premise section below the fold — not on the cover, which is
+   * where it used to be and where 47 words is far too many for the first thing anybody reads.
+   *
+   * IT WAS RENDERED NOWHERE AT ALL FOR A WHILE, which is worth recording as a warning about this file.
+   * When the cover's paragraph became three short lines, the paragraph was removed from HomePage and
+   * this string stayed here with a comment claiming it "survives immediately below" — a description of
+   * a placement that no longer existed. Copy in a data file has no compiler to tell you it is unused,
+   * so a deleted call site leaves a fully commented ghost. Restored to the premise section, which is
+   * where the comment always said it was.
+   *
+   * ITS OPENING CLAUSE WAS CUT WHEN IT CAME BACK. It began "I have just come back from five countries,
+   * and I did not go for the monuments" — both halves of which the cover's rewritten lines now say, in
+   * almost the same words, one screen above. So it now starts at the thing only it says: what the
+   * traveller went to find out. The four items after the colon are the four the facets answer, which is
+   * the whole reason to keep a list this long anywhere on the site.
+   *
+   * "the same questions everywhere" IS THE ONE ADDITION, and it is the load-bearing phrase. The list on
+   * its own reads as four topics; saying they were the same ones in every country is what makes the five
+   * pages comparable at all, and it is true of the data — every country carries the same six facets,
+   * which is why there is one CountryPage and not five.
+   *
+   * IT DOES NOT COUNT THEM, AND THE DRAFT DID, WHICH WAS A CONTRADICTION IN NUMBERS. The draft read "I
+   * asked the same four things everywhere" because four items follow the colon. But `EXPLORER.lead` on
+   * every country page reads "Six things I paid attention to everywhere I went", and facets.js holds six
+   * — so the home page promised four questions and each country page then offered six. Caught in a
+   * screenshot of the two sections rather than by reading either one.
+   *
+   * THE FIX IS TO DROP THE NUMBER RATHER THAN CORRECT IT TO SIX, because the list here is deliberately
+   * NOT all six: this is the traveller talking, and a person naming what they went to find out gives
+   * examples, not an inventory. Writing "the same six things" and then listing four would be a different
+   * error in the same place. The count belongs where it is checkable against the data, which is the
+   * explorer's own lead directly above the six cards.
+   */
   pitch:
-    "I have just come back from five countries, and I did not go for the monuments. I went to find out what an ordinary day looks like somewhere else: what time people get up, what is on the table, how they get to work, what they say to a stranger.",
+    "I went to find out what an ordinary day looks like somewhere else, and I asked the same questions everywhere: what time people get up, what is on the table, how they get to work, and what languages they hear on the way.",
   /*
    * THE TURN, REWRITTEN. It read: "None of it is the kind of thing that ends up on a postcard. All of
    * it is the reason the trip stayed with me." A reader reported it as vague and as sounding
@@ -113,10 +147,57 @@ export const OPENING = {
    * vehicle — without printing a figure, because this page carries no numbers by design. It says
    * what the visitor will find, in the traveller's own terms, and leaves the argument to `invitation`
    * below.
+   *
+   * ------------------------------------------------------------------------------------------------
+   * AND IT WAS REWRITTEN AGAIN, BECAUSE THAT REPLACEMENT WAS WORSE. It read "Nobody sends a photograph
+   * of the hour before work, or of how they got there. Those are the two things I ended up writing
+   * about most." A reader said it does not make sense and does not match the flow, and both halves of
+   * that are right for one reason: IT IS STILL ARGUING WITH POSTCARDS.
+   *
+   * The line it replaced was rejected for defining the content by what it is not ("none of it is the
+   * kind of thing that ends up on a postcard"). The replacement kept the same move and only changed the
+   * noun — "nobody sends a photograph of" is the same negation, so the first thing the visitor meets
+   * below the fold is still the site telling them what other people fail to photograph. That is an
+   * argument with a straw traveller, and the visitor has to work out what it is FOR before they can
+   * read it.
+   *
+   * "THE HOUR BEFORE WORK" WAS ALSO A PHRASE THE SITE INVENTED AND NEVER USES AGAIN. Nothing in the
+   * data is an hour before work; the day facet holds sleep, work, leisure, housework and commuting.
+   * So the visitor was asked to hold a category that no page delivers, which is the flow break the
+   * reader named.
+   *
+   * WHAT THIS ONE DOES INSTEAD. It is the site's thesis said forwards, in the traveller's voice, as the
+   * thing they came back with: the ordinary parts of a day are not the same from one country to the
+   * next, and they are the parts nobody thinks to ask about. Both clauses are supported — the workbook's
+   * five days differ in every category, and the facets are all questions about ordinary things. No
+   * negation, no photographs, and no noun the rest of the site does not use.
    */
-  turn: "Nobody sends a photograph of the hour before work, or of how they got there. Those are the two things I ended up writing about most.",
+  turn: "The ordinary parts of a day turned out to be the parts that changed most from one country to the next. They are also the parts nobody thinks to ask about.",
+  /*
+   * THE NO-RANKING PROMISE, AND THE SENTENCE THAT HAD TO COME OFF THE END OF IT.
+   *
+   * It read: "You choose what we look at. Nothing here is ranked. These are five different ways of
+   * arranging the same twenty-four hours." A reader asked what it meant, and the first two sentences
+   * are fine — they are a promise the site keeps, in plain words. THE THIRD IS THE PROBLEM, in two
+   * ways that compound.
+   *
+   *   IT IS ONLY TRUE OF ONE FACET OUT OF SIX. "Arranging the same twenty-four hours" describes the day
+   *   card exactly and describes nothing else on the site: food is kilograms a year, language is shares
+   *   of a population, transport is journeys, the people card is two single figures. So it promises a
+   *   site made of clocks and then delivers five other kinds of evidence.
+   *
+   *   AND IT IS WRITTEN AS AN EQUATION RATHER THAN A SENTENCE. "Five different ways of arranging the
+   *   same twenty-four hours" is the kind of phrase that sounds like an insight because of its symmetry
+   *   — same hours, different arrangements — and a reader has to unpack it to find that it is only
+   *   restating what a percentage is. The reader's question is the correct response to it.
+   *
+   * SO THE PROMISE STAYS AND THE FLOURISH GOES. What replaces it is the practical fact the visitor
+   * needs at exactly this point, one screen above five doors: the order is theirs, and no page is the
+   * answer to any other page. That is the no-ranking promise stated as something they can act on
+   * rather than as a claim about time.
+   */
   invitation:
-    "You choose what we look at. Nothing here is ranked. These are five different ways of arranging the same twenty-four hours.",
+    "You choose what we look at, and in whatever order you like. Nothing here is ranked, and no country is the answer to another one.",
   action: "Start where I started",
 
   /*
@@ -174,11 +255,125 @@ export const OPENING = {
    * typography was built around, and the breaks now fall at the sentence's own commas, so each line is
    * a complete item. A screen reader pauses between them, which is where the pauses belong.
    */
-  coverLines: [
-    "I wanted to know what time people got up,",
-    "what was on the table when they did,",
-    "and how they got to work afterwards.",
-  ],
+  /*
+   * ------------------------------------------------------------------------------------------------
+   * REWRITTEN A THIRD TIME, AND THE THIRD DIAGNOSIS IS THE ONE THAT MATTERED.
+   *
+   * The second version read: "I wanted to know what time people got up, / what was on the table when
+   * they did, / and how they got to work afterwards." A reader called it very bad and asked for the
+   * traveller actually TELLING them something — that they have been to five countries for
+   * twenty-eight days, that here is the journal, and that the trip was about how people live rather
+   * than about places.
+   *
+   * WHY THE SECOND VERSION FAILED, since it was written specifically to fix the first. It is three
+   * subordinate clauses of one sentence whose main clause is "I wanted to know" — so the whole cover
+   * is a statement about the traveller's curiosity in the PAST, with no trip in it, no visitor in it,
+   * and nothing offered. It reads as the setup to an invitation that never arrives. Worse, "got up",
+   * "was on the table", "got to work" is the same list as `pitch` below, which meant the cover's
+   * headline promise and its own second paragraph were the same three nouns twice.
+   *
+   * WHAT REPLACES IT IS ADDRESSED TO THE VISITOR AND CONTAINS THE TRIP. Five countries and
+   * twenty-eight days are back in the first line — not as the counting caption they were the first
+   * time, but as the traveller saying where they have been, which is how a person opens this
+   * conversation. The second line is what the trip was for, in the traveller's own terms and without
+   * the three-noun list, so it sets up `pitch` instead of pre-empting it. The third line hands the
+   * journal over, which is the object directly below and the thing the button opens.
+   *
+   * WHY "how people live" AND NOT "how people thrive and connect", which the reader offered as the
+   * sense of it. "Thrive" is a verdict — it says the living was going well, which is the site placing a
+   * country on a scale — and "connect" the workbook cannot support at all: there is no measure of
+   * anyone's relationships in it. What IS in it is where the hours go, what is on the table, how people
+   * travel and which languages share a street, and "how people actually live" is the honest whole of
+   * those four. The reader's intent survives; the two words that would have made the cover promise what
+   * the data cannot are the ones left out.
+   *
+   * THE READER DID NOT INVENT THAT PHRASE, THOUGH — THE SITE SAYS IT. SiteFooter's own description reads
+   * "exploring how people live, thrive and connect", which is almost certainly where they picked it up,
+   * and it means the objection above lands on the footer rather than on them. Recording it here rather
+   * than quietly writing a cover that contradicts a line two screens below: the footer is another page's
+   * copy and belongs to that page's pass, but the inconsistency is real and this is the note that will
+   * find it when the footer is reached.
+   *
+   * WHY IT IS STILL THREE LINES AND STILL AN ARRAY: unchanged from the note above. The breaks fall at
+   * the sentence boundaries now rather than mid-clause, so each line is a whole thought and the screen
+   * reader's pauses land where a speaker's would.
+   *
+   * TWO DUPLICATIONS THIS CREATES, BOTH RESOLVED RATHER THAN IGNORED, because putting the counts back
+   * on the cover is precisely what caused them the first time:
+   *
+   *   THE COUNTS CAPTION BENEATH THE BUTTON IS NOW THE ECHO, AND IT GOES. It reads "Five stops ·
+   *   Twenty-eight days", and the same reader asked in the previous round whether it was needed. It was
+   *   kept then on the grounds that the counts belonged somewhere quiet and the cover lines had given
+   *   them up. That trade is now reversed: the counts are in the traveller's own sentence, which is
+   *   the better place for them, so the caption is the one saying it twice. Removed in HomePage.
+   *
+   *   "ONE NOTEBOOK" IS NOT SAID HERE, though the draft said it, because `JOURNAL.heading` two screens
+   *   down reads "Twenty-eight days, five stamps, one notebook." Two nearly identical tricolons on one
+   *   page is worse than either alone. The cover says the journal exists in a full sentence; the
+   *   heading counts what is in it.
+   *
+   * AND THE LAST LINE SAYS "here it is" RATHER THAN "come and read it with me", WHICH WAS THE DRAFT.
+   * "With me" would break the singular/plural arrangement two notes above: `hail` is the one plural on
+   * the site because the cover shows two of them, and a second invitation on the same screen in the
+   * SINGULAR would make the pair inconsistent within one view. Handing the journal over says the same
+   * thing without issuing a competing invitation — the hail already did that, and the button below it
+   * is the thing that accepts.
+   *
+   * WHY THIS IS NOW A FUNCTION WHERE IT WAS AN ARRAY, which is the one structural change. The first line
+   * counts the trip, and the counts caption it replaces was DERIVED from the itinerary registry —
+   * `TOTAL_STOPS` and `TOTAL_DAYS`, spelled out by `spellOut`. Typing "five countries, twenty-eight days"
+   * here would move two derived figures back into hand-typed prose, so the day a stop is added the cover
+   * would state the old size of the journey in a sentence that still reads perfectly. That is the exact
+   * failure `spellOut`'s own header calls the thing nobody proofreads for.
+   *
+   * `PASSPORT.lead` and `PASSPORT.stopsLabel` already take their counts as arguments for this reason, so
+   * this follows a pattern the file has rather than inventing one. The caller holds the constants; this
+   * file holds the sentence.
+   */
+  /*
+   * ------------------------------------------------------------------------------------------------
+   * AND THE THREE LINES BECAME ONE PARAGRAPH, WHICH IS THE STRUCTURE CHANGE THE REWRITE FORCED.
+   *
+   * The three-line form was inherited from the design reference and defended above on rhythm: three
+   * short statements, a screen-reader pause between each, read in about a second. That defence holds
+   * only while each line FITS ON ONE VISUAL LINE, and the copy the reader asked for cannot.
+   *
+   * MEASURED, RATHER THAN GUESSED. The block's column is 576px wide at every desktop width (1440, 1280
+   * and 1024 all report 576 — it is a fixed measure, not a fraction), which is about 53 characters at
+   * this size. The sentences needed to say the trip's size, what it was for, and that the journal is
+   * the record of it. Two of the three ran to 63 and 68 characters, so both wrapped: six visual lines
+   * with a 4px `space-y-1` gap appearing at three arbitrary points inside them. The first draft was
+   * worse still — it orphaned "in all." as two words alone on a line, which reads as a fourth line
+   * saying nothing.
+   *
+   * THE CHOICE WAS THEREFORE BETWEEN THE FORM AND THE CONTENT, and the content is what the reader
+   * asked for: the traveller telling them where they went, what for, and what they brought back. That
+   * is roughly forty words in anybody's mouth. Forty words is a paragraph, and a paragraph that wraps
+   * naturally has no orphan to tune and no character budget to break the next time a word changes.
+   *
+   * WHAT IS LOST AND WHAT IS NOT. The staccato rhythm goes, and it was real. The screen-reader pauses
+   * do not: they came from the sentence boundaries as much as the paragraph boundaries, and there are
+   * still three full stops. What is gained is that the cover now sounds like someone talking rather
+   * than three captions stacked up — which is the whole of the reader's objection to both previous
+   * versions.
+   *
+   * IT IS STILL A FUNCTION TAKING THE TWO COUNTS, for the reason in the note above: they are derived
+   * from the itinerary and must not be typed here.
+   */
+  /*
+   * THE LAST SENTENCE IS THE LONGEST ON PURPOSE, and it is a typographic constraint rather than a
+   * stylistic one. Measured: the paragraph sets to four lines in a 576px column, so whatever ends the
+   * sentence has to be long enough to fill the fourth. The draft ended "This is it." — three words alone
+   * on line four, which is the same orphan the three-line version produced with "in all.", found the same
+   * way and one round later. An orphan under a headline reads as a mistake in the type.
+   *
+   * "This is my journal, and you are welcome to read it" both fills the line and does the thing the reader
+   * asked for: it hands the object over and addresses them directly. Note it does not repeat the invitation
+   * `hail` makes — "you are welcome to read it" is permission rather than a second summons, so the cover
+   * still issues exactly one.
+   */
+  coverIntro: (stops, days) =>
+    `I have just come back from ${stops} countries in ${days} days. I did not go for the sights. I went to see how people actually live, and I wrote all of it down. This is my journal, and you are welcome to read it.`,
 
   /*
    * The handwritten aside beside the traveller and the dog, in Fraunces italic.
@@ -468,8 +663,46 @@ export const JOURNAL = {
    * Set on the home page's journal. Present tense would make it a status ("this journal is empty");
    * past tense makes it a memory, which is what puts the visitor at the beginning of somebody's story
    * rather than at the start of a form.
+   *
+   * ------------------------------------------------------------------------------------------------
+   * REWRITTEN, BECAUSE THE PAST TENSE WAS TOO CLEVER TO SURVIVE BEING READ ONCE.
+   *
+   * It read "Twenty-eight days, and it was blank when I left." The header note above calls this the most
+   * important sentence on the home page and defends it at length: the journal is drawn blank, the caption
+   * is in the past tense, so the visitor is standing at the start of a trip that already happened to
+   * somebody else. That is a real idea and the sentence does contain it.
+   *
+   * WHAT IT ALSO DOES, WHICH IS FATAL: the object beside it is a notebook with five stamped slots and
+   * five country names, plainly not blank, under a caption insisting it was blank. A reader asked "it was
+   * blank??" and that is the only available reading — the caption appears to be describing the picture and
+   * getting it wrong. The clever reading requires noticing that "was" refers to a different moment from
+   * the one being drawn, and nobody reads a caption twice to find that out. A caption is read as a label
+   * for what it sits under; a caption doing something other than labelling has to survive being taken as
+   * a label first, and this one did not.
+   *
+   * THE REPLACEMENT KEEPS THE TIME SHIFT AND MOVES IT OFF THE OBJECT. "I started with nothing in it" is
+   * still past, still the traveller, and still puts the visitor at a beginning — but its subject is the
+   * TRAVELLER'S starting point rather than the state of the thing on screen, so it cannot be misread as
+   * a false description of the picture. The second clause is what the visitor does next, which is the job
+   * this caption has directly above an "Open the journal" button.
+   *
+   * THE COUNT COMES OFF IT TOO. `JOURNAL.heading` sits about eighty pixels above and reads "Twenty-eight
+   * days, five stamps, one notebook", so "Twenty-eight days" was the third time that number appeared in
+   * one screen once the cover lines got it back. The heading is the right place for it: it is counting
+   * what is in the object, which is what a heading over an object does.
+   *
+   * "SEE WHERE IT WENT" WAS THE FIRST DRAFT OF THE SECOND CLAUSE AND IT HAD THE SAME DISEASE AS THE LINE
+   * IT REPLACED: read against a notebook, "where it went" says the notebook went somewhere. The intended
+   * subject was the twenty-eight days. Caught in a screenshot again, which is now twice in two rounds that
+   * a caption beside this object has been misread through the object — worth stating as the rule for
+   * anything written in this position: THE JOURNAL'S CAPTION IS READ AS BEING ABOUT THE JOURNAL, so any
+   * pronoun in it will attach to the notebook whatever the sentence meant.
+   *
+   * The version that survives has no pronoun in its second clause. "See what I found" makes the traveller
+   * the subject and the findings the object, both of which are unambiguous, and it is the same promise:
+   * the pages are full of something and the button is how you get at it.
    */
-  emptyCaption: "Twenty-eight days, and it was blank when I left.",
+  emptyCaption: "I started with nothing in it. Open it and see what I found.",
 
   /*
    * Set on the ending's journal. It names what filled the pages without characterising any of it —
