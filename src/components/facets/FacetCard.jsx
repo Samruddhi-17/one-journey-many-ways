@@ -692,14 +692,78 @@ export function FacetCard({ facet, country, open, onToggle, index }) {
                * collected in a page footer nobody reaches. Only facets that need one carry one, so
                * this is absent more often than present, which is what keeps it from reading as
                * boilerplate.
+               *
+               * ==================================================================================
+               * IT IS NOW MARKED AS A NOTE RATHER THAN LEFT AS A LAST PARAGRAPH, AND THAT IS THE FIX
+               * FOR A REPORTED PROBLEM RATHER THAN A DECORATION.
+               *
+               * A reader said the measurement notes were breaking their reading flow and asked for
+               * them below, as a note. Half of that was a content problem and is fixed in facets.js —
+               * four explanations of method have moved out of `framing`, where they were being spoken
+               * BEFORE the evidence, and into this field. But moving them here only helps if this
+               * field looks like something a reader is allowed to skip, and it did not: grey 14px
+               * prose after a blockquote is simply the writing continuing in a quieter voice, so a
+               * reader who has just been handed the traveller's note reads straight on into sourcing
+               * arithmetic without being told the subject changed.
+               *
+               * THREE MARKS, ALL CHEAP, AND EACH DOING ONE JOB:
+               *
+               *   A HAIRLINE ABOVE IT (`border-t`) says the section ended. On the ruled notebook page
+               *   this reads as the line a writer draws before a footnote, which is what this is.
+               *   `ink-200` and not `ink-100`: the page's grain sits over everything at 3.5% (see the
+               *   contrast table above), and at `ink-100` the rule was inside the noise.
+               *
+               *   A LABEL, "A note on the evidence", so the reader knows what kind of thing follows
+               *   before they commit to reading it.
+               *
+               *   IT SAYS "EVIDENCE" AND NOT "FIGURES", WHICH IS A CORRECTION MADE BEFORE THIS SHIPPED.
+               *   The first version read "About these figures" and it is false on the culture card,
+               *   whose note is about three photographs and whose whole point is that nothing there was
+               *   measured. One label has to cover both, because the alternative is a per-facet label
+               *   in facets.js — a seventh field carrying two distinct values, which is more data than
+               *   the distinction is worth. "Evidence" is the word this project already uses for the
+               *   whole range (see `FacetEvidence`, which renders bars and photographs alike), so it is
+               *   the existing vocabulary rather than a compromise found for this label.
+               *
+               *   SMALLER, WIDER-TRACKED, UPPERCASE for the label only, which is the site's existing
+               *   eyebrow treatment (`text-xs uppercase tracking-[0.16em]` — the same values as the
+               *   `<cite>` above and the fact card's label). Reusing it rather than inventing a fourth
+               *   small-text style is what keeps the panel from acquiring a new typographic register
+               *   per element.
+               *
+               * WHY IT IS NOT COLLAPSED BEHIND A DISCLOSURE, which is the obvious way to get something
+               * fully out of the flow. A caveat the reader has to click is a caveat the reader will not
+               * see, and Principle 17 is not satisfied by information being technically reachable — the
+               * whole reason these notes are on the card at all rather than in a page footer is that
+               * nobody reaches a page footer. A hidden qualification on a chart is worse than a visible
+               * one that is easy to skip, and this is now easy to skip. The card itself is already a
+               * disclosure; a second one inside it is a fold too far.
+               *
+               * `<aside>` AND NOT `<p>`, so the change of subject is in the markup and not only in the
+               * styling. A screen-reader user gets a complementary landmark they can skip past, which
+               * is the same affordance the hairline and the label give a sighted reader — the test this
+               * project applies everywhere is that the two experiences match.
+               *
+               * `aria-labelledby` RATHER THAN `aria-label`, pointing at the visible label. The label is
+               * on screen, so duplicating it in an attribute would create two strings that can drift.
+               * The id has to be unique per card because six of these exist on a page: it is built from
+               * the facet's own id, which is already unique by construction (see FACETS_BY_ID).
+               * ==================================================================================
                */}
               {facet.caveat ? (
-                <motion.p
+                <motion.aside
                   {...part()}
-                  className="mt-8 max-w-[62ch] text-sm leading-relaxed text-ink-500"
+                  aria-labelledby={`${facet.id}-caveat-label`}
+                  className="mt-10 max-w-[62ch] border-t border-ink-200 pt-5"
                 >
-                  {facet.caveat}
-                </motion.p>
+                  <h4
+                    id={`${facet.id}-caveat-label`}
+                    className="text-xs font-medium uppercase tracking-[0.16em] text-ink-500"
+                  >
+                    A note on the evidence
+                  </h4>
+                  <p className="mt-2.5 text-sm leading-relaxed text-ink-500">{facet.caveat}</p>
+                </motion.aside>
               ) : null}
             </Paper>
           </motion.div>

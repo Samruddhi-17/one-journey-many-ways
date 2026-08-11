@@ -350,9 +350,15 @@ export function FacetEvidence({ facet, country }) {
       const transport = getTransport(country)
       return (
         <figure className="max-w-[34rem]">
+          {/*
+           * "each way, one way" WAS THE SAME THING TWICE IN FOUR WORDS, and it rendered as "About 39
+           * minutes each way, one way." The field is named `commuteMinutesOneWay`, the direction has to
+           * be said once because a reader would otherwise assume a round trip, and "each way" says it
+           * in two words: a figure that is true of each direction is by definition not the total.
+           */}
           <figcaption className="text-sm text-ink-500">
-            Share of everyday journeys by mode. About {country.facts.commuteMinutesOneWay} minutes
-            each way, one way.
+            Share of everyday journeys by mode. The commute is about{' '}
+            {country.facts.commuteMinutesOneWay} minutes each way.
           </figcaption>
           <div className="mt-5">
             <ShareBars
@@ -371,8 +377,18 @@ export function FacetEvidence({ facet, country }) {
       const food = getFood(country)
       return (
         <figure className="max-w-[34rem]">
+          {/*
+           * THE UNIT ONLY. This caption used to add "drawn against the journey's largest figure", and
+           * that half is gone because the note at the foot of the panel now says the same thing at
+           * length — including WHICH figure it is — so the reader was being told about the scale twice
+           * within one card, once in passing and once properly.
+           *
+           * A figcaption's job here is the unit, which the bars cannot carry themselves: "92" is
+           * meaningless and "92 kg" over a year is not. Everything about how the drawing was made
+           * belongs in the note; see the header in facets.js for where that line falls and why.
+           */}
           <figcaption className="text-sm text-ink-500">
-            Kilograms per person per year, drawn against the journey&rsquo;s largest figure.
+            Kilograms per person per year.
           </figcaption>
           <div className="mt-5">
             <ShareBars

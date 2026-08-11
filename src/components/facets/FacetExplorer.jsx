@@ -75,22 +75,33 @@ export function FacetExplorer({ country }) {
 
   return (
     <Section width="content" ariaLabelledBy="explorer-heading">
+      {/*
+       * THE HEADING IS THE FIRST THING IN THIS SECTION. There was an eyebrow above it reading "Ask the
+       * traveller" and it is gone — see the note where it used to be defined in src/data/voice.js for
+       * why, briefly: the heading below is already the traveller asking, and a label above it announced
+       * the conversation instead of starting it.
+       *
+       * `mt-3` WENT WITH IT. That margin existed to set the heading below the eyebrow; with nothing
+       * above it, it was three pixels of dead space between the section's own top padding and its first
+       * word, which is the sort of leftover that makes a rhythm look slightly wrong for no findable
+       * reason. `Section` supplies the space above.
+       *
+       * The `delay` on this Reveal went too, for the same reason: it was staggered to arrive after the
+       * eyebrow, and a first element that waits 80ms for a predecessor that no longer exists reads as
+       * the page hesitating.
+       */}
       <Reveal>
-        <p className="text-sm font-medium uppercase tracking-[0.16em] text-ink-500">
-          {EXPLORER.eyebrow}
-        </p>
-      </Reveal>
-
-      <Reveal delay={0.08}>
         <h2
           id="explorer-heading"
-          className="mt-3 max-w-[26ch] font-display text-[clamp(2rem,5vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink-900"
+          className="max-w-[26ch] font-display text-[clamp(2rem,5vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink-900"
         >
           {EXPLORER.heading}
         </h2>
       </Reveal>
 
-      <Reveal delay={0.16}>
+      {/* `delay` stepped down from 0.16 to 0.08 now that this is the second element rather than the
+          third. The stagger counts positions, so it has to be renumbered when one is removed. */}
+      <Reveal delay={0.08}>
         <p className="mt-6 max-w-[58ch] text-lg leading-[1.65] text-ink-700">{EXPLORER.lead}</p>
       </Reveal>
 

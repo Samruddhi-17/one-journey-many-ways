@@ -29,7 +29,7 @@ import coverVista from "../assets/hero-vista.jpg";
  *
  * THE PAGE MAKES ONE ARGUMENT IN THREE MOVES:
  *
- *   1. THE HAIL       "Come with me." Someone is talking to you, and they say what the trip was for.
+ *   1. THE HAIL       "Come with us." Someone is talking to you, and they say what the trip was for.
  *   2. THE TURN       Why the unglamorous parts are the point, and that nothing here is ranked.
  *   3. THE ITINERARY  The whole route flown across a real map, and five doors into it.
  *
@@ -278,8 +278,13 @@ export function HomePage() {
              * secret has to be kept in both channels or it is not kept.
              *
              * Nothing is lost, because the image carries no information the text does not. The headline
-             * says come with me, the cover lines say what the trip is, and the aside names the pair. A
-             * describable fact that only exists in the picture would need an alt; atmosphere does not.
+             * says come with us, the cover lines say what the trip looked for, and the aside names the
+             * pair. A describable fact that only exists in the picture would need an alt; atmosphere does
+             * not.
+             *
+             * NOTE THAT THE HEADLINE'S PLURAL IS NOW DOING PART OF THIS JOB. "Come with us" tells every
+             * visitor, sighted or not, that there is more than one of them — which is the only thing about
+             * this picture a reader could reasonably want and previously had no way to learn.
              */
             /*
              * ==========================================================================================
@@ -446,7 +451,7 @@ export function HomePage() {
              * WHY IT IS THE `<h1>`. The temptation is to make the pitch the heading — it contains the
              * subject matter, and it is what a search engine would want. But the heading is the page's
              * one-sentence claim, and this page's claim is an invitation rather than a description.
-             * "Come with me" as an `<h1>` is also what a screen-reader user hears first, which is the
+             * "Come with us" as an `<h1>` is also what a screen-reader user hears first, which is the
              * same thing a sighted visitor sees first: the two experiences match, which is the whole
              * test.
              *
@@ -460,15 +465,27 @@ export function HomePage() {
               className="font-display text-[clamp(3rem,8.5vw,5.75rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-ink-900"
             >
               {/*
-               * "Hey, come with me." rather than the bare "Come with me." the panel version used.
+               * "Hey, come with us." rather than the bare "Come with us." the panel version used.
                *
                * The reference opens with "Hey," and it earns its place: it is the word that makes the
-               * line an address to somebody rather than an imperative. "Come with me" alone can be read
+               * line an address to somebody rather than an imperative. "Come with us" alone can be read
                * as an instruction from an interface; nothing that starts with "Hey," can.
+               *
+               * "US" AND NOT "ME", BECAUSE THE COVER SHOWS TWO OF THEM. A reader pointed out the picture
+               * has a dog in it and the line only accounted for the person. The full reasoning — including
+               * why the plural is confined to this one line and every other line in the file stays
+               * singular — is on `OPENING.hail` in src/data/voice.js.
                *
                * The comma is a real break in the sentence, so the two halves are separate lines rather
                * than one string wrapping wherever the box happens to end. `block` on each makes the
                * break structural instead of leaving it to the measure.
+               *
+               * THE WORDS ARE TYPED HERE RATHER THAN READ FROM `OPENING.hail`, WHICH IS A REAL SEAM AND
+               * IS WORTH NAMING SO THE NEXT EDIT DOES NOT MISS HALF OF IT. The `<h1>` needs the sentence
+               * split across two spans so the underline below can measure the second half alone, and a
+               * single string cannot supply that. So `hail` holds the line for the record and this markup
+               * holds the same words broken in two: change one and you must change the other. It is the
+               * one place on the site where copy is duplicated between the data layer and a component.
                */}
               <span className="block">Hey, come</span>
               {/*
@@ -478,13 +495,13 @@ export function HomePage() {
                *
                * `inline-block` AND NOT `block`, WHICH IS WHAT MAKES THE UNDERLINE THE RIGHT LENGTH.
                * A `block` span fills its container — 576px here — so an underline sized against it
-               * measured the COLUMN rather than the WORDS, and overhung "with me." by 114px, running out
+               * measured the COLUMN rather than the WORDS, and overhung "with us." by 114px, running out
                * across the photograph. `inline-block` shrink-wraps to the text, so `100%` in the SVG
                * below means the width of the two words it is underlining. Verified in the browser: the
                * line now ends with the full stop.
                */}
               <span className="relative inline-block">
-                with me.
+                with us.
                 {/*
                  * The hand-drawn underline from the reference, as an inline SVG.
                  *
@@ -641,6 +658,30 @@ export function HomePage() {
              * hazed over the mug and the journal, which are the two props the asset's veil was shaped to
              * protect. Darkening the ink one token buys the same margin and costs the artwork nothing. When
              * a caption and a picture compete, move the caption.
+             *
+             * ------------------------------------------------------------------------------------------
+             * THE LINE USED TO HAVE A THIRD ITEM, "nothing ranked", AND IT IS GONE. A reader asked whether
+             * this line needs to be here at all, and the answer turned out to be different for its two
+             * halves — so this note records both, because "delete the line" was the tempting single answer.
+             *
+             * THE COUNTS STAY, AND THEY ARE NOW THE ONLY PLACE THEY APPEAR. They used to be said twice
+             * within one screen: here, and in the cover's first line ("Five countries. Twenty-eight days.").
+             * That line has been rewritten into the traveller's own sentence — see `OPENING.coverLines` —
+             * which leaves these two figures said once, quietly, in the position a caption occupies. They
+             * earn that place by answering the only question a visitor has before clicking: how much is
+             * this. Both are derived from the itinerary, never typed, so the sentence cannot go stale.
+             *
+             * "nothing ranked" WAS A DISCLAIMER WEARING A COUNT'S CLOTHES. Set as the third item in a
+             * dotted list beside two measurements, it reads as a third fact about the trip — and it is not a
+             * fact about the trip, it is the site defending its own editorial method to a visitor who has
+             * not yet accused it of anything. voice.js states the general rule this breaks: copy may say
+             * what a thing IS; copy that defines itself by what it refuses is arguing with a reader who has
+             * not spoken.
+             *
+             * IT IS ALSO STILL SAID, PROPERLY, ONE SCREEN DOWN. `OPENING.invitation` reads "You choose what
+             * we look at. Nothing here is ranked." — in the traveller's voice, in a full sentence, next to
+             * the reason it matters. That is the promise; this was the badge. Deleting the badge loses no
+             * information and removes the only place on the cover where the site spoke about itself.
              */}
             <motion.p
               initial={prefersReducedMotion ? false : { opacity: 0 }}
@@ -650,8 +691,7 @@ export function HomePage() {
             >
               {spellOutCapitalised(TOTAL_STOPS)} stops{" "}
               <span aria-hidden="true">·</span>{" "}
-              {spellOutCapitalised(TOTAL_DAYS)} days{" "}
-              <span aria-hidden="true">·</span> nothing ranked
+              {spellOutCapitalised(TOTAL_DAYS)} days
             </motion.p>
           </div>
         </Section>

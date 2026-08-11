@@ -5,7 +5,7 @@
  * WHY THIS FILE EXISTS AND WHY IT IS DATA
  *
  * The rebuild turns a magazine article into a conversation: the traveller now addresses the
- * visitor directly ("come with me"), instead of the site describing a journey in the third
+ * visitor directly ("come with us"), instead of the site describing a journey in the third
  * person. That is a change in the product, so it needs to be written down as content rather
  * than scattered as string literals across a dozen components.
  *
@@ -76,10 +76,45 @@ import { spellOut } from "../lib/spellOut";
  * exactly that is a promise the data can keep.
  */
 export const OPENING = {
-  hail: "Come with me.",
+  /*
+   * "COME WITH US" AND NOT "COME WITH ME", BECAUSE THERE ARE TWO OF THEM IN THE PICTURE.
+   *
+   * A reader pointed out that the cover shows a traveller and a dog and the line only accounts for
+   * one of them. That is exactly right, and it is a factual mismatch rather than a matter of taste:
+   * the invitation is issued by whoever is in the frame, and the frame contains a pair.
+   *
+   * WHAT THE PLURAL COSTS, since it is not free. "Us" makes the dog a party to the invitation, which
+   * means the animal is now someone the copy speaks for — and §3.4's rule that the traveller has no
+   * biography applies to whoever is sitting next to them. So the plural appears HERE and nowhere
+   * else: every other line in this file stays first-person singular, because the traveller is the
+   * one who noticed things and wrote them down. "Come with us" is the two of them at the trailhead;
+   * "I went to find out what an ordinary day looks like" is the person holding the notebook.
+   *
+   * `companionAside` already ended in "together", so this makes the cover's first line agree with
+   * its last rather than introducing a new idea.
+   */
+  hail: "Come with us.",
   pitch:
     "I have just come back from five countries, and I did not go for the monuments. I went to find out what an ordinary day looks like somewhere else: what time people get up, what is on the table, how they get to work, what they say to a stranger.",
-  turn: "None of it is the kind of thing that ends up on a postcard. All of it is the reason the trip stayed with me.",
+  /*
+   * THE TURN, REWRITTEN. It read: "None of it is the kind of thing that ends up on a postcard. All of
+   * it is the reason the trip stayed with me." A reader reported it as vague and as sounding
+   * generated, and both halves earn that:
+   *
+   *   "the kind of thing that ends up on a postcard" is a category rather than a thing. It defines
+   *   the content by what it is not, which is the failure already recorded against "Not the
+   *   postcards" three notes below — the same instinct, at greater length.
+   *
+   *   "the reason the trip stayed with me" asserts an effect on the traveller and names no cause. It
+   *   is the shape of a sentence that means something without any of the content.
+   *
+   * The replacement names two of the actual observations in the workbook — India's day gives 2.9
+   * hours to unpaid housework where Japan's gives 2.2, and America's transport mix is 85.5% private
+   * vehicle — without printing a figure, because this page carries no numbers by design. It says
+   * what the visitor will find, in the traveller's own terms, and leaves the argument to `invitation`
+   * below.
+   */
+  turn: "Nobody sends a photograph of the hour before work, or of how they got there. Those are the two things I ended up writing about most.",
   invitation:
     "You choose what we look at. Nothing here is ranked. These are five different ways of arranging the same twenty-four hours.",
   action: "Start where I started",
@@ -108,11 +143,41 @@ export const OPENING = {
    * WHY IT IS AN ARRAY. The three lines break on their own, so a single string with `<br>` would put
    * markup in the content layer, and a `whitespace-pre-line` string makes the line breaks invisible to
    * anyone editing them. An array says "these are three lines" in the data itself.
+   *
+   * ------------------------------------------------------------------------------------------------
+   * REWRITTEN A SECOND TIME, FROM THREE LABELS INTO ONE SENTENCE THE TRAVELLER SAYS.
+   *
+   * They read: "Five countries. Twenty-eight days." / "Real stories. Everyday lives." / "Ordinary
+   * days, recorded." A reader asked for something that sounds like the traveller's words, and the
+   * diagnosis is that none of those three lines had a speaker. Each is a noun phrase with a full stop
+   * after it — the register of a conference slide, and the reason is visible in the grammar: there is
+   * no verb in any of them, so nobody is doing anything.
+   *
+   * THE SECOND LINE WAS ALSO THE WEAKEST CLAIM ON THE PAGE. "Real stories. Everyday lives." are the
+   * two phrases every travel brand uses, and the site cannot be the judge of whether its own stories
+   * are real. The third line, "Ordinary days, recorded", was defended in the note above as saying what
+   * the pages contain — which it does, in the voice of a filing system.
+   *
+   * THE FIRST LINE ALSO DUPLICATED THE COUNTS LINE beneath the button, which already reads "Five stops
+   * · Twenty-eight days" — see the note on that line in HomePage. The same two numbers appeared twice
+   * within one screen, once as a headline claim and once as a caption, and the caption is the honest
+   * place for them because it is set quietly. Saying them twice made the trip's size the cover's
+   * subject.
+   *
+   * WHAT REPLACES THEM is one sentence broken across three lines, in the first person, listing three
+   * things the workbook can actually answer: the hour people get up, what is on the table, how they
+   * get to work. It is the same list as `pitch` below, cut to its three concrete nouns — so the cover
+   * promises exactly what the facets deliver, and a visitor who scrolls finds the long version of a
+   * sentence they have already agreed to rather than a different pitch.
+   *
+   * IT STAYS THREE LINES AND STAYS AN ARRAY. The rhythm of three short lines is what the cover's
+   * typography was built around, and the breaks now fall at the sentence's own commas, so each line is
+   * a complete item. A screen reader pauses between them, which is where the pauses belong.
    */
   coverLines: [
-    "Five countries. Twenty-eight days.",
-    "Real stories. Everyday lives.",
-    "Ordinary days, recorded.",
+    "I wanted to know what time people got up,",
+    "what was on the table when they did,",
+    "and how they got to work afterwards.",
   ],
 
   /*
@@ -218,8 +283,20 @@ export function arrivalGreeting(country) {
      * land as a correction rather than as a testimonial — expectation versus discovery (§2.1),
      * stated by the person who had the expectation.
      */
+    /*
+     * "IN MY JOURNAL" IS NOT A FLOURISH — IT NAMES THE OBJECT THE VISITOR IS ALREADY CARRYING.
+     *
+     * The journal is a real thing on this site: it opens on the home page, it collects a stamp per
+     * country, and `JOURNAL` below is the copy printed on it. So "what I wrote down in my journal"
+     * points at something the visitor has seen, which is what makes the quotation beneath this line a
+     * page from it rather than a pull-quote. Without the object named, "wrote down" could be anywhere.
+     *
+     * It also settles the register of what follows: a journal is written for yourself, so a reader
+     * expects an impression rather than a finding — which is exactly what `travellerNote` is, and is
+     * the distinction the caveats on the facets below keep having to make in prose.
+     */
     pivot:
-      "That is what I was told before I came. Here is what I actually wrote down:",
+      "That is what I was told before I came. Here is what I actually wrote down in my journal:",
     /*
      * THERE USED TO BE AN `onward` LINE HERE READING "Ask me anything about this place", AND IT WAS A
      * PROMISE THE SITE CANNOT KEEP.
@@ -249,7 +326,33 @@ export function arrivalGreeting(country) {
  * answers, and the traveller's impression sits beside the answer rather than replacing it.
  */
 export const EXPLORER = {
-  eyebrow: "Ask the traveller",
+  /*
+   * THERE USED TO BE AN `eyebrow` HERE READING "Ask the traveller", AND IT WAS DELETED FOR BREAKING
+   * THE ONE THING THIS SECTION HAS TO GET RIGHT: THE HANDOVER.
+   *
+   * A reader reported it as out of place and as interrupting the flow, and the structural reason is
+   * that it made the visitor read the same instruction twice in three lines. The heading directly
+   * below is "What do you want to know?" — the traveller already speaking, already inviting the
+   * question. An eyebrow above it saying "Ask the traveller" is the interface leaning in first to
+   * announce that a conversation is about to happen, which is the one thing that stops it being one.
+   *
+   * IT WAS ALSO THE THIRD PERSON, ON THE ONE SCREEN THAT IS ENTIRELY THE FIRST PERSON. "Ask the
+   * traveller" refers to the speaker as a role, so between the arrival's "here is what I wrote down"
+   * and this section's "six things I paid attention to", a label appeared calling that voice "the
+   * traveller". That is the site's own voice labelling its narrator, and it lands as a section header
+   * in a report.
+   *
+   * WHY REMOVING IT COSTS NOTHING STRUCTURALLY, since eyebrows are a site pattern (`SIGNPOST`,
+   * `departureLines`, HOMECOMING all have one): those three sit above headings that do not introduce
+   * themselves. "What do you want to know?" is a question addressed to the reader, which is already the
+   * strongest possible section opener. The `<h2>` remains the labelled landmark — see FacetExplorer,
+   * where `ariaLabelledBy` points at the heading and never pointed at the eyebrow — so the document
+   * outline is unchanged and no screen-reader user loses a signpost.
+   *
+   * NOTE THE PATTERN THIS IS THE SECOND CASE OF. "Ask me anything about this place" was deleted from
+   * `arrivalGreeting` for promising an interaction that does not exist. This is the milder form of the
+   * same instinct: copy that describes the interaction instead of conducting it.
+   */
   heading: "What do you want to know?",
   lead: "Six things I paid attention to everywhere I went. Open them in any order.",
   /*
