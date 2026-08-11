@@ -318,11 +318,36 @@ export function Arrival({ country }) {
            * gone and the reason is recorded above TravellerFigure. The illustrations face right as
            * drawn, so the left edge is where a figure facing into the text belongs.
            *
-           * Slightly overlapping the sheet below (`-mb-4`) so the two read as one object: the traveller
-           * holding out their note, rather than an illustration filed above a quotation.
+           * THE OVERLAP WITH THE SHEET IS REAL NOW, AND IT WAS ONLY EVER CLAIMED.
+           *
+           * This was `-mb-4` and the note here said it was "slightly overlapping the sheet below so the
+           * two read as one object: the traveller holding out their note". Measured, the overlap was
+           * exactly ZERO: the sheet carries `mt-4`, which is the same 16px in the opposite direction, so
+           * the two margins cancelled and the boxes merely abutted. Figure bottom 1320, paper top 1320,
+           * on all five pages.
+           *
+           * That is not a cosmetic miss, because of what sits at the figure's bottom edge. All five
+           * illustrations are cropped at the torso — they are portraits, not full figures — so the last
+           * row of pixels is a hard horizontal cut through a backpack and a jacket. With the boxes
+           * touching, that cut landed precisely on the card's top edge, where two straight lines meeting
+           * at nothing reads as an image colliding with a component. It is what a reader reported.
+           *
+           * A real overlap fixes it by hiding the cut rather than by moving it. The sheet is
+           * `position: relative` and comes later in the DOM, so it paints above this static figure — the
+           * figure's lower 24px now passes BEHIND the paper, which is both the arrangement the old
+           * comment described and the one that puts the crop somewhere the eye cannot find it.
+           *
+           * WHY NOT THE OTHER DIRECTION. Adding clear space between them was the obvious alternative and
+           * it is worse: it leaves the torso crop floating in the middle of the page with a drop shadow
+           * under it, which announces the cut instead of resolving it. There is nothing for a
+           * half-figure to stand on except the next object.
+           *
+           * `-mb-10` IS 40px AGAINST THE SHEET'S `mt-4`, NETTING 24px. The two numbers have to be read
+           * together, which is exactly how this went wrong the first time — so if either changes, measure
+           * the result rather than assuming the class name describes it.
            */}
           <div className="flex justify-start">
-            <TravellerFigure src={country.images.portrait} className="-mb-4 ml-2 md:ml-6" />
+            <TravellerFigure src={country.images.portrait} className="-mb-10 ml-2 md:ml-6" />
           </div>
 
           {/*
@@ -376,13 +401,30 @@ export function Arrival({ country }) {
               </p>
 
               {/*
-               * "The traveller" — not a name, and not "I". The visitor travels alongside an anonymous
-               * companion who is a guide, not the protagonist: naming them would make this a personal
-               * blog and would invite the visitor to evaluate the person rather than the observation.
+               * "FROM MY JOURNAL" AND NOT "THE TRAVELLER", which is the fourth place the third person
+               * hid — after the sr-only heading directly above, the deleted "Ask the traveller" eyebrow,
+               * and the culture caveat's "One person choosing".
                *
-               * `<cite>` is the element for the source of a quotation. Browsers italicise it by
-               * default, which here would compete with the quotation's own italic — hence `not-italic`.
-               * The default is a stylistic convention, not a semantic requirement.
+               * It was the most conspicuous of the four and the last to be found, because it is set in
+               * small caps under the quotation where an attribution is expected to be formal. The line
+               * above it reads "here is what I actually wrote down in my journal", and then the site
+               * signed that sentence in the third person, in a voice the visitor has not heard: the
+               * traveller says "I", and the label under their words called them "the traveller".
+               *
+               * `<cite>` NAMES THE SOURCE, WHICH IS THE THING THAT MAKES THE FIRST PERSON WORK HERE. The
+               * element is for the title of a work, not for a person — the HTML spec is explicit that a
+               * person's name is not a valid `<cite>`, so "The traveller" was the wrong sort of value as
+               * well as the wrong voice, and "I" would have been no better. The journal is a real object
+               * on this site (it opens on the home page and takes a stamp per country), the line above
+               * has just named it, and the quotation is a page from it. So the source has a title.
+               *
+               * The old note here argued that "not a name, and not 'I'" kept the traveller from becoming
+               * a protagonist the visitor would evaluate. That argument holds and nothing here weakens
+               * it: naming the journal still gives no name, face or biography to the person keeping it.
+               *
+               * Browsers italicise `<cite>` by default, which here would compete with the quotation's
+               * own italic — hence `not-italic`. The default is a stylistic convention, not a semantic
+               * requirement.
                *
                * `ink-700` AND NOT `ink-500`, which is what this line used before the paper arrived. It
                * is 14px, so it needs 4.5:1, and on the sheet's darkest pixel `ink-500` measures about
@@ -392,7 +434,8 @@ export function Arrival({ country }) {
                */}
               <footer className="mt-6">
                 <cite className="text-sm font-medium uppercase not-italic tracking-[0.14em] text-ink-700">
-                  The traveller, on arriving in {inProse(country)}
+                  {/* `inProse`: mid-sentence, so America takes its article. */}
+                  From my journal, on arriving in {inProse(country)}
                 </cite>
               </footer>
             </blockquote>

@@ -513,9 +513,27 @@ export function FacetCard({ facet, country, open, onToggle, index }) {
                       <p className="max-w-[54ch] font-display text-lg italic leading-[1.55] text-ink-900 md:text-xl">
                         {voice}
                       </p>
+                      {/*
+                       * "FROM MY JOURNAL", MATCHING THE ARRIVAL'S ATTRIBUTION — see the long note at
+                       * that `<cite>` in Arrival.jsx for the whole argument. Briefly: this said "The
+                       * traveller", which is the site naming its narrator in the third person directly
+                       * under a sentence they speak in the first, and `<cite>` is for the title of a
+                       * work rather than for a person in any case.
+                       *
+                       * IT MATTERS MORE HERE THAN THERE BECAUSE THERE ARE FIVE OF THEM. The arrival
+                       * prints one attribution; this prints one under every facet that has an
+                       * observation, so a country page carried the third-person label six times in
+                       * total. Fixing one and not the other would have left the same page addressing
+                       * the visitor in two voices depending on how far down they had scrolled.
+                       *
+                       * NO "ON ARRIVING IN <COUNTRY>" TAIL, unlike the arrival's. That clause is
+                       * meaningful once, at the moment of landing; repeated under five quotations
+                       * spread down one page it would read as a form field rather than as a note, and
+                       * the visitor has not gone anywhere between them.
+                       */}
                       <footer className="mt-4">
                         <cite className="text-xs font-medium uppercase not-italic tracking-[0.14em] text-ink-500">
-                          The traveller
+                          From my journal
                         </cite>
                       </footer>
                     </blockquote>

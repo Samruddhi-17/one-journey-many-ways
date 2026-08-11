@@ -2,6 +2,9 @@ import { Section } from '../ui/Section'
 import { Reveal } from '../ui/Reveal'
 import { toAvif } from '../../lib/images'
 import { inProse, inProseCapitalised } from '../../lib/countryName'
+/* Capitalised because the count opens the eyebrow. The helper cannot know where the word lands, so the
+   call site chooses — see the note in src/lib/meta.js, where getting this wrong was a real bug. */
+import { spellOutCapitalised } from '../../lib/spellOut'
 
 /*
  * Glimpses — the country's five photographs, shown plainly, once.
@@ -146,8 +149,18 @@ export function Glimpses({ country }) {
            * The traveller's voice, in the first person, consistent with everything else they say —
            * and note it claims nothing about the country. "Five things I saw" is a statement about
            * where the photographs came from, which is the strongest claim available here.
+           *
+           * THE COUNT IS DERIVED, AND IT WAS TYPED. This read "Five things I saw" as a literal, three
+           * lines below `glimpses` — the filtered array this very component maps over. The filter drops
+           * any image the workbook names but cannot supply, and the comment above it says exactly that:
+           * "Five countries all currently have all five, so this is a guard rather than a visible
+           * behaviour." So the one situation the guard exists for is the situation where this sentence
+           * becomes a lie, and it would have said "Five things I saw" over four photographs.
+           *
+           * Third typed count found in two days, after the explorer's lead and its completion line. The
+           * rule is now settled: if the site says a number out loud, the number comes from the data.
            */}
-          Five things I saw
+          {spellOutCapitalised(glimpses.length)} things I saw
         </p>
 
         {/*
