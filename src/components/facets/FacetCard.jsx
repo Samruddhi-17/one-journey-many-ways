@@ -130,8 +130,27 @@ const FACT_ALT = {
     'Open sacks of spices crowded together at an Indian market: turmeric, cardamom, dried chillies, cinnamon bark and peppercorns.',
   italy:
     'Mount Vesuvius rising behind the excavated streets and stone amphitheatre of Pompeii.',
+  /*
+   * SEVEN, AND IT SAID SIX. Counted twice, because a number in alt text is the one part of a
+   * description a screen-reader user cannot sanity-check against the picture: a labelled coordinate
+   * grid over the source, then a ring drawn on each nose individually — back-left, back-right, the
+   * grey one at mid-left, mid-centre, mid-right, front-left, and the black-and-white one at
+   * front-right. The first attempt at that overlay put a ring on a cheek and left the grey animal
+   * unmarked, which is exactly why it was not treated as a count until every ring sat on its own
+   * face with no animal spare.
+   *
+   * `scripts/convertData.mjs` had it right all along — its note beside `FACT_ASSETS` reads "seven
+   * guinea pigs, in a row, looking directly at the camera" — so the pipeline and the shipped alt
+   * text disagreed by one and nothing failed, because nothing compares them. That is the cost of
+   * writing the same observation down in two places, and the reason this comment names the file.
+   *
+   * Worth stating plainly against the header above: this is the failure that note warns about.
+   * "Alt text that claims more than the author knows is worse than alt text that is merely thin,
+   * because a screen-reader user cannot tell a confident description from an accurate one" — and a
+   * miscount is the most confident kind of wrong, since it sounds like someone counted.
+   */
   switzerland:
-    'Six guinea pigs huddled together on a dirt path, all facing the camera.',
+    'Seven guinea pigs huddled together on a dirt path, all facing the camera.',
 }
 
 /*

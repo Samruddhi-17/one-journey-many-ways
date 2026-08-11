@@ -81,11 +81,42 @@ export function Notepaper({ src, children, className = '' }) {
          * drawing of the Taj Mahal, a temple and a camel" before the traveller's note would be told
          * about the stationery instead of the writing on it.
          *
-         * `object-cover object-bottom` — the art in all five sheets sits along the LOWER portion of
-         * the image with the top left as empty paper, which is exactly the shape a note wants:
-         * anchoring to the bottom keeps the drawing at the foot of the sheet as the text above it
-         * grows or shrinks with the viewport. Anchoring to the centre would slide the landmarks up
-         * through the paragraph on a narrow screen.
+         * `object-cover object-bottom`, AND THE REASON THIS COMMENT USED TO GIVE FOR IT WAS FALSE.
+         *
+         * It claimed "the art in all five sheets sits along the LOWER portion of the image with the
+         * top left as empty paper". Measured — ink coverage per fifth of each source, top to bottom,
+         * as the percentage of pixels below luminance 225:
+         *
+         *     japan            1,   4,  12,   1   (plus 0 in the top fifth)
+         *     india          100, 100,  90,  84,  83
+         *     italy          100,  97,  82,  60,  98
+         *     switzerland      1,  21,  62,  56,  18
+         *     united-states    1,   8,  39,  73,  34
+         *
+         * Only Japan is the sheet that sentence describes. India and Italy are solid ink at the top,
+         * and Switzerland's densest bands are its two MIDDLE ones with its emptiest at the foot —
+         * the exact inverse of the claim. So the anchor was chosen for a property four of the five
+         * sheets do not have.
+         *
+         * THE ANCHOR IS STILL RIGHT, for a smaller reason that survives measurement: the crop is
+         * shallow. A 1536x1024 sheet in the rendered 584x312 box scales to 584x389, so `object-cover`
+         * discards 77px — under 20%, and off the top. Bottom, centre and top anchoring therefore
+         * differ by at most a fifth of the image, which is why no sheet's composition visibly moves
+         * with the choice. Bottom is kept because it pins whatever is at the foot of the drawing to
+         * the foot of the sheet as the text above reflows, and because changing it now would churn
+         * five backgrounds to no measured end.
+         *
+         * WHAT THE MEASUREMENT DOES SETTLE is legibility, and that is the number to check if this
+         * changes. Compositing each source's actual text-band rows at 18% over the card, the worst
+         * pixel any line of the quotation sits on gives `ink-700` 8.11:1 (Japan), 7.62:1 (India),
+         * 7.69:1 (Italy), 7.70:1 (Switzerland), 7.67:1 (United States) — a spread of half a point,
+         * all far above 4.5:1. Switzerland's heavier middle costs it nothing.
+         *
+         * This is the third time a comment in this project asserted what an image file looks like
+         * without opening it (see the two recorded in journey/TravellerFigure.jsx). The pattern is
+         * always the same: the assertion is about art nobody re-checked, it justifies a line of CSS
+         * that happens to be fine, and it survives because the CSS looks correct. Describing the
+         * five sheets was never needed to defend one anchor value.
          */
         <picture aria-hidden="true" className="absolute inset-0 -z-10 block">
           <source srcSet={toAvif(src)} type="image/avif" />
