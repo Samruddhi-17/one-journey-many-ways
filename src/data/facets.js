@@ -168,9 +168,21 @@ export const FACETS = [
      * same screen reading "An average day for someone aged 15–64" — so the band was printed twice in one
      * panel. Same duplication as the food figcaption's scale clause, found the same way, and the division
      * of labour that prevents it is written out on the transport facet below.
+     *
+     * AND THE CLOSING SENTENCE IS NOW GONE TOO: "Nobody has a day that looks exactly like this one." A
+     * reader asked why it was there at all, and there is no good answer. Everybody already knows an
+     * average is not a person — nobody reads a national average and expects to meet it — so the sentence
+     * told the reader something they brought with them, using the last position in the note, which is the
+     * one a reader is most likely to actually finish on.
+     *
+     * IT WAS ALSO THE THIRD NEGATION IN A ROW ACROSS THIS PANEL'S NOTES if you read the cards in order,
+     * and negations of things nobody claimed are the exact failure catalogued on the culture and people
+     * facets below. What survives is the one sentence a reader can act on: weekends are inside the
+     * average, which is why paid work looks short. That is a fact about THIS chart. The old second
+     * sentence was a fact about arithmetic.
      */
     caveat:
-      'The average runs across all seven days of the week rather than working days only, which is why the paid-work figure is shorter than a weekday would be. Nobody has a day that looks exactly like this one.',
+      'The average runs across all seven days of the week rather than working days only, which is why the paid-work figure is shorter than a weekday would be.',
   },
   {
     id: 'transport',
@@ -272,8 +284,34 @@ export const FACETS = [
      * the three do not combine — plus the scale, which is a property of the drawing and appears nowhere
      * else above the note.
      */
-    framing:
-      'Three separate totals, each standing on its own. Every bar on every country page is drawn to the same scale, so lengths mean the same thing from one page to the next.',
+    /*
+     * CUT IN HALF AGAIN, ON A DIRECT INSTRUCTION TO SIMPLIFY. The version above was 27 words in two
+     * sentences and the second one was the problem:
+     *
+     *   "Every bar on every country page is drawn to the same scale, so lengths mean the same thing from
+     *   one page to the next."
+     *
+     * THREE FAULTS, AND THE THIRD IS THE REAL ONE.
+     *
+     *   IT IS ABOUT THE OTHER FOUR PAGES. A reader on Japan's page is being told a fact about pages they
+     *   have not visited, before they have looked at Japan's three bars. Whatever its value, it cannot be
+     *   collected until later, which makes it the wrong sentence for the framing slot by definition.
+     *
+     *   "LENGTHS MEAN THE SAME THING" IS ABSTRACT WHERE THE FIRST SENTENCE IS CONCRETE. It describes a
+     *   property of the drawing system rather than the food, so the reader has to hold a claim about
+     *   rulers in mind while looking at kilograms of dairy.
+     *
+     *   IT DUPLICATES THE NOTE, which is the fault that made this measurable. The caveat below explains
+     *   the scale properly and at length. So the panel explained its scale twice — once in passing before
+     *   the evidence and once in full after it — which is the same double-telling found on transport and
+     *   the day, and the file header's own test says which copy wins: a reader who skips the scale still
+     *   reads every bar correctly, so it belongs in the note and nowhere else.
+     *
+     * WHAT IS LEFT IS ONE SHORT SENTENCE DOING THE ONE JOB THE FRAMING EVER HAD: stopping the reader
+     * adding three independent quantities together. "Not three parts of one total" says it positively
+     * about what is on screen, and mentions no other page.
+     */
+    framing: 'Three separate totals, not three parts of one.',
     /*
      * THE CAVEAT NOW CARRIES BOTH METHOD NOTES, AND THE OPENING PHRASE HAD TO GO.
      *
@@ -291,8 +329,29 @@ export const FACETS = [
      * measurement: a national total tells you nothing about one person's plate, which is true and is
      * why no reader should score the countries on it.
      */
+    /*
+     * THE SCALE SENTENCE IS REWRITTEN, AND WHAT WENT IS THE IDENTITY OF THE SCALE-SETTER. It read:
+     *
+     *   "The scale every bar is drawn against is the largest single figure on the journey, which is a
+     *   Swiss dairy total."
+     *
+     * A reader asked what that meant, and the trailing clause is why. "A Swiss dairy total" is trivia
+     * that only means something to somebody who has already seen all five pages and remembers that
+     * Switzerland's 288.5 kg of dairy is the biggest number in the dataset. On Japan's page it names a
+     * country the reader is not looking at, to explain a ruler, in a note about food supply. Three
+     * subjects in eleven words.
+     *
+     * IT ALSO TOLD THE READER A FACT WITHOUT TELLING THEM WHAT TO DO WITH IT, which is the deeper fault.
+     * Knowing which figure sets the scale is useless on its own. Knowing that ONE ruler is used
+     * everywhere is what lets a reader carry a bar length from this page to the next — that is the
+     * payoff, and the old sentence buried it behind the mechanism.
+     *
+     * SO THE REPLACEMENT LEADS WITH THE CONSEQUENCE and drops the identity. This is also where the
+     * cross-page point from the old framing has landed: same information, moved from before the evidence
+     * to after it, which is the split the file header describes. It is worth having exactly once.
+     */
     caveat:
-      'These are national food supply figures divided by population, so they count what reached the shops and kitchens rather than what anyone put on a plate. Waste, animal feed and stock are all inside them. The scale every bar is drawn against is the largest single figure on the journey, which is a Swiss dairy total.',
+      'These are national food supply figures divided by population, so they count what reached the shops and kitchens rather than what anyone put on a plate. Waste, animal feed and stock are all inside them. Every bar on the site is drawn against the same ruler, set by the largest figure anywhere on the journey, so a bar here can be compared with a bar on any other country page.',
   },
   {
     id: 'language',
@@ -371,8 +430,31 @@ export const FACETS = [
      * Switzerland's three plain numbers as accurately as it describes Japan's two ranges, because a
      * number given precisely IS the source's figure as written.
      */
+    /*
+     * REWRITTEN A THIRD TIME, CALLED "VERY VERY COMPLICATED", AND IT WAS. The version above ran to 45
+     * words across two sentences, and the second one was a piece of philosophy:
+     *
+     *   "Narrowing a range to one figure would look more certain than anything anyone actually knows, so
+     *   nothing here is rounded into a bar."
+     *
+     * WHAT MAKES THAT HARD IS NOT VOCABULARY, IT IS THAT IT ARGUES A COUNTERFACTUAL. The reader has to
+     * imagine a chart that does not exist, imagine it being wrong in a subtle way, and then accept the
+     * absence of that chart as the conclusion. "More certain than anything anyone actually knows" is four
+     * hedges in one clause. And it ends on "rounded into a bar" — but there are no bars on this card at
+     * all, so the closing image contradicts the screen.
+     *
+     * IT WAS ALSO EXPLAINING A DECISION RATHER THAN THE EVIDENCE. A caveat's job here is what the figures
+     * will not bear; the absence of a chart is an editorial choice, and the reader does not need the
+     * minutes of it. They need to know why one row says 23% and the next says 15–30%.
+     *
+     * THE REPLACEMENT IS ONE SENTENCE THAT ANSWERS EXACTLY THAT, in the order the reader meets it: the
+     * figures are copied from their sources, and a range means the source gave a range. It stays true of
+     * Switzerland, where no range appears, because "where a source gives a range" is a conditional rather
+     * than a promise that ranges are present. That was the falsity caught in a screenshot last round and
+     * it must not come back.
+     */
     caveat:
-      'Each figure is printed as its source gives it, which sometimes means a range rather than a single number. Narrowing a range to one figure would look more certain than anything anyone actually knows, so nothing here is rounded into a bar.',
+      'Every figure is printed exactly as its source gives it. Where a source gives a range, the range is what you see, because nobody has counted these more precisely than that.',
   },
   {
     id: 'culture',
@@ -415,8 +497,35 @@ export const FACETS = [
      * not a description of a culture, and the risk on this card is precisely that a visitor generalises
      * from them. Saying so is Principle 17; saying so first was the mistake.
      */
+    /*
+     * "EVERY COUNTRY HERE HAS THOUSANDS MORE." CUT — a reader asked what it was supposed to mean, and the
+     * sentence genuinely does not say. "Thousands more" of WHAT? The noun it needs is "things worth
+     * going to", and that noun is nowhere in the sentence; the nearest one is "three things they liked",
+     * so it parses as thousands more things this one traveller liked, which is not the point and is not
+     * true either. A pronoun-free sentence still needs its subject.
+     *
+     * "THOUSANDS" IS ALSO A NUMBER THE SITE CANNOT SOURCE, on a site whose own rule is that no figure is
+     * invented. The dataset holds three experiences per country and nothing about how many exist. It
+     * reads as a modest disclaimer, but it is the one unsupported quantity on the card.
+     *
+     * AND IT WAS UNNECESSARY, which is the strongest reason. "Not a sample of anything" already does the
+     * whole job: a reader who has accepted that these three are not a sample is not generalising from
+     * them, so telling them more things exist adds nothing. The first sentence was always the caveat; the
+     * second was it clearing its throat.
+     *
+     * WHAT REPLACES IT IS NOT A SECOND DISCLAIMER but the honest positive: chosen because the traveller
+     * wanted to go, which is a real and different kind of evidence from a percentage, and stating it
+     * plainly is what the culture framing's rewrite was for.
+     *
+     * AND THE WHOLE NOTE HAD TO GO TO FIRST PERSON, which only became visible in a screenshot. The first
+     * sentence was inherited unchanged as "One person choosing three things they liked" and the new second
+     * sentence began "I picked them" — so two consecutive sentences described the same person in two
+     * different grammatical persons, and the panel read as though a curator introduced the traveller who
+     * then spoke. This is the exact fault the framing above was rewritten for ("the traveller went to"),
+     * caught then and reintroduced now by editing one sentence of a pair.
+     */
     caveat:
-      'One person choosing three things they liked, which is not a sample of anything. Every country here has thousands more.',
+      'Three things I liked, which is not a sample of anything. I picked them because I wanted to go, not because they represent the place.',
   },
   {
     id: 'people',
@@ -443,8 +552,40 @@ export const FACETS = [
      * fact and is a better closing note than an observation would be anyway.
      */
     note: null,
+    /*
+     * REWRITTEN, AND THE READER'S SECOND QUESTION IS THE IMPORTANT ONE. It read:
+     *
+     *   "Two numbers, set as sentences rather than bars on purpose: a population is not a score, and a
+     *   longer life expectancy is not a country doing better at being a country."
+     *
+     * They asked what it meant and then asked whether it was offensive. It is, and not by accident of
+     * wording — by structure.
+     *
+     * THE SENTENCE INTRODUCES THE OFFENSIVE IDEA IN ORDER TO DENY IT. No reader arrives at "Who lives
+     * here?" thinking a country with a lower life expectancy is worse at being a country. The copy put
+     * that thought on the page, in the site's own voice, and then disowned it. A denial cannot be read
+     * without first reading the thing denied, so the net effect is to plant the ranking it forbids. This
+     * is the identical fault as the main page's "Nobody sends a photograph" line and the food caveat's
+     * "more of something is not better than less of it" — negation-as-copy, three times now.
+     *
+     * IT IS WORSE HERE THAN IN THOSE TWO, because the figures are real and unequal. India's 73 years sits
+     * beside Japan's 85 on pages a reader can visit in sequence. A sentence about which country is
+     * "doing better" lands on those specific numbers and therefore on those specific countries, whatever
+     * its grammar says afterwards. The traveller is barred from judging a country; the site's narration
+     * is bound by the same rule, and this was the site's narration doing the judging out loud in order to
+     * announce that it would not.
+     *
+     * "A POPULATION IS NOT A SCORE" HAD THE SAME SHAPE and goes for the same reason.
+     *
+     * THE REPLACEMENT DOES THE PROTECTIVE WORK WITHOUT NAMING THE COMPARISON. Saying these two figures
+     * are context for everything else on the page tells the reader what they are FOR, and a number
+     * offered as context is not a number offered as a verdict. The structural guarantee is unchanged and
+     * lives where it always did: `kind: 'stated-facts'` means there are no bars to rank by eye, which is
+     * enforced by the renderer rather than promised by a sentence. The copy no longer has to say what the
+     * shape already does.
+     */
     framing:
-      'Two numbers, set as sentences rather than bars on purpose: a population is not a score, and a longer life expectancy is not a country doing better at being a country.',
+      'Two figures worth carrying into everything else on this page: how many people live here, and how long a life here tends to be.',
     caveat: null,
   },
 ]
