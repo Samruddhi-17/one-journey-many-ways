@@ -264,8 +264,19 @@ export function Arrival({ country }) {
            * traveller's note" would label the quotation as a feature of the page, and it is meant to
            * be encountered rather than introduced.
            */}
+          {/*
+           * FIRST PERSON, LIKE EVERYTHING ELSE IN THIS SECTION. It read "What the traveller expected in
+           * India, and what they found" — the site's own voice naming its narrator in the third person,
+           * on a screen whose next three elements say "before I came", "I actually wrote down" and "I".
+           *
+           * It is hidden, which is exactly why it survived: sighted review never sees it and it is the
+           * FIRST thing a screen-reader user hears about this section, so that reader met a curator
+           * describing a traveller while a sighted reader met the traveller. Same fault as the deleted
+           * "Ask the traveller" eyebrow and the culture caveat's "One person choosing" (see facets.js);
+           * this is the third place it hid.
+           */}
           {/* `inProse`: mid-sentence, so America takes its article. See src/lib/countryName. */}
-          What the traveller expected in {inProse(country)}, and what they found
+          What I expected in {inProse(country)}, and what I found
         </h2>
 
         {/*

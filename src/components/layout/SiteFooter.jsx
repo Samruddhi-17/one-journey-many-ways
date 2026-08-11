@@ -64,15 +64,39 @@ export function SiteFooter() {
             <p className="font-display text-2xl text-ink-900 md:text-3xl">
               One Journey. Many Ways of Living.
             </p>
+            {/*
+             * REWRITTEN, AND IT WAS CARRYING THREE SEPARATE FAULTS ON EVERY PAGE OF THE SITE.
+             *
+             * "LIVE, THRIVE AND CONNECT" IS A VERDICT THE DATA CANNOT SUPPORT. "Thrive" says the places
+             * visited are flourishing, which is a judgement of a country, and nothing in the workbook
+             * measures it. The home page's cover copy was deliberately written to avoid those two words
+             * (see OPENING.coverIntro in voice.js, which records the decision) and this footer sat
+             * underneath contradicting it on all five country pages plus the home page itself.
+             *
+             * THE LAST SENTENCE WAS THE FACET-PANEL FAULT AGAIN. "An average flattens the variation that
+             * makes each place interesting" tells the reader an average is not a person — the same thing
+             * the day facet's note was told to stop saying, in the same register, but here on every
+             * screen rather than one. It also ends the site on the claim that its own evidence hides what
+             * matters, which is a strange note to close a piece of data journalism on.
+             *
+             * "BEST READ AS IMPRESSIONS RATHER THAN PRECISE MEASUREMENTS" WENT TOO, for a related reason:
+             * it is a hedge over the whole dataset, and the six facet notes already say precisely what
+             * each figure will and will not bear, attached to the figure in question. A blanket
+             * disclaimer in the footer is weaker than a specific one beside the evidence, and having both
+             * means the specific ones read as though they did not do their job.
+             *
+             * WHAT SURVIVES IS THE PART THAT IS TRUE AND CHECKABLE: national averages, several published
+             * sources. The provenance clause is load-bearing and was corrected once already, when it
+             * claimed a single dataset (facets.js records that fix).
+             */}
             <p className="mt-4 text-sm leading-relaxed text-ink-500">
               {/* Spelled out, and derived from the itinerary rather than typed — see
                   src/lib/spellOut.js. This sentence appears on every page of the site, so it
                   is the worst possible place for a count that can quietly go stale. */}
-              A journey through {spellOut(TOTAL_STOPS)} countries, exploring how
-              people live, thrive and connect. Figures are national averages,
-              compiled from several published sources, and are best read as
-              impressions rather than precise measurements. An average flattens
-              the variation that makes each place interesting.
+              A journey through {spellOut(TOTAL_STOPS)} countries, looking at how
+              an ordinary day is spent in each. The figures are national
+              averages, compiled from several published sources, and each one is
+              printed as its source gives it.
             </p>
           </div>
 

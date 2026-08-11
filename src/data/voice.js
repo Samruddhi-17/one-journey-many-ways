@@ -549,13 +549,39 @@ export const EXPLORER = {
    * same instinct: copy that describes the interaction instead of conducting it.
    */
   heading: "What do you want to know?",
-  lead: "Six things I paid attention to everywhere I went. Open them in any order.",
+  /*
+   * A FUNCTION, BECAUSE THE COUNT WAS TYPED. It read "Six things I paid attention to" with the six
+   * spelled out by hand, and the number of facets is `TOTAL_FACETS` — so adding or removing a facet made
+   * this sentence quietly wrong on all five country pages, with no compiler and no test to catch it. Copy
+   * in a data file has no call-site checking at all; the only defence is deriving the number.
+   *
+   * IT HAS ALREADY BEEN WRONG ONCE, in the other direction: the home page's premise said "the same four
+   * things everywhere" while this line said six, and the contradiction was found by screenshotting both
+   * sections rather than by reading either file. Same precedent as `PASSPORT.lead(stops)` and
+   * `OPENING.coverIntro(stops, days)` — every count the site says out loud is passed in.
+   */
+  lead: (count) => `${count} things I paid attention to everywhere I went. Open them in any order.`,
   /*
    * Progress copy. Deliberately never a fraction or a percentage: "four of six" is a completion
    * meter and turns curiosity into a chore. See `progressLine` below for the wording.
    */
-  allSeen:
-    "That is everything I noticed here. There is more to any country than six questions.",
+  /*
+   * REWRITTEN FOR THE FAULT FOUND ON THE FACET PANELS: "There is more to any country than six
+   * questions" was a denial of something nobody claimed. Nobody who has just opened six cards believes
+   * they now know India. So the sentence told the reader a thing they already knew, in the site's own
+   * voice, at the moment they finished — and it did it by pointing out a limitation, which turns the
+   * reward for reading everything into a disclaimer.
+   *
+   * IT ALSO CONTRADICTED THE SITE'S OWN STRUCTURE. The next thing on screen is the departure, offering
+   * another country. A reader is not at an end that needs qualifying; they are at a junction.
+   *
+   * THE REPLACEMENT REPORTS WHAT HAPPENED AND HANDS OVER. "All six" is the fact, and the second clause
+   * is the honest positive the old sentence was groping for: what is missing is not a caveat about
+   * questions, it is the reason to go somewhere yourself.
+   */
+  /* Also a function, and for the reason given on `lead` above: "all six" is the same typed count. */
+  allSeen: (count) =>
+    `That is all ${count}, and everything I thought to write down. The rest of it you would have to go and see.`,
 };
 
 /*
@@ -568,7 +594,12 @@ export const EXPLORER = {
  */
 export function progressLine(opened, total) {
   if (opened === 0) return "Nothing opened yet.";
-  if (opened >= total) return EXPLORER.allSeen;
+  /*
+   * `total` spelled out, so the sentence says "all six" rather than "all 6". This function already
+   * received the count — it is the branch condition on the line above — so making `allSeen` a function
+   * cost nothing here, which is the tell that the number should always have come from the data.
+   */
+  if (opened >= total) return EXPLORER.allSeen(spellOut(total));
   if (opened === 1)
     return "One question asked. They are all short.";
   return `${opened} questions asked, and a few still unopened.`;
@@ -599,8 +630,18 @@ export function departureLines(from, to) {
   return {
     eyebrow: "Leaving " + inProse(from),
     question: `Shall we go to ${inProse(to)} next?`,
-    reason:
-      "It is a different kind of day entirely, which is the only reason the order matters at all.",
+    /*
+     * THE SECOND CLAUSE IS CUT: "which is the only reason the order matters at all." Same fault as the
+     * facet panels — it raises a question nobody asked (does the order matter?) in order to half-answer
+     * it, and the answer it gives contradicts the home page, which tells the reader to start wherever
+     * they like. So on Japan's page the site says order is optional and on India's it says there is
+     * exactly one reason it matters. A reader who noticed both would be right to be confused.
+     *
+     * "A DIFFERENT KIND OF DAY" IS THE WHOLE OF WHAT THIS LINE NEEDS TO SAY, and it is the thesis: a
+     * difference in KIND, never in degree (§7.4). Everything after the comma was the site explaining its
+     * own navigation to itself.
+     */
+    reason: "It is a different kind of day entirely.",
     action: `Fly to ${inProse(to)}`,
     /*
      * Shown while the plane is in the air. Two short lines, because they have to be readable in

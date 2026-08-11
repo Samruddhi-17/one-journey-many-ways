@@ -4,6 +4,10 @@ import { Reveal } from '../ui/Reveal'
 import { FacetCard } from './FacetCard'
 import { FACETS, TOTAL_FACETS } from '../../data/facets'
 import { EXPLORER, progressLine } from '../../data/voice'
+/* `spellOutCapitalised` and not `spellOut`: the count opens the lead sentence, so it needs "Six" rather
+   than "six". The helper cannot know where the word will land, so the call site chooses — the same
+   distinction that was a real bug once in src/lib/meta.js. */
+import { spellOutCapitalised } from '../../lib/spellOut'
 
 /*
  * FacetExplorer — the six questions, and the state of which are open.
@@ -102,7 +106,15 @@ export function FacetExplorer({ country }) {
       {/* `delay` stepped down from 0.16 to 0.08 now that this is the second element rather than the
           third. The stagger counts positions, so it has to be renumbered when one is removed. */}
       <Reveal delay={0.08}>
-        <p className="mt-6 max-w-[58ch] text-lg leading-[1.65] text-ink-700">{EXPLORER.lead}</p>
+        {/*
+         * `lead` TAKES THE COUNT NOW, spelled out, rather than having "Six" typed into the string. The
+         * number is `TOTAL_FACETS`, which this file already imports for the progress line below — so the
+         * count the sentence claims and the count the section renders can no longer disagree. They did
+         * once, in the other direction: the home page said four while this said six.
+         */}
+        <p className="mt-6 max-w-[58ch] text-lg leading-[1.65] text-ink-700">
+          {EXPLORER.lead(spellOutCapitalised(TOTAL_FACETS))}
+        </p>
       </Reveal>
 
       {/*

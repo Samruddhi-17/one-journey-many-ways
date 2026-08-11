@@ -86,7 +86,20 @@ export const SITE = {
    * index.html, which is unavoidable — static HTML cannot call a function — and the duplication
    * is guarded by the development-only check in useDocumentMeta.
    */
-  description: `${spellOutCapitalised(TOTAL_STOPS)} countries, one traveller, and a set of expectations that did not survive the trip. A data-led travel story about how the world lives, thrives and connects.`,
+  /*
+   * "LIVES, THRIVES AND CONNECTS" IS GONE, and this was the last place on the site carrying it. It is a
+   * verdict the data cannot support — "thrives" says the five countries are flourishing, which nothing in
+   * the workbook measures — and the footer was rewritten for the same phrase. This copy is worse than the
+   * footer's was, because a description is what a shared link and a search result show, so it is the
+   * site's claim about itself before anybody has seen a single figure.
+   *
+   * WHAT REPLACES IT KEEPS THE STRUCTURE THE COMMENT ABOVE DESCRIBES: shape of the thing, then the
+   * expectation-versus-discovery narrative. It now closes on what the site actually contains, which is
+   * ordinary days rather than an assessment of how well anyone is doing. Measured: 158 characters with
+   * "Five" expanded, so it still lands inside the truncation limit — and the constraint is why the last
+   * clause is short.
+   */
+  description: `${spellOutCapitalised(TOTAL_STOPS)} countries, one traveller, and a set of expectations that did not survive the trip. A data-led story about how an ordinary day is spent.`,
 
   /*
    * The cream that the page background actually is (`--color-surface-page` in tokens.css).
