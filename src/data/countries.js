@@ -177,7 +177,19 @@ export const REFLECTIONS = {
     open: 'Whether structure like this is something a place builds or something it inherits is not a question a dataset can answer.',
   },
   india: {
-    carried: 'Nothing here happens to only one person.',
+    /*
+     * WAS "Nothing here happens to only one person." — asked about directly, and it deserved to be.
+     *
+     * It is a riddle. The reader has to negate it ("things do not happen to only one person"), then
+     * invert that into the positive claim ("things happen to several people"), then work out that the
+     * intended sense is "people do things together" — three steps to arrive at what the paragraph
+     * underneath says outright with meals, markets, festivals and crowded transport.
+     *
+     * The `carried` slot is the pull-quote, the one line meant to stay with a reader, so it is the
+     * worst possible place on the page for a sentence that needs decoding. Said forwards it is four
+     * words, it matches the body exactly, and it still ranks nothing.
+     */
+    carried: 'Almost nothing here is done alone.',
     /*
      * "carries most journeys" was cut from this sentence after checking it against the chart above
      * it. Shared transport is the largest single mode here (43.5%) but it is not a majority, and
@@ -207,7 +219,17 @@ export const REFLECTIONS = {
     open: 'What that costs, and who can afford to live inside it, is not something the dataset was asked.',
   },
   'united-states': {
-    carried: 'Distance shapes almost everything else.',
+    /*
+     * WAS "Distance shapes almost everything else." — asked about, and the fault is that all three
+     * words are abstractions. "Distance" is a bare noun with no referent on the page, "shapes" is a
+     * verb doing no visible work, and "everything else" is everything except the thing not named.
+     * Nothing in it can be pictured, which for a pull-quote is fatal.
+     *
+     * The body already has the concrete version: journeys made by car, a long commute, the size of a
+     * meal, the shape of a weekend. So the line now says the same thing with a picture in it — things
+     * being far apart, and a day arranged around that.
+     */
+    carried: 'Everything is further apart here, and the day is built around that.',
     body: 'Most journeys happen in a private vehicle, and that single fact reaches into the length of a commute, the size of a meal and the shape of a weekend. Scale is not a statistic here so much as a daily condition.',
     open: 'Whether that scale is a freedom or a requirement almost certainly depends on which part of the country you ask.',
   },

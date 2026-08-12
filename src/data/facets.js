@@ -310,8 +310,18 @@ export const FACETS = [
      * WHAT IS LEFT IS ONE SHORT SENTENCE DOING THE ONE JOB THE FRAMING EVER HAD: stopping the reader
      * adding three independent quantities together. "Not three parts of one total" says it positively
      * about what is on screen, and mentions no other page.
+     *
+     * AND IT WAS STILL ASKED ABOUT, in the words "what do you mean by this". The fault is that the
+     * short version leaves both nouns implicit: "three separate totals" of WHAT, and "three parts of
+     * one" one WHAT. A reader who already knows the answer reads it as terse; a reader meeting it for
+     * the first time has to supply two missing words before it says anything. Compression is not the
+     * same as clarity, and this file has now made that mistake by cutting rather than by padding.
+     *
+     * The replacement is one word longer and names both things. "Its own total" says what each figure
+     * is; "one bigger number" says what they are not parts of. Nothing else changed: the job is still
+     * only to stop the reader adding the bars up.
      */
-    framing: 'Three separate totals, not three parts of one.',
+    framing: 'Each of these three is its own total. They are not parts of one bigger number.',
     /*
      * THE CAVEAT NOW CARRIES BOTH METHOD NOTES, AND THE OPENING PHRASE HAD TO GO.
      *
@@ -350,8 +360,33 @@ export const FACETS = [
      * cross-page point from the old framing has landed: same information, moved from before the evidence
      * to after it, which is the split the file header describes. It is worth having exactly once.
      */
+    /*
+     * AND THEN A READER ASKED WHAT THE WHOLE THING MEANT, which means the rewrite above fixed the wrong
+     * half. The information was right; the ENGLISH was the problem, in three specific places.
+     *
+     *   "NATIONAL FOOD SUPPLY FIGURES DIVIDED BY POPULATION" is a term of art wearing a plain-English
+     *   coat. Four nouns in a row, one of them ("supply") doing technical work the reader cannot see.
+     *   Said as an action instead — a country's food supply divided by the people living in it — the
+     *   same fact needs no glossary.
+     *
+     *   "WASTE, ANIMAL FEED AND STOCK ARE ALL INSIDE THEM" was the sentence quoted back. "Stock" is
+     *   the killer: in this context it means unsold inventory, but it is also a food word, so a reader
+     *   on a page about eating will read it as the liquid. A sentence whose subject can be misread as
+     *   soup does not survive being skimmed.
+     *
+     *   "DRAWN AGAINST THE SAME RULER, SET BY THE LARGEST FIGURE ANYWHERE ON THE JOURNEY" is a
+     *   metaphor followed by its own mechanism. The reader does not need the ruler or where it came
+     *   from; they need to know they may compare a bar here with a bar elsewhere. The note above
+     *   already established that leading with the consequence is the fix, and then kept the mechanism
+     *   anyway.
+     *
+     * WHAT IS PRESERVED, because it is the point of the caveat and not decoration: the figures are
+     * bigger than anyone's actual eating, and the reason is that they count food nobody ate. A reader
+     * who takes 262 kg of dairy as one American's yearly consumption has misread the card, and this
+     * is the only sentence standing between them and that.
+     */
     caveat:
-      'These are national food supply figures divided by population, so they count what reached the shops and kitchens rather than what anyone put on a plate. Waste, animal feed and stock are all inside them. Every bar on the site is drawn against the same ruler, set by the largest figure anywhere on the journey, so a bar here can be compared with a bar on any other country page.',
+      "These figures are a country's whole food supply divided by the number of people living there, so they count what reached the shops rather than what anyone actually ate. Food that was thrown away, fed to animals or never sold is still counted in them. Every bar on every country page is drawn to the same scale, so you can compare a bar here with a bar on another page.",
   },
   {
     id: 'language',
@@ -401,9 +436,39 @@ export const FACETS = [
      * THE VERSION THAT SURVIVES NAMES BOTH REASONS THE SUM MISSES A HUNDRED — double-counting in one
      * direction, unlisted languages in the other — which is true everywhere and is the whole of what a
      * reader needs in order not to add the rows up.
+     *
+     * ============================================================================================
+     * "EVERY COUNTRY HERE HAS MORE LANGUAGES THAN THREE" WAS A GRAMMATICAL ERROR, NOT A STYLE
+     * COMPLAINT — and it is the one item in this round that made the site say something false.
+     *
+     * A reader on Japan's page put it exactly: it reads as "in Japan, every country has more languages
+     * than three". The word "here" is the problem. Everywhere else in this file "here" means THIS
+     * COUNTRY — "how much of the country uses each", "you would hear" — because a facet panel is
+     * rendered inside one chapter and the reader's frame is that chapter. Then this clause used "here"
+     * to mean THE FIVE COUNTRIES ON THIS SITE, a sense no other sentence on the page carries, and
+     * attached it to "every country". The result is a sentence with a subject that cannot fit its
+     * container.
+     *
+     * WHY IT SURVIVED: it is true under the reading the author had in mind, and the note above shows
+     * how hard that reading was won — the draft before it was wrong for two of the five countries, so
+     * the effort went into making the CLAIM true of all five and none went into checking that the
+     * SENTENCE was about one country. A framing string that must hold for all five is very easy to
+     * write in the site's voice instead of the chapter's.
+     *
+     * THE FIX IS TO SAY IT OF THIS COUNTRY, which is both what the reader is looking at and still true
+     * of all five, so nothing about the all-five constraint is given up. "There are more languages
+     * spoken here than these three" keeps "here" meaning what it means in every other sentence on the
+     * card, and the claim is now checkable by the person reading it rather than by someone who has
+     * visited the other four pages.
+     *
+     * THE GENERAL RULE, worth stating because the transport framing sits one facet away and legitimately
+     * does talk about the five: a sentence may be ABOUT the whole journey, but then it must say so
+     * ("This is where the five countries differ most"). What it may not do is use a this-country word
+     * like "here" and a whole-journey subject in the same clause.
+     * ============================================================================================
      */
     framing:
-      'Three of the languages you would hear, and how much of the country uses each. They are not slices of one whole: many people are counted under more than one, and every country here has more languages than three.',
+      'Three of the languages you would hear, and how much of the country uses each. They are not slices of one whole: many people are counted under more than one, and there are more languages spoken here than these three.',
     /*
      * THE "WHY NO CHART" ARGUMENT MOVED HERE, WHICH IS WHERE IT BELONGS. It is a note about how the
      * evidence was made and what it will not bear — the definition of a caveat in this file — and a

@@ -680,11 +680,47 @@ export function departureLines(from, to) {
  * left with rather than on a total, and the only thing offered is going back — because re-reading
  * ranks nothing.
  */
+/*
+ * BOTH PARAGRAPHS REWRITTEN, ON A READER'S OBJECTION THAT THEY WERE "very complicated and ai
+ * generated". That is the most useful complaint the copy has had, because it names a texture rather
+ * than an error — every clause was true and the whole thing still read like a machine.
+ *
+ * WHAT WAS ACTUALLY WRONG WITH `body`. It read:
+ *
+ *   "Five countries, and not one of them doing an ordinary day the way the last one did. I did not
+ *   come back with a favourite. I came back suspecting that almost everything I do at a particular
+ *   hour, I do at that hour because of where I happen to live."
+ *
+ *   "NOT ONE OF THEM DOING AN ORDINARY DAY THE WAY THE LAST ONE DID" is a double negative wrapped
+ *   around a participle. The plain thought underneath is "an ordinary day looked different in each
+ *   one" — six words, no negation, same meaning. The inverted version sounds more considered and
+ *   takes longer to understand, which is the exact trade this whole file is supposed to refuse.
+ *
+ *   "AT A PARTICULAR HOUR, I DO AT THAT HOUR" REPEATS ITSELF TO COMPLETE A PATTERN. The symmetry is
+ *   doing the persuading, not the content — the same fault already recorded against "five different
+ *   ways of arranging the same twenty-four hours" a few hundred lines up. Once is enough: "a lot of
+ *   what I do at a given hour, I do because of where I live."
+ *
+ *   "I CAME BACK SUSPECTING" hedges a conclusion the traveller is entitled to have reached, and pairs
+ *   with "I did not come back with a favourite" to start two consecutive sentences the same way.
+ *
+ * AND `open` WAS ASKED ABOUT AS "what is this line?", WHICH IS THE WORST RESULT A SENTENCE CAN GET —
+ * not disagreement, non-recognition. "Which is a strange thing to find out from a spreadsheet, and I
+ * have not entirely got over it." Two problems: it opens with a dangling "Which", so it depends
+ * entirely on the sentence before it and cannot be read on its own where it sits (a separate
+ * paragraph, in italic display type, several lines below); and "I have not entirely got over it" is a
+ * joke about being emotionally affected by a spreadsheet, which is charming if you catch it and
+ * baffling if you do not. A closing line has one chance and cannot afford a maybe.
+ *
+ * ITS JOB IS UNCHANGED, and §4.4 is why the line exists at all: the ending must be a reflection and
+ * not a conclusion, so the last thing said has to stay open. "I am still thinking about it" does that
+ * in words that cannot be misread, and it no longer needs the previous sentence to make sense.
+ */
 export const HOMECOMING = {
   eyebrow: "The last flight home",
   heading: "That is the whole trip.",
-  body: "Five countries, and not one of them doing an ordinary day the way the last one did. I did not come back with a favourite. I came back suspecting that almost everything I do at a particular hour, I do at that hour because of where I happen to live.",
-  open: "Which is a strange thing to find out from a spreadsheet, and I have not entirely got over it.",
+  body: "Five countries, and an ordinary day looked different in each one. I did not come back with a favourite. What I came back with is the sense that a lot of what I do at a given hour, I do because of where I live.",
+  open: "It is an odd thing to learn from a set of numbers, and I am still thinking about it.",
   action: "Go back to the beginning",
 };
 
