@@ -40,6 +40,7 @@ highest authority in this repository. Where code and vision disagree, the vision
 | [`docs/PRODUCT_VISION.md`](docs/PRODUCT_VISION.md) | The narrative, the principles, and what this project refuses to do. Read first. |
 | [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | Type scale, colour tokens, spacing, motion, component contracts. |
 | [`docs/DATA_PIPELINE.md`](docs/DATA_PIPELINE.md) | How the workbook becomes JSON, and the assertions that guard the conversion. |
+| [`docs/AI_AND_DATA.md`](docs/AI_AND_DATA.md) | How AI was used, where the numbers and images came from, and what is not yet documented. |
 | [`docs/DESIGN.md`](docs/DESIGN.md) | Earlier design exploration, kept for context. |
 
 Beyond these, the components carry the detailed reasoning. Several files open with a long comment
