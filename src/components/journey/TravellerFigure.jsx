@@ -131,6 +131,36 @@ export function TravellerFigure({
    * Any CSS length; passed straight through, because the caller knows what it is next to.
    */
   maxHeight = DEFAULT_MAX_HEIGHT,
+  /*
+   * `fadeFoot` — dissolve the bottom of the figure instead of ending it on the torso crop.
+   *
+   * ALL FIVE ILLUSTRATIONS ARE CUT AT THE TORSO. Measured on the published PNGs, the proportion of the
+   * final row of pixels that is opaque: Japan 45.6%, India 40.8%, Italy 59.3%, United States 49.8%.
+   * (Switzerland's last row is 0% — that one file has a few transparent rows below the cut, so its
+   * crop is 2% up the image rather than at the very edge. Same cut, different padding.) Roughly half
+   * the width of a hard horizontal line through a jacket and a backpack, in every case.
+   *
+   * `Arrival` solves this by overlapping the notepaper beneath it — the cut passes behind the sheet
+   * and is simply not visible. That is the better fix wherever there is something to hide behind, and
+   * it is why this prop defaults to false.
+   *
+   * `Homecoming` IS THE ONE PLACE ON THE SITE WITH NOTHING BENEATH IT. It is the last figure on the
+   * last page; below it is the eyebrow line in 12px letterspaced caps, and its own note records why a
+   * negative margin was tried there and rejected — text is not a surface, so tucking the figure into
+   * it greys out the words instead of hiding the crop. The home page does not need this either: it
+   * overlaps `CoverPanel`. So the exposed cut occurs exactly once, and this prop is for that once.
+   *
+   * WHY A MASK RATHER THAN A GRADIENT OVERLAY. An overlay would have to be painted in the page's
+   * background colour, which means hard-coding which surface the figure happens to stand on — and
+   * `Homecoming` is on `surface-sunken` while everything else is on the page cream. A mask removes
+   * pixels, so it works on any background and cannot go stale when a section's surface changes.
+   *
+   * THE STOP IS 78%, WHICH IS THE FIGURE'S HEIGHT AND NOT THE CUT'S POSITION. Fading over the last
+   * fifth or so puts the whole dissolve below the hands and above the bottom edge, so the gradient is
+   * long enough to read as air rather than as a soft-edged rectangle. Shorter fades (90%) still show
+   * an edge; longer ones (60%) start eating the figure.
+   */
+  fadeFoot = false,
   className = '',
 }) {
   const prefersReducedMotion = useReducedMotion()
@@ -209,8 +239,36 @@ export function TravellerFigure({
              * which for a cut-out means a shadow around empty space. `drop-shadow` follows the alpha
              * channel, so it follows the figure's actual silhouette. Very soft and very weak — enough
              * that the traveller sits on the page rather than floating above it.
+             *
+             * THE SHADOW GOES WHEN THE FOOT IS FADED, AND IT HAS TO — this is the part that took a
+             * browser to find. FILTERS APPLY AFTER MASKS in the rendering order, so `drop-shadow` reads
+             * the ALREADY-MASKED alpha and faithfully re-prints the hard edge it just dissolved, offset
+             * 12px down. The mask worked and the shadow undid it, which looked like the mask failing.
+             *
+             * Verified at 1440 across seven variants: the y-offset is the whole problem, so a
+             * symmetrical `0 0` shadow also reads clean. It is dropped rather than flattened because a
+             * figure whose feet dissolve into the page has nothing left to cast a shadow onto — the
+             * grounding the shadow provides is exactly what the fade is replacing.
              */
-            filter: 'drop-shadow(0 12px 18px color-mix(in oklab, var(--accent-ink) 22%, transparent))',
+            filter: fadeFoot
+              ? undefined
+              : 'drop-shadow(0 12px 18px color-mix(in oklab, var(--accent-ink) 22%, transparent))',
+            /*
+             * Both spellings, because the unprefixed property is not yet universal for `mask-image` in
+             * the way `mask` shorthand support suggests, and a figure that keeps its hard cut on one
+             * browser is the bug this exists to fix. `no-repeat` and `100% 100%` are required: the
+             * default `mask-size: auto` tiles a gradient, which stripes the figure.
+             */
+            ...(fadeFoot
+              ? {
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 78%, transparent 100%)',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskSize: '100% 100%',
+                  maskImage: 'linear-gradient(to bottom, black 78%, transparent 100%)',
+                  maskRepeat: 'no-repeat',
+                  maskSize: '100% 100%',
+                }
+              : null),
           }}
         />
       </picture>

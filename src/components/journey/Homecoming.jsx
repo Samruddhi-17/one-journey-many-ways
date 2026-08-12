@@ -116,9 +116,20 @@ export function Homecoming({
        * caps. Verified in the browser at 1440: the figure's box plus its drop-shadow sat across "THE
        * LAST FLIGHT HOME" and greyed the words out. A negative margin needs something to hide behind;
        * text is not that thing.
+       *
+       * WHICH LEFT THE TORSO CROP FULLY EXPOSED, and that is what `fadeFoot` is for.
+       *
+       * The note above solved the collision with the eyebrow and, in doing so, made this the ONE place
+       * on the site where a traveller figure ends in mid-air. The illustrations are portraits cut at the
+       * torso — roughly half the width of the last pixel row is opaque on every one of the five — so
+       * with clear space beneath, the ending reads as a photograph with its bottom sliced off, with a
+       * drop shadow underneath drawing attention to the slice. `Arrival` hides the same cut behind the
+       * notepaper and the home page hides it behind `CoverPanel`; there is nothing here to hide it
+       * behind, so the cut is dissolved instead. See TravellerFigure's `fadeFoot` note for the measured
+       * alpha figures and for why the drop-shadow has to go with it.
        */}
       <div className="mb-5 flex items-end gap-3 md:gap-5">
-        <TravellerFigure src={portraitSrc} maxHeight={TRAVELLER_HEIGHT} />
+        <TravellerFigure src={portraitSrc} maxHeight={TRAVELLER_HEIGHT} fadeFoot />
         <CompanionFigure travellerHeight={TRAVELLER_HEIGHT} delay={0.3} />
       </div>
 

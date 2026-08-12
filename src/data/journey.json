@@ -927,10 +927,6 @@
             "src": "./images/us_food.jpeg"
           },
           {
-            "category": "New York Taxi",
-            "src": "./images/us_train.jpeg"
-          },
-          {
             "category": "Hollywood Sign",
             "src": "./images/us_temple.jpeg"
           },

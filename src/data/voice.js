@@ -51,7 +51,9 @@
  */
 
 /*
- * The one import this file has, and it is a grammar helper rather than data.
+ * EVERY IMPORT THIS FILE HAS IS A GRAMMAR HELPER. Not one of them is data, and that is the test for
+ * whether something belongs up here: it has to be a fact about English rather than a fact about the
+ * journey. The journey arrives as an argument.
  *
  * `departureLines` interpolates country names into sentences, and one of the five names takes a
  * definite article. Keeping that knowledge in src/lib rather than here is deliberate: this file is
@@ -61,8 +63,13 @@
  * `spellOut` is here for the same reason and on the same terms: `PASSPORT.stopsLabel` has to count what
  * is actually in the record, and how English writes a small number is a fact about English. See the
  * note on that label for why it spells its own number where `lead` is handed one.
+ *
+ * `endSentence` is the third of the same kind, and it is here because a typed full stop is as much an
+ * assumption about a workbook value as a typed number is. See its own file for the sentence that
+ * printed two of them, and `arrivalGreeting` below for the call.
  */
 import { inProse } from "../lib/countryName";
+import { endSentence } from "../lib/endSentence";
 import { spellOut } from "../lib/spellOut";
 
 /*
@@ -459,7 +466,20 @@ export const SIGNPOST = {
  */
 export function arrivalGreeting(country) {
   return {
-    landed: `We have landed in ${country.capital}.`,
+    /*
+     * `endSentence` RATHER THAN A TYPED FULL STOP, because one of the five capitals already ends in one.
+     *
+     * This read `${country.capital}.` and printed "WE HAVE LANDED IN WASHINGTON, D.C.." on the American
+     * page — two stops, in 12px letterspaced caps at the top of the last chapter. The other four
+     * capitals are single words, so the bug was invisible on 80% of the site, which is why it survived:
+     * "Tokyo." "New Delhi." "Rome." "Bern." all look right.
+     *
+     * The interesting part is that this is the same class of error as a typed count. A punctuation mark
+     * appended to a value is an assumption about that value's shape, and the assumption held for four
+     * cases out of five. The rule the site already applies to numbers — if it comes from the data,
+     * derive it — applies to the sentence's last character too.
+     */
+    landed: `We have landed in ${endSentence(country.capital)}`,
     /*
      * The clock line is the smallest possible "you are somewhere else" signal, and it is a fact rather
      * than a flourish: the time zone is in the dataset.

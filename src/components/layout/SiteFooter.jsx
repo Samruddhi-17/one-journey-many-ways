@@ -57,7 +57,33 @@ export function SiteFooter() {
   const visited = useVisited();
 
   return (
-    <footer className="mt-24 border-t border-ink-200 bg-surface-sunken">
+    /*
+     * NO TOP MARGIN, AND IT USED TO HAVE `mt-24` — 96px of page background printed as a stripe.
+     *
+     * The footer is `bg-surface-sunken` (#f6f1e8). Every one of the seven routes — home, passport and
+     * the five countries — ends on a section that is ALSO `bg-surface-sunken`. So the margin never
+     * separated two different surfaces anywhere on the site: it opened a 96px band of the page
+     * background (#fdf9f3) between two blocks of identical colour, which reads as a seam across the
+     * bottom of the page rather than as breathing room. Measured on all seven, the gap was 96px every
+     * time and the colours either side were the same every time.
+     *
+     * WHY IT LOOKED CORRECT IN THE CODE. `mt-24` on a footer is ordinary, and it would be right if
+     * pages ended on white cards — the margin would be the pale channel between a card and the footer.
+     * The site simply does not end that way. This is the class of mistake where the value is defensible
+     * and the assumption behind it was never checked, and it is the same shape as the notepaper anchor
+     * (see ui/Notepaper.jsx): CSS chosen for a property the content does not have.
+     *
+     * THE SPACING IS NOT LOST. The last section carries `py-24 md:py-32` and this footer's inner
+     * container carries `py-16 md:py-20`, so there is 96–128px of padding above the border and 64–80px
+     * below it. Removing the margin removes the stripe, not the air.
+     *
+     * WHAT THE BORDER NOW DOES, and why it stays. With the stripe gone, `border-t border-ink-200` is
+     * the only thing marking where the page ends and the footer begins — two same-coloured blocks need
+     * a line between them. If a future route ends on a white or dark section, this is the line that
+     * will read against it, and the margin still should not come back: the section itself would own
+     * that spacing.
+     */
+    <footer className="border-t border-ink-200 bg-surface-sunken">
       <div className="mx-auto max-w-(--container-content) px-5 py-16 md:px-8 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1fr_auto]">
           <div className="max-w-(--container-prose)">

@@ -608,7 +608,7 @@ const ALIASES = {
  * fires costs nothing, and the old names may return.
  */
 const EXCLUDED =
-  /(_dash|_pp\.|_passport\.|^us_flag\.jpeg|^top_part_of_dashboard|^traveler_|^transport_|^france_|^netherlands_|^sweden_)/
+  /(_dash|_pp\.|_passport\.|^us_flag\.jpeg|^us_train\.jpeg|^top_part_of_dashboard|^traveler_|^transport_|^france_|^netherlands_|^sweden_)/
 
 /*
  * ============================================================================================
@@ -670,6 +670,39 @@ const EXCLUDED =
  * This is the third time in this file that a filename-keyed rule has misfired on a rename or an
  * addition (see the `_pp\.` note above, and the `^traveler_` note in EXCLUDED). The pattern is now
  * as narrow as its reason — one watermarked JPEG — so a new file cannot inherit its exclusion.
+ *
+ * ============================================================================================
+ * WHY us_train.jpeg IS EXCLUDED — THE SAME OBJECTION, BUT TO A PHOTOGRAPH THAT WAS SHIPPING.
+ *
+ * Everything above concerns assets nothing rendered, which is why the watermarks went unnoticed:
+ * an unused file is never looked at. This one was on the live site. `country_gallery` lists it for
+ * the United States under the category "New York Taxi", so it was the third of the five glimpses on
+ * the American chapter, and it carries "Travelopick" burned into it in white sans-serif capitals.
+ *
+ * MEASURED, so the next person does not have to guess whether it is croppable: the source is
+ * 736x920 and the mark occupies x 567..706, y 28..53 — top right, about a fifth of the width. The
+ * gallery renders each photograph in a 3/4 frame, which on this file shows x 23..713, so the mark is
+ * inside the visible area rather than something the crop already removes. There is no framing of a
+ * portrait photograph that keeps the subject and loses a mark in its top corner.
+ *
+ * ALL TWENTY-FIVE GALLERY PHOTOGRAPHS WERE OPENED, five per country, and this is the only one with a
+ * mark on it. So the rule is one filename wide, for the reason us_flag.jpeg's is: the objection is
+ * to a specific file, and a `_train` or `^us_` pattern would claim something untrue about clean
+ * photographs. A rule should be exactly as wide as its reason — and stating the count here is what
+ * makes that claim checkable rather than assumed.
+ *
+ * WHAT THIS DOES TO THE PAGE, and why nothing else needs changing: the United States drops to four
+ * glimpses. `Glimpses` filters on `image?.src` and spells its own heading from the survivors, so it
+ * renders "Four things I saw" without being told. That guard was written for a country with a
+ * missing photograph and had never fired; this is the case it was for. The standing rule against
+ * forcing equal image counts per country is the other half of the same decision — four honest
+ * photographs beat five with an agency's watermark across one.
+ *
+ * WHY NOT RETOUCH IT, given that scripts/retouchPassports.mjs exists and paints text off images at
+ * build time. That script removes lettering the project itself would otherwise be asserting is on a
+ * passport cover; the artwork underneath is the subject. Here the mark sits over a photograph
+ * somebody else owns, and painting out an ownership notice to publish the file anyway is a different
+ * act from tidying a graphic. Removing the watermark does not remove the reason it is there.
  * ============================================================================================
  *
  * NOTE these files are ALSO the reason `resolveAsset` returns null after the EXCLUDED test
